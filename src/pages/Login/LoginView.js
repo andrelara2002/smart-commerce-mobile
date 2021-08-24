@@ -3,17 +3,17 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import LoginTexts from '../../texts';
 import LoginInput from '../../Components/Inputs/LoginInput';
+import DefaultColors from '../../res/colors/DefaultColors';
 
 export default function LoginView(props) {
 
     const texts = LoginTexts()[props.lang];
-
     const styles = StyleSheet.create({
         container: {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: "#252731",
+            backgroundColor: DefaultColors["dark"].background,
             flexDirection: 'column'
         },
         title: {
@@ -30,6 +30,7 @@ export default function LoginView(props) {
                 {texts.login_introduction}
             </Text>
             <LoginInput lang={props.lang} label={"username"} />
+            <LoginInput lang={props.lang} label={"password"} />
         </View>
     )
 }

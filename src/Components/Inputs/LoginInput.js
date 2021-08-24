@@ -16,7 +16,8 @@ export default function LoginInput(props) {
             borderWidth: 1,
             borderColor: '#ddd',
             padding: 10,
-            borderRadius: 12
+            borderRadius: 12,
+            margin: 20
         },
         label: {
             flex: 1,
