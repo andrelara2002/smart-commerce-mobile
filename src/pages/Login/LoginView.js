@@ -8,6 +8,7 @@ import DefaultColors from '../../res/colors/DefaultColors';
 export default function LoginView(props) {
 
     const texts = LoginTexts()[props.lang];
+
     const styles = StyleSheet.create({
         container: {
             flex: 1,
