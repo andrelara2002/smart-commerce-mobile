@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import LoginTexts from '../../texts';
-import LoginInput from '../../Components/Inputs/LoginInput';
+import LoginInput from '../../components/Inputs/LoginInput';
 import DefaultColors from '../../res/colors/DefaultColors';
 
 export default function LoginView(props) {
