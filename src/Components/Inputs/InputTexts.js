@@ -21,4 +21,5 @@ export default function InputTexts() {
             password_label: "Passwort"
         },
     }
+    return response;
 }

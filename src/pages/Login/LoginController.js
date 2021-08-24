@@ -8,13 +8,13 @@ export default class LoginController extends React.Component {
         super(props);
 
         this.state = {
-            language: 'pt_br'
+            language: 'pt_br',
         }
     }
 
     render() {
         return (
-            <LoginView lang = {this.state.language}/>
+            <LoginView lang={this.state.language}/>
         );
     }
 }
