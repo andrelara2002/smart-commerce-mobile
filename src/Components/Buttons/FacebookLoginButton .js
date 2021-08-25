@@ -37,7 +37,7 @@ export default function FacebookLoginButton() {
         <TouchableOpacity style={styles.container}>
             <View>
                 <Image
-                    source={require('../../res/assets/facebook_logo.png')}
+                    source={require('../../assets/image/facebook_logo.png')}
                     style={styles.image} />
             </View>
             <Text>

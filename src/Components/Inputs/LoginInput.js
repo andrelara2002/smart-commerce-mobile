@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 import InputTexts from './InputTexts';
-import DefaultColors from '../../res/colors/DefaultColors'
+import DefaultColors from '../../assets/colors/DefaultColors'
 
 
 export default function LoginInput(props) {

@@ -13,7 +13,7 @@ import {
 //Custom Components
 import LoginInput from '../../Components/Inputs/LoginInput';
 
-import DefaultColors from '../../res/colors/DefaultColors';
+import DefaultColors from '../../assets/colors/DefaultColors'
 import Button from '../../Components/Buttons/Button';
 import SignIn from '../../Components/Buttons/SignIn';
 
@@ -88,7 +88,7 @@ export default function LoginView(props) {
 
                 </Text>
                 <Image
-                    source={require('../../res/assets/login_image.png')}
+                    source={require('../../assets/image/login_image.png')}
                     style={styles.image}
                 />
             </View>
