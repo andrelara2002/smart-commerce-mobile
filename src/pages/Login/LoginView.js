@@ -15,6 +15,7 @@ import {
 import LoginInput from '../../Components/Inputs/LoginInput';
 import DefaultColors from '../../res/colors/DefaultColors';
 import Button from '../../Components/Buttons/Button';
+import SignIn from '../../Components/Buttons/SignIn';
 
 import GoogleLoginButton from '../../Components/Buttons/GoogleLoginButton';
 import FacebookLoginButton from '../../Components/Buttons/FacebookLoginButton '
@@ -50,7 +51,7 @@ export default function LoginView(props) {
             justifyContent: 'center',
             backgroundColor: DefaultColors["dark"].background,
             flexDirection: 'column',
-            padding: 20
+            padding: 25
         },
         title: {
             flex: 1,
@@ -63,7 +64,7 @@ export default function LoginView(props) {
             justifyContent: 'space-evenly',
             alignItems: 'center',
             flexDirection: 'row',
-            marginBottom: 30,
+            marginBottom: 10,
             marginTop: 10
         },
         image: {
@@ -102,6 +103,7 @@ export default function LoginView(props) {
                 console.log(`SENHA: \t${password}`)
             }
             } />
+            <SignIn lang={props.lang} />
         </View>
     )
 }
