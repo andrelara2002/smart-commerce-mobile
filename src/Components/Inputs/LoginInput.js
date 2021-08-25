@@ -6,9 +6,10 @@ import DefaultColors from '../../res/colors/DefaultColors'
 
 
 export default function LoginInput(props) {
-
-    const texts = InputTexts()[props.lang];
     const type = props.label + "_label";
+
+    const [hidePassword, setHidePassword] = React.useState(true);
+    const [texts, setTexts] = React.useState(InputTexts()[props.lang][type]);
 
     const {
         background,
@@ -19,6 +20,12 @@ export default function LoginInput(props) {
         deactivate,
         textColor
     } = DefaultColors["dark"];
+
+    React.useEffect(() => {
+        if (props.label != "password") {
+            setHidePassword(false);
+        }
+    })
 
     const style = StyleSheet.create({
         container: {
@@ -45,11 +52,23 @@ export default function LoginInput(props) {
     }
     );
 
+    handleTexts = (text) => {
+        setTexts(text);
+    }
+
     return (
         <View style={style.container}>
-            <TextInput style={style.input}></TextInput>
+            <TextInput
+                style={style.input}
+                autoCompleteType={props.label}
+                secureTextEntry={hidePassword}
+                onChangeText={a => props.onChange(a)}
+                onKeyPress={() => {
+                    setTexts("Show")
+                }}
+            />
             <Text style={style.label}>
-                {texts[type]}
+                {texts}
             </Text>
         </View>
     )

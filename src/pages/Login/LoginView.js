@@ -1,16 +1,30 @@
-import React from 'react';
+//Importacoes padrao
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+//Textos da pagina
 import LoginTexts from '../../texts';
-import LoginInput from '../../Components/Inputs/LoginInput';
 
+//Componentes
+import LoginInput from '../../Components/Inputs/LoginInput';
 import DefaultColors from '../../res/colors/DefaultColors';
-import Input from '../../Components/Inputs/Input';
 import Button from '../../Components/Buttons/Button';
+import GoogleLoginButton from '../../Components/Buttons/GoogleLoginButton';
 
 export default function LoginView(props) {
 
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+
     const texts = LoginTexts()[props.lang];
+
+    handleSetUsername = (name) => {
+        setUsername(name)
+    }
+
+    handleSetPassword = (pass) => {
+        setPassword(pass)
+    }
 
     const styles = StyleSheet.create({
         container: {
@@ -26,6 +40,11 @@ export default function LoginView(props) {
             fontWeight: 'bold',
             marginBottom: 20
         },
+        socialButtons: {
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: 'row',
+        }
     })
 
     return (
@@ -33,10 +52,17 @@ export default function LoginView(props) {
             <Text style={styles.title}>
                 {texts.login_introduction}
             </Text>
-            <LoginInput lang={props.lang} label={"username"} />
-            <LoginInput lang={props.lang} label={"password"} />
-            <Input label={"Nome"} />
-            <Button />
+            <LoginInput lang={props.lang} label={"username"} onChange={handleSetUsername} />
+            <LoginInput lang={props.lang} label={"password"} onChange={handleSetPassword} />
+            <View style={styles.socialButtons}>
+                <GoogleLoginButton lang={props.lang} />
+                <GoogleLoginButton lang={props.lang} />
+            </View>
+            <Button text={"entrar"} onPress={() => {
+                console.log(`USUARIO: \t${username}`)
+                console.log(`SENHA: \t${password}`)
+            }
+            } />
         </View>
     )
 }
