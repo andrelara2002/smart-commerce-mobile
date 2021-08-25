@@ -2,11 +2,30 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 import InputTexts from './InputTexts';
+import DefaultColors from '../../res/colors/DefaultColors'
+
 
 export default function LoginInput(props) {
-
-    const texts = InputTexts()[props.lang];
     const type = props.label + "_label";
+
+    const [hidePassword, setHidePassword] = React.useState(true);
+    const [texts, setTexts] = React.useState(InputTexts()[props.lang][type]);
+
+    const {
+        background,
+        accent,
+        sec_accent,
+        trd_accent,
+        border,
+        deactivate,
+        textColor
+    } = DefaultColors["dark"];
+
+    React.useEffect(() => {
+        if (props.label != "password") {
+            setHidePassword(false);
+        }
+    })
 
     const style = StyleSheet.create({
         container: {
@@ -14,15 +33,15 @@ export default function LoginInput(props) {
             alignItems: 'center',
             justifyContent: 'center',
             borderWidth: 1,
-            borderColor: '#ddd',
-            padding: 10,
-            borderRadius: 12,
-            margin: 20
+            borderColor: border,
+            padding: 6,
+            borderRadius: 10,
+            marginBottom: 10
         },
         label: {
             flex: 1,
             fontSize: 20,
-            color: '#ffffff',
+            color: border,
             textAlign: 'center',
         },
         input: {
@@ -33,11 +52,23 @@ export default function LoginInput(props) {
     }
     );
 
+    handleTexts = (text) => {
+        setTexts(text);
+    }
+
     return (
         <View style={style.container}>
-            <TextInput style={style.input}></TextInput>
+            <TextInput
+                style={style.input}
+                autoCompleteType={props.label}
+                secureTextEntry={hidePassword}
+                onChangeText={a => props.onChange(a)}
+                onKeyPress={() => {
+                    setTexts("Show")
+                }}
+            />
             <Text style={style.label}>
-                {texts[type]}
+                {texts}
             </Text>
         </View>
     )
