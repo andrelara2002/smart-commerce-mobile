@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, StyleSheet, Text } from 'react-native'
 
-export default function GoogleLoginButton() {
+export default function FacebookLoginButton() {
 
     const styles = StyleSheet.create({
         container: {
 
             flex: 1,
-
+            
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "row",
@@ -19,7 +19,7 @@ export default function GoogleLoginButton() {
             paddingBottom: 5,
             paddingLeft: 10,
             paddingRight: 15,
-            
+
             borderRadius: 5,
         },
         image: {
@@ -37,11 +37,11 @@ export default function GoogleLoginButton() {
         <TouchableOpacity style={styles.container}>
             <View>
                 <Image
-                    source={require('../../res/assets/google_logo.png')}
+                    source={require('../../res/assets/facebook_logo.png')}
                     style={styles.image} />
             </View>
             <Text>
-                Login with Google
+                Login with Facebook
             </Text>
         </TouchableOpacity>
     )

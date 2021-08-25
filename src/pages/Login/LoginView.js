@@ -1,15 +1,23 @@
-//Importacoes padrao
+//Standard imports
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 
-//Textos da pagina
+//Page texts
 import LoginTexts from '../../texts';
 
-//Componentes
+//Native Components
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image
+} from 'react-native';
+//Custom Components
 import LoginInput from '../../Components/Inputs/LoginInput';
 import DefaultColors from '../../res/colors/DefaultColors';
 import Button from '../../Components/Buttons/Button';
+
 import GoogleLoginButton from '../../Components/Buttons/GoogleLoginButton';
+import FacebookLoginButton from '../../Components/Buttons/FacebookLoginButton '
 
 export default function LoginView(props) {
 
@@ -17,6 +25,16 @@ export default function LoginView(props) {
     const [password, setPassword] = useState();
 
     const texts = LoginTexts()[props.lang];
+
+    breakLine = () => {
+        const introduction = texts.login_introduction.split(" ")
+
+        return introduction.map((word, index) => {
+
+            return <Text key={index}>{"\n"}{word}</Text>
+
+        })
+    }
 
     handleSetUsername = (name) => {
         setUsername(name)
@@ -32,31 +50,52 @@ export default function LoginView(props) {
             justifyContent: 'center',
             backgroundColor: DefaultColors["dark"].background,
             flexDirection: 'column',
-            padding: 10
+            padding: 20
         },
         title: {
+            flex: 1,
             fontSize: 40,
             color: '#fff',
             fontWeight: 'bold',
-            marginBottom: 20
+            marginBottom: 20,
         },
         socialButtons: {
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             alignItems: 'center',
             flexDirection: 'row',
+            marginBottom: 30,
+            marginTop: 10
+        },
+        image: {
+            flex: 1,
+            width: 200,
+            height: 200,
+        },
+        header: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: "baseline",
+            marginBottom: 20,
         }
     })
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>
-                {texts.login_introduction}
-            </Text>
+            <View style={styles.header}>
+                <Text style={styles.title}>
+                    {breakLine()}
+
+                </Text>
+                <Image
+                    source={require('../../res/assets/login_image.png')}
+                    style={styles.image}
+                />
+            </View>
             <LoginInput lang={props.lang} label={"username"} onChange={handleSetUsername} />
             <LoginInput lang={props.lang} label={"password"} onChange={handleSetPassword} />
             <View style={styles.socialButtons}>
                 <GoogleLoginButton lang={props.lang} />
-                <GoogleLoginButton lang={props.lang} />
+                <FacebookLoginButton lang={props.lang} />
             </View>
             <Button text={"entrar"} onPress={() => {
                 console.log(`USUARIO: \t${username}`)
