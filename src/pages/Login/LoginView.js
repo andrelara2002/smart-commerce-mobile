@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 //Page texts
 import LoginTexts from '../../texts';
-
 //Native Components
 import {
     View,
@@ -13,6 +12,7 @@ import {
 } from 'react-native';
 //Custom Components
 import LoginInput from '../../Components/Inputs/LoginInput';
+
 import DefaultColors from '../../res/colors/DefaultColors';
 import Button from '../../Components/Buttons/Button';
 import SignIn from '../../Components/Buttons/SignIn';
