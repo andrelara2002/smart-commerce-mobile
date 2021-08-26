@@ -37,13 +37,6 @@ export default function LoginView(props) {
         })
     }
 
-    handleSetUsername = (name) => {
-        setUsername(name)
-    }
-
-    handleSetPassword = (pass) => {
-        setPassword(pass)
-    }
 
     const styles = StyleSheet.create({
         container: {
@@ -92,17 +85,15 @@ export default function LoginView(props) {
                     style={styles.image}
                 />
             </View>
-            <LoginInput lang={props.lang} label={"username"} onChange={handleSetUsername} />
-            <LoginInput lang={props.lang} label={"password"} onChange={handleSetPassword} />
+            <LoginInput lang={props.lang} label={"username"} onChange={setUsername} />
+            <LoginInput lang={props.lang} label={"password"} onChange={setPassword} />
             <View style={styles.socialButtons}>
                 <GoogleLoginButton lang={props.lang} />
                 <FacebookLoginButton lang={props.lang} />
             </View>
             <Button text={"entrar"} onPress={() => {
-                console.log(`USUARIO: \t${username}`)
-                console.log(`SENHA: \t${password}`)
-            }
-            } />
+                console.log(username, password)
+            }} />
             <SignIn lang={props.lang} />
         </View>
     )
