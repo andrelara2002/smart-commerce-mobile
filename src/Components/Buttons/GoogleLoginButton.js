@@ -37,7 +37,7 @@ export default function GoogleLoginButton() {
         <TouchableOpacity style={styles.container}>
             <View>
                 <Image
-                    source={require('../../res/assets/google_logo.png')}
+                    source={require('../../assets/image/google_logo.png')}
                     style={styles.image} />
             </View>
             <Text>
