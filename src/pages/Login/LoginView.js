@@ -20,12 +20,16 @@ import SignIn from '../../Components/Buttons/SignIn';
 import GoogleLoginButton from '../../Components/Buttons/GoogleLoginButton';
 import FacebookLoginButton from '../../Components/Buttons/FacebookLoginButton '
 
-export default function LoginView(props) {
+export default function LoginView({navigation, settings}) {
+
+    const lang = "pt_br"
+
+    //console.log(settings)
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
-    const texts = LoginTexts()[props.lang];
+    const texts = LoginTexts()[lang];
 
     breakLine = () => {
         const introduction = texts.login_introduction.split(" ")
@@ -35,6 +39,10 @@ export default function LoginView(props) {
             return <Text key={index}>{"\n"}{word}</Text>
 
         })
+    }
+
+    autenticar = () => {
+        navigation.navigate('Home')
     }
 
 
@@ -85,16 +93,15 @@ export default function LoginView(props) {
                     style={styles.image}
                 />
             </View>
-            <LoginInput lang={props.lang} label={"username"} onChange={setUsername} />
-            <LoginInput lang={props.lang} label={"password"} onChange={setPassword} />
+            <LoginInput lang={lang} label={"username"} onChange={setUsername} />
+            <LoginInput lang={lang} label={"password"} onChange={setPassword} />
+
             <View style={styles.socialButtons}>
-                <GoogleLoginButton lang={props.lang} />
-                <FacebookLoginButton lang={props.lang} />
+                <GoogleLoginButton lang={lang} />
+                <FacebookLoginButton lang={lang} />
             </View>
-            <Button text={"entrar"} onPress={() => {
-                console.log(username, password)
-            }} />
-            <SignIn lang={props.lang} />
+            <Button text={"entrar"} onPress={autenticar} />
+            <SignIn lang={lang} />
         </View>
     )
 }
