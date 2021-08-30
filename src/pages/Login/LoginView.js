@@ -20,9 +20,11 @@ import SignIn from '../../Components/Buttons/SignIn';
 import GoogleLoginButton from '../../Components/Buttons/GoogleLoginButton';
 import FacebookLoginButton from '../../Components/Buttons/FacebookLoginButton '
 
-export default function LoginView({navigation}) {
+export default function LoginView({navigation, settings}) {
 
     const lang = "pt_br"
+
+    //console.log(settings)
 
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -40,7 +42,7 @@ export default function LoginView({navigation}) {
     }
 
     autenticar = () => {
-        props.navigation.navigate('Home')
+        navigation.navigate('Home')
     }
 
 

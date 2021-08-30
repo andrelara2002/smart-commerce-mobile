@@ -8,9 +8,9 @@ import Settings from './src/services/settings'
 
 export default function App() {
 
-  const settings  = new Settings().getSettings();
+  const settings = new Settings().getSettings();
 
   return (
-    <Navigator />
+    <Navigator settings={settings} />
   )
 }

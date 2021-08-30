@@ -28,7 +28,6 @@ export default class Settings {
             const value = await AsyncStorage.getItem('settings');
             if (value !== null) {
                 // We have data!!
-                console.log(JSON.parse(value));
                 response = JSON.parse(value)
             }
         }
