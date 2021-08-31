@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Loading({ navigation }) {
-    const isLogged = false;
+    const isLogged = true;
 
     if (isLogged) {
         // User is logged
