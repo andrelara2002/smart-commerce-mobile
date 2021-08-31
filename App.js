@@ -1,4 +1,5 @@
 import React from 'react';
+import SplashScreen from 'react-native-splash-screen'
 
 import { NavigationContainer } from '@react-navigation/native';
 import LoginController from './src/pages/Login/LoginController';
@@ -6,11 +7,20 @@ import LoginController from './src/pages/Login/LoginController';
 import Navigator from './src/routes/homeStack'
 import Settings from './src/services/settings'
 
-export default function App() {
+export default class App extends React.Component {
 
-  const settings = new Settings().getSettings();
+  constructor(props) {
+    super(props)
+    const settings = new Settings().getSettings();
+  }
 
-  return (
-    <Navigator settings={settings} />
-  )
+  componentDidMount(){
+    SplashScreen.hide();
+  }
+
+  render() {
+    return (
+      <Navigator />
+    )
+  }
 }
