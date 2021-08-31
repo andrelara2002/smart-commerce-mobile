@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 })
 
 export default function HomeView({ navigation }) {
+
     return (
         <View style={styles.container}>
             <ScrollView>
