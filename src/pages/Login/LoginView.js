@@ -10,9 +10,9 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
+
 //Custom Components
 import LoginInput from '../../components/Inputs/LoginInput';
-
 import DefaultColors from '../../assets/colors/DefaultColors'
 import Button from '../../components/Buttons/Button';
 import SignIn from '../../components/Buttons/SignIn';
