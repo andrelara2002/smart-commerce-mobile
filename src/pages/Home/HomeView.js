@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 import DefaultColors from '../../assets/colors/DefaultColors';
-import HomeHeader from '../../Components/Headers/HomeHeader';
+import HomeHeader from '../../components/Headers/HomeHeader';
 
 const styles = StyleSheet.create({
     container: {
