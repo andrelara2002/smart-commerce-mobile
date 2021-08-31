@@ -12,7 +12,11 @@ const screens = {
         screen: Home
     }
 }
+const
+    navigationOptions = {
+        headerMode: 'none'
+    }
 
-const HomeStack = createStackNavigator(screens)
+const HomeStack = createStackNavigator(screens, navigationOptions)
 
 export default createAppContainer(HomeStack)
