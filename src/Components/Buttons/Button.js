@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     }
 })
 
-export default function Button({ text, onPress }) {
+export default function Button({ text, onPress, keyText }) {
 
 
     if (text === null || text === undefined) {
@@ -39,8 +39,10 @@ export default function Button({ text, onPress }) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.touchable} onPress={onPress}>
-                <Text style={styles.text}>{text}</Text>
+            <TouchableOpacity
+                style={styles.touchable}
+                onPress={onPress}>
+                <Text style={styles.text}>{keyText}</Text>
             </TouchableOpacity>
         </View>
     )

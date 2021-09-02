@@ -6,12 +6,12 @@ import DefaultColors from '../../assets/colors/DefaultColors'
 const styles = StyleSheet.create({
     container: {},
     title: {
-        fontSize: 20,
+        fontSize: 40,
         fontWeight: 'bold',
         color: '#fff'
     },
     subtitle: {
-        fontSize: 15,
+        fontSize: 20,
         color: '#fff'
     }
 })
