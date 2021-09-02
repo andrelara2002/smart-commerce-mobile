@@ -1,31 +1,26 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { View, Text, StyleSheet } from 'react-native'
-
 import DefaultColors from '../../assets/colors/DefaultColors'
-const {
-    border,
-    textColor
-} = DefaultColors["dark"]
 
 const styles = StyleSheet.create({
     container: {},
     title: {
-        fontSize: 40,
+        fontSize: 20,
         fontWeight: 'bold',
-        color: textColor
+        color: '#fff'
     },
     subtitle: {
-        fontSize: 20,
-        color: border
+        fontSize: 15,
+        color: '#fff'
     }
 })
 
-export default function HomeHeader(props) {
+export default function HomeHeader({ name }) {
     return (
         <View>
             <Text style={styles.subtitle}>Bom dia</Text>
-            <Text style={styles.title}>André</Text>
+            <Text style={styles.title}>{name}</Text>
         </View>
     )
 }
