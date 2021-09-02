@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
     }
 })
 
-export default function HomeHeader(props) {
+export default function HomeHeader({ name }) {
     return (
         <View>
             <Text style={styles.subtitle}>Bom dia</Text>
-            <Text style={styles.title}>Usuario: {props.name}</Text>
+            <Text style={styles.title}>{name}</Text>
         </View>
     )
 }

@@ -10,16 +10,15 @@ export default class HomeController extends React.Component {
     constructor({ navigation }) {
         super();
         this.settings = JSON.parse(AsyncStorage.getItem('settings'));
-        this.state = { username: 'oie'};
     }
 
     render() {
+
         return (
             <HomeView
                 lang={this.settings.app["language"]}
                 navigation={navigation}
                 colors={this.settings.app["colors"]}
-                username={this.state.username}
             />
         );
     }

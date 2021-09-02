@@ -17,23 +17,19 @@ const styles = StyleSheet.create({
 
 export default function HomeView(props) {
 
-    let username = 'testeeee';
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        async function LoadUser() {
-
-            var obj = await getUser();
-            console.log(obj);
-            props.username = JSON.parse(obj);
-        };
-        LoadUser();
-    }, []);
+        getUser().then(user => {
+            setUser(user.nomeCliente)
+        })
+    })
 
 
     return (
         <View style={styles.container}>
             <ScrollView>
-                <HomeHeader name={props.username} />
+                <HomeHeader name={user} />
             </ScrollView>
         </View>
     )

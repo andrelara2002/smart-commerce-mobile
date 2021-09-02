@@ -11,6 +11,14 @@ export async function getUserToken() {
     }
 }
 
+export async function getUser() {
+    try {
+        return JSON.parse(await AsyncStorage.getItem('user'));
+    } catch (e) {
+        throw e;
+    }
+}
+
 export async function storeUserToken(userToken) {
     try {
         return await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
