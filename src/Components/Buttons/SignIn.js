@@ -16,7 +16,7 @@ export default function SignIn(props) {
         }
     })
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
             <Text style={styles.text}>Cadastrar-se</Text>
         </TouchableOpacity>
     );

@@ -20,7 +20,7 @@ import SignIn from '../../components/Buttons/SignIn';
 import GoogleLoginButton from '../../components/Buttons/GoogleLoginButton';
 import FacebookLoginButton from '../../components/Buttons/FacebookLoginButton '
 
-export default function LoginView({navigation, settings}) {
+export default function LoginView({ navigation, settings }) {
 
     const lang = "pt_br"
 
@@ -42,7 +42,17 @@ export default function LoginView({navigation, settings}) {
     }
 
     autenticar = () => {
-        navigation.navigate('Home')
+        if (username && password) {
+            console.log("Autenticado")
+            navigation.navigate('App')
+        }
+        else {
+            console.log("Usuario não autenticado")
+        }
+    }
+
+    register = () => {
+        navigation.navigate('Register')
     }
 
 
@@ -101,7 +111,7 @@ export default function LoginView({navigation, settings}) {
                 <FacebookLoginButton lang={lang} />
             </View>
             <Button text={"entrar"} onPress={autenticar} />
-            <SignIn lang={lang} />
+            <SignIn lang={lang} onPress={register}/>
         </View>
     )
 }

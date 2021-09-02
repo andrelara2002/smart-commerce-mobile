@@ -9,10 +9,12 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         backgroundColor: DefaultColors["dark"].background,
+        padding: 25
     }
 })
 
 export default function HomeView({ navigation }) {
+
     return (
         <View style={styles.container}>
             <ScrollView>
