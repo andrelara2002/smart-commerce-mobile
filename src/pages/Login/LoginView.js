@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //Api
 import api from '../../services/api'
 
-import { storeUser,storeUserToken } from '../../utils'
+import { storeUser, storeUserToken } from '../../utils'
 
 //Page texts
 import LoginTexts from '../../texts';
@@ -17,10 +17,9 @@ import { StackActions, NavigationActions } from 'react-navigation'
 import LoginInput from '../../components/Inputs/LoginInput';
 import DefaultColors from '../../assets/colors/DefaultColors'
 
-//import Button from '../../components/Buttons/Button';
-//import SignIn from '../../components/Buttons/SignIn';
-
-import { Container, Title, TextInformation, Error, Form, Input, Button, ButtonText, } from './Styles'
+import Button from '../../components/Buttons/Button';
+import SignIn from '../../components/Buttons/SignIn';
+import Error from '../../components/Text/Error';
 
 import GoogleLoginButton from '../../components/Buttons/GoogleLoginButton';
 import FacebookLoginButton from '../../components/Buttons/FacebookLoginButton '
@@ -61,7 +60,7 @@ export default function LoginView(props) {
                 senha: password
             }
 
-            const loginResponse = await api.post('/login', credentials)            
+            const loginResponse = await api.post('/login', credentials)
             await storeUserToken(loginResponse.data);
 
             const userResponse = await api.get('/usuario');
@@ -79,7 +78,7 @@ export default function LoginView(props) {
             props.navigation.dispatch(resetAction)
 
         } catch (err) {
-            
+
             console.log(err)
 
             setLoading(false)
@@ -135,27 +134,18 @@ export default function LoginView(props) {
                     style={styles.image}
                 />
             </View>
-            {!!errorMessage && <Error>{errorMessage}</Error>}
+            {!!errorMessage && <Error errorMessage={errorMessage} />}
 
-            <Input
-                color='#000000'
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Digite seu usuário"
-                placeholderTextColor="#003f5c"
-                value={username}
-                onChangeText={username => setUsername(username)}
+            <LoginInput
+                label={"username"}
+                lang={lang}
+                onChange={username => setUsername(username)}
             />
 
-            <Input
-                color='#000000'
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Digite sua senha"
-                placeholderTextColor="#003f5c"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={password => setPassword(password)}
+            <LoginInput
+                label={"password"}
+                lang={lang}
+                onChange={password => setPassword(password)}
             />
 
             <View style={styles.socialButtons}>
@@ -163,12 +153,14 @@ export default function LoginView(props) {
                 <FacebookLoginButton lang={lang} />
             </View>
 
-            <Button onPress={signIn}>
-                {loading ? (
+            <Button
+                onPress={signIn}
+                keyText={loading ? (
                     <ActivityIndicator size="small" color="#FFF" />
                 ) : (
-                    <ButtonText>Prosseguir</ButtonText>
-                )}
+                    <Text>Entrar</Text>
+                )}>
+
             </Button>
         </View>
     )

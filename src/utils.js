@@ -48,10 +48,33 @@ export async function deleteUser() {
 
 export async function getSettings() {
     try {
-        return await AsyncStorage.getItem('settings');
+        let settings = await AsyncStorage.getItem('settings');
+        if (settings === null || settings === undefined) {
+            console.log('Settings not found, creating default settings');
+            settings = {
+                app: {
+                    "theme": "dark",
+                    "language": "pt_br",
+                    "colors": DefaultColors["dark"]
+                }
+            }
+        }
+        console.log('Settings loaded');
+        return JSON.parse(settings);
     } catch (e) {
+        // Error getting data
         console.log(e);
         throw e;
+    }
+}
+
+export async function setSettings(settings) {
+    try {
+        await AsyncStorage.setItem('settings', JSON.stringify(settings));
+    }
+    catch (error) {
+        // Error setting data
+        console.log(error);
     }
 }
 

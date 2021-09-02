@@ -60,7 +60,6 @@ export default function LoginInput(props) {
         <View style={style.container}>
             <TextInput
                 style={style.input}
-                autoCompleteType={props.label}
                 secureTextEntry={hidePassword}
                 onChangeText={a => props.onChange(a)}
                 onKeyPress={() => {

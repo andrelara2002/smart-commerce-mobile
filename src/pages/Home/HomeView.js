@@ -12,6 +12,15 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         backgroundColor: DefaultColors["dark"].background,
+        padding: 20,
+    },
+    title: {
+        fontSize: 40,
+        color: DefaultColors["dark"].text,
+    },
+    subText: {
+        fontSize: 20,
+        color: DefaultColors["dark"].border,
     }
 })
 
