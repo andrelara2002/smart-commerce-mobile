@@ -21,7 +21,7 @@ export default function HomeView(props) {
 
     useEffect(() => {
         getUser().then(user => {
-            setUser(user.nomeCliente)
+            setUser(user.nomeCliente + ' ' + user.sobrenome)
         })
     })
 
