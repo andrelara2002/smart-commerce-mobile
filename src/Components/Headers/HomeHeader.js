@@ -20,7 +20,7 @@ export default function HomeHeader(props) {
     return (
         <View>
             <Text style={styles.subtitle}>Bom dia</Text>
-            <Text style={styles.title}>Usuario</Text>
+            <Text style={styles.title}>Usuario: {props.name}</Text>
         </View>
     )
 }

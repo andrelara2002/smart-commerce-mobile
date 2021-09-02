@@ -1,22 +1,44 @@
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
-
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 import Login from '../pages/Login/LoginView'
 import Home from '../pages/Home/HomeView'
+import AuthLoadingScreen from '../pages/AuthLoading/AuthLoadingScreen'
 
-const screens = {
-    Login: {
-        screen: Login
+const StackNavigator = createStackNavigator(
+    {
+        Home,
     },
-    Home: {
-        screen: Home
+    {
+        initialRouteName: 'Home',
+        headerMode: 'none',
+        header: null,
     }
-}
-const
-    navigationOptions = {
-        headerMode: 'none'
-    }
+);
 
-const HomeStack = createStackNavigator(screens, navigationOptions)
+const AuthStack = createStackNavigator(
+    {
+        SignIn: Login,
+        App: StackNavigator,
+    },
+    {
+        initialRouteName: 'SignIn',
+        headerMode: 'none',
+        header: null,
+    },
+);
 
-export default createAppContainer(HomeStack)
+const RootStack = createSwitchNavigator(
+    {
+        AuthLoading: AuthLoadingScreen,
+        Auth: AuthStack,
+        App: StackNavigator,
+    },
+    {
+        initialRouteName: 'AuthLoading',
+        headerMode: 'none',
+        header: null,
+    },
+);
+
+const RootStackContainer = createAppContainer(RootStack)
+export default RootStackContainer
