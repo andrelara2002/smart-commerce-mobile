@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { Alert } from 'react-native'
 
-import { getUserToken, navigate, deleteUser } from '../utils'
+import { getUserToken, navigate, deleteAsyncStorage } from '../utils'
 
 const api = axios.create({
   baseURL: 'https://smart-commerce-back.azurewebsites.net',  
@@ -43,7 +43,7 @@ api.interceptors.response.use(
 
       // O token JWT expirou
 
-      deleteUser()
+      deleteAsyncStorage()
         .then(() => {
           navigate('AuthLoading', {})
         })
