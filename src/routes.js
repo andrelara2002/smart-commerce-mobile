@@ -1,8 +1,9 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import Login from '../pages/Login/LoginView'
-import Home from '../pages/Home/HomeView'
-import AuthLoadingScreen from '../pages/AuthLoading/AuthLoadingScreen'
+
+import Login from './pages/Login/LoginView'
+import Home from './pages/Home/HomeView'
+import AuthLoadingScreen from './pages/AuthLoading/AuthLoadingScreen'
 
 const StackNavigator = createStackNavigator(
     {
@@ -41,4 +42,5 @@ const RootStack = createSwitchNavigator(
 );
 
 const RootStackContainer = createAppContainer(RootStack)
+
 export default RootStackContainer

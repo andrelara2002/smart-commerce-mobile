@@ -35,9 +35,10 @@ export async function storeUser(userToken) {
     }
 }
 
-export async function deleteUser() {
+export async function deleteAsyncStorage() {
     try {
-        return await AsyncStorage.removeItem('userToken');
+        return await AsyncStorage.clear();
+        // return await AsyncStorage.removeItem('userToken');
     } catch (e) {
         throw e;
     }
@@ -50,7 +51,6 @@ export async function getSettings() {
     try {
         let settings = await AsyncStorage.getItem('settings');
         if (settings === null || settings === undefined) {
-            console.log('Settings not found, creating default settings');
             settings = {
                 app: {
                     "theme": "dark",
@@ -59,10 +59,9 @@ export async function getSettings() {
                 }
             }
         }
-        console.log('Settings loaded');
+
         return JSON.parse(settings);
     } catch (e) {
-        // Error getting data
         console.log(e);
         throw e;
     }
@@ -72,9 +71,9 @@ export async function setSettings(settings) {
     try {
         await AsyncStorage.setItem('settings', JSON.stringify(settings));
     }
-    catch (error) {
-        // Error setting data
-        console.log(error);
+    catch (e) {
+        console.log(e);
+        throw e;
     }
 }
 
