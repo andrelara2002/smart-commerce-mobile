@@ -3,7 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import DefaultColors from '../../../assets/colors/DefaultColors'
 
+import Button from '../../../components/Buttons/Button'
+import LevelButton from '../../../components/Buttons/LevelButton'
+
 import Texts from '../../../texts'
+
+import diamond from '../../../assets/image/diamond.png'
 
 const {
     textColor,
@@ -19,6 +24,13 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 24,
         color: border
+    },
+    buttons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 20,
     }
 })
 
@@ -48,6 +60,13 @@ export default function HomeHeader({ name, language }) {
         <View>
             <Text style={styles.subtitle}>{saudacao}</Text>
             <Text style={styles.title}>{name}</Text>
+            <View style={styles.buttons}>
+                <Button
+                    isDark={true}
+                    keyText={"Adicionar empresa"}
+                />
+                <LevelButton text={200} image={diamond} />
+            </View>
         </View>
     )
 }
