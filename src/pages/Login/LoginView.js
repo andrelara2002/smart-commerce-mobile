@@ -26,8 +26,9 @@ import FacebookLoginButton from '../../components/Buttons/FacebookLoginButton '
 
 export default function LoginView(props) {
 
-    const lang = props.language || 'pt_br';
 
+    const lang = "pt_br";
+  
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -64,9 +65,6 @@ export default function LoginView(props) {
 
             const userResponse = await api.get('/usuario');
             await storeUser(userResponse.data);
-
-            console.log(loginResponse.data);
-            console.log(userResponse.data);
 
             const resetAction = StackActions.reset({
                 index: 0,

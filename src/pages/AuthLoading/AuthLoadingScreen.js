@@ -6,8 +6,7 @@ export default function AuthLoadingScreen(props) {
 
   useEffect(() => {
     async function handleUserNextScreen() {
-      const userToken = await getUserToken();
-      console.log(userToken);
+      const userToken = await getUserToken();      
       props.navigation.navigate(userToken ? 'App' : 'Auth');
     }
 
