@@ -11,9 +11,6 @@ import Texts from '../../../texts'
 
 import diamond from '../../../assets/image/diamond.png'
 
-=======
-import Texts from '../../../texts'
-
 const {
     textColor,
     border } = DefaultColors["dark"]
