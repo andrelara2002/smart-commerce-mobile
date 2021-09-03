@@ -6,7 +6,7 @@ import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView } from 'rea
 import DefaultColors from '../../assets/colors/DefaultColors';
 import HomeHeader from '../../components/Headers/HomeHeader';
 
-import { getUser, getUserToken } from '../../utils'
+import { getUser, getUserToken, getSettings } from '../../utils'
 
 const styles = StyleSheet.create({
     container: {
@@ -27,18 +27,29 @@ const styles = StyleSheet.create({
 export default function HomeView(props) {
 
     const [user, setUser] = useState(null);
+    const [language, setLanguage] = useState("pt_br");
 
     useEffect(() => {
-        getUser().then(user => {
+        setVariables();
+    })
+
+    async function setVariables() {
+        await getUser().then(user => {
             setUser(user.nomeCliente + ' ' + user.sobrenome)
         })
-    })
+        await getSettings().then(settings => {
+            setLanguage(settings.app.language)
+        })
+    }
 
 
     return (
         <View style={styles.container}>
             <ScrollView>
-                <HomeHeader name={user} />
+                <HomeHeader
+                    name={user}
+                    language={language}
+                />
             </ScrollView>
         </View>
     )
