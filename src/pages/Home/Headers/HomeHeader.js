@@ -3,12 +3,16 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import DefaultColors from '../../../assets/colors/DefaultColors'
 
+
 import Button from '../../../components/Buttons/Button'
 import LevelButton from '../../../components/Buttons/LevelButton'
 
 import Texts from '../../../texts'
 
 import diamond from '../../../assets/image/diamond.png'
+
+=======
+import Texts from '../../../texts'
 
 const {
     textColor,
