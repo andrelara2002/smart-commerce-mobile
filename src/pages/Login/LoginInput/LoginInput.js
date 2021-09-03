@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 
-import InputTexts from './InputTexts';
-import DefaultColors from '../../assets/colors/DefaultColors'
+import Texts from '../../../texts'
+import DefaultColors from '../../../assets/colors/DefaultColors'
 
 
 export default function LoginInput(props) {
     const type = props.label + "_label";
 
     const [hidePassword, setHidePassword] = React.useState(true);
-    const [texts, setTexts] = React.useState(InputTexts()[props.lang][type]);
+    const [texts, setTexts] = React.useState(Texts)[props.lang].input_labels;
 
     const {
         background,
