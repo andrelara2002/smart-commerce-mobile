@@ -43,8 +43,6 @@ export default function HomeHeader({ name, language }) {
     const [saudacao, setSaudacao] = useState('');
     const greetings = Texts[language].greetings;
 
-    console.log(greetings)
-
     useEffect(() => {
         const time = new Date().getHours()
 

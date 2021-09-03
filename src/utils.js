@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation'
 // User
 export async function getUserToken() {
     try {
-        return await AsyncStorage.getItem('userToken');
+        return JSON.parse(await AsyncStorage.getItem('userToken'));
     } catch (e) {
         throw e;
     }
@@ -47,26 +47,6 @@ export async function deleteAsyncStorage() {
 
 // Settings
 
-export async function getSettings() {
-    try {
-        let settings = await AsyncStorage.getItem('settings');
-        if (settings === null || settings === undefined) {
-            settings = {
-                app: {
-                    "theme": "dark",
-                    "language": "pt_br",
-                    "colors": DefaultColors["dark"]
-                }
-            }
-        }
-
-        return JSON.parse(settings);
-    } catch (e) {
-        console.log(e);
-        throw e;
-    }
-}
-
 export async function setSettings(settings) {
     try {
         await AsyncStorage.setItem('settings', JSON.stringify(settings));
@@ -77,6 +57,26 @@ export async function setSettings(settings) {
     }
 }
 
+export async function getSettings() {
+    try {
+       
+        let settings = await AsyncStorage.getItem('settings');
+        if (settings === null || settings === undefined) {
+            settings = {
+                app: {
+                    "theme": "dark",
+                    "language": "pt_br",
+                    "colors": DefaultColors["dark"]
+                }                
+            }
+            await setSettings(settings);
+
+        }
+        return JSON.parse(settings);
+    } catch (e) {
+        throw e;
+    }
+}
 
 // NavigationService
 
