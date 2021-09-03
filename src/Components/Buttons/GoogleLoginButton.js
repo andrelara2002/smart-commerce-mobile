@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, StyleSheet, Text } from 'react-native'
 
+import texts from '../../texts';
+
 export default function GoogleLoginButton() {
+
+    const lang = "pt_br"
 
     const styles = StyleSheet.create({
         container: {
@@ -41,7 +45,7 @@ export default function GoogleLoginButton() {
                     style={styles.image} />
             </View>
             <Text>
-                Login with Google
+                {texts[lang].google_login}
             </Text>
         </TouchableOpacity>
     )

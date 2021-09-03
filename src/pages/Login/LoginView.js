@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 //Api
 import api from '../../services/api'
 
-import { storeUser, storeUserToken } from '../../utils'
+import {  storeUser, storeUserToken } from '../../utils'
 
 //Page texts
-import LoginTexts from '../../texts';
+import Texts from '../../texts';
 
 //Native Components
 import { View, Text, StyleSheet, Image, StatusBar, ActivityIndicator } from 'react-native';
@@ -26,15 +26,14 @@ import FacebookLoginButton from '../../components/Buttons/FacebookLoginButton '
 
 export default function LoginView(props) {
 
-    const lang = "pt_br";
-    //console.log(settings);
+    const lang = props.language || 'pt_br';
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
 
-    const texts = LoginTexts()[lang];
+    const texts = Texts[lang];
 
     breakLine = () => {
         const introduction = texts.login_introduction.split(" ")
@@ -47,7 +46,7 @@ export default function LoginView(props) {
     }
     async function signIn() {
         if (username.length === 0 || password.length === 0) {
-            setErrorMessage('Usuário ou senha não podem estar vazios')
+            setErrorMessage(texts.login_error_empty_fields);
             return;
         }
 
@@ -82,7 +81,7 @@ export default function LoginView(props) {
             console.log(err)
 
             setLoading(false)
-            setErrorMessage('Usuário não existe')
+            setErrorMessage(texts.login_error_invalid_credentials);
         }
     }
 
