@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, StyleSheet, Text } from 'react-native'
 
-import texts from '../../texts';
+import texts from '../../../texts';
 
 export default function FacebookLoginButton() {
 
@@ -41,7 +41,7 @@ export default function FacebookLoginButton() {
         <TouchableOpacity style={styles.container}>
             <View>
                 <Image
-                    source={require('../../assets/image/facebook_logo.png')}
+                    source={require('../../../assets/image/facebook_logo.png')}
                     style={styles.image} />
             </View>
             <Text>

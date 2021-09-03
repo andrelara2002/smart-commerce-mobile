@@ -14,15 +14,15 @@ import { View, Text, StyleSheet, Image, StatusBar, ActivityIndicator } from 'rea
 import { StackActions, NavigationActions } from 'react-navigation'
 
 //Custom Components
-import LoginInput from '../../components/Inputs/LoginInput';
+import LoginInput from './LoginInput/LoginInput';
 import DefaultColors from '../../assets/colors/DefaultColors'
 
 import Button from '../../components/Buttons/Button';
 import SignIn from '../../components/Buttons/SignIn';
 import Error from '../../components/Text/Error';
 
-import GoogleLoginButton from '../../components/Buttons/GoogleLoginButton';
-import FacebookLoginButton from '../../components/Buttons/FacebookLoginButton '
+import GoogleLoginButton from './SocialButtons/GoogleLoginButton';
+import FacebookLoginButton from './SocialButtons/FacebookLoginButton '
 
 export default function LoginView(props) {
 

@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView } from 'rea
 
 
 import DefaultColors from '../../assets/colors/DefaultColors';
-import HomeHeader from '../../components/Headers/HomeHeader';
+import HomeHeader from './Headers/HomeHeader';
 
 import { getUser, getUserToken, getSettings } from '../../utils'
 

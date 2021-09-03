@@ -5,6 +5,10 @@ export default Texts = {
         google_login: "Login com Google",
         login_error_empty_fields: "Usuário ou senha não podem estar vazios",
         login_error_invalid_credentials: "Usuário não existe",
+        input_labels: {
+            "username_label": "Usuário",
+            "password_label": "Senha"
+        },
         greetings: {
             "good_morning": "Bom dia",
             "good_afternoon": "Boa tarde",
@@ -17,6 +21,10 @@ export default Texts = {
         google_login: "Login with Google",
         login_error_empty_fields: "Username or password can't be empty",
         login_error_invalid_credentials: "User doesn't exist",
+        input_labels: {
+            "username_label": "Username",
+            "password_label": "Password"
+        },
         greetings: {
             "good_morning": "Good morning",
             "good_afternoon": "Good afternoon",
