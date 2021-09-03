@@ -18,12 +18,13 @@ const styles = {
         justifyContent: 'center',
 
         height: 60,
-        width: 100,
+        width: 125,
 
         marginLeft: 10,
-        padding: 10,
+        paddingLeft: 10,
+        paddingRight: 10,
 
-        borderRadius: 5,
+        borderRadius: 10,
         backgroundColor: accent,
     },
 

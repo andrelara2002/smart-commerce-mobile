@@ -22,6 +22,7 @@ import { getUser, getUserToken, getSettings } from '../../utils'
 
 import HomeHeader from './Headers/HomeHeader';
 import HomeCarrocel from './HomeCarrocel/HomeCarrocel';
+import MostVotted from '../../components/Graphs/HorBarGraph/MostVotted';
 
 // <- Componentes customizados
 
@@ -67,6 +68,7 @@ export default function HomeView(props) {
                     language={language}
                 />
                 <HomeCarrocel />
+                <MostVotted />
             </ScrollView>
         </View>
     )
