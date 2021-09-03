@@ -16,7 +16,7 @@ export default function Button({ onPress, keyText, isDark, width }) {
         container: {
             flex: flex,
             width: newWidth,
-            height: 60,
+            height: 0,
             justifyContent: "center",
             alignItems: "center",
             marginTop: 10,
@@ -25,14 +25,15 @@ export default function Button({ onPress, keyText, isDark, width }) {
         touchable: {
             backgroundColor: backgroundColor,
             width: newWidth,
-            height: "100%",
+            height: 60,
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: 4
+            borderRadius: 10
         },
         text: {
             color: textColor,
             fontSize: 15,
+            fontWeight: "bold",
             textAlign: "center",
             textTransform: "uppercase",
         }

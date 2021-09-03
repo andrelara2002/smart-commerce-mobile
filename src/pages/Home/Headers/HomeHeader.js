@@ -16,7 +16,10 @@ const {
     border } = DefaultColors["dark"]
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        padding: 30,
+        marginTop: 20,
+    },
     title: {
         fontSize: 40,
         fontWeight: 'bold',
@@ -30,8 +33,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
+        marginTop: 20,
     }
 })
 
@@ -58,7 +60,7 @@ export default function HomeHeader({ name, language }) {
     })
 
     return (
-        <View>
+        <View style = {styles.container}>
             <Text style={styles.subtitle}>{saudacao}</Text>
             <Text style={styles.title}>{name}</Text>
             <View style={styles.buttons}>

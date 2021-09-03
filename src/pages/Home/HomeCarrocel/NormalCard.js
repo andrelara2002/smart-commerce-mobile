@@ -9,43 +9,56 @@ import {
 
 import DefaultColors from '../../../assets/colors/DefaultColors';
 
-const styles = StyleSheet.create({
-    item: {
-        flexDirection: 'column',
-        padding: 10,
-        backgroundColor: DefaultColors["dark".backgroundColor],
-    },
-    itemHeader: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginTop: 15,
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: DefaultColors["dark"].textColor,
-    },
-    description: {
-        fontSize: 14,
-        color: DefaultColors["dark"].border,
-    },
-    image: {
-        width: 250,
-        height: 150,
-        borderRadius: 8,
-    },
-    logo: {
-        width: 50,
-        height: 50,
-        borderRadius: 10,
-    },
-    itemText: {
-        flexDirection: 'column',
-        marginLeft: 15,
-    },
-})
-
 export default function NormalCard(props) {
+
+    const [initialMargin, setInitialMargin] = React.useState(0);
+
+    React.useEffect(() => {
+        if (props.index === 0) {
+            setInitialMargin(60);
+        }
+    })
+
+    const styles = StyleSheet.create({
+        item: {
+            flexDirection: 'column',
+            padding: 10,
+            backgroundColor: DefaultColors["dark".backgroundColor],
+            marginLeft: initialMargin,
+            marginRight: 10,
+            marginBottom: 0,
+            marginTop: 0,
+        },
+        itemHeader: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            marginTop: 15,
+        },
+        title: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            color: DefaultColors["dark"].textColor,
+        },
+        description: {
+            fontSize: 14,
+            color: DefaultColors["dark"].border,
+        },
+        image: {
+            width: 250,
+            height: 150,
+            borderRadius: 8,
+        },
+        logo: {
+            width: 50,
+            height: 50,
+            borderRadius: 10,
+        },
+        itemText: {
+            flexDirection: 'column',
+            marginLeft: 15,
+        },
+    })
+
     return (
         <TouchableOpacity style={styles.item}>
             <Image source={props.image} style={styles.image} />

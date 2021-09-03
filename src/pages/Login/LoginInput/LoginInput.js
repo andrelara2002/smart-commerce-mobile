@@ -9,7 +9,7 @@ export default function LoginInput(props) {
     const type = props.label + "_label";
 
     const [hidePassword, setHidePassword] = React.useState(true);
-    const [texts, setTexts] = React.useState(Texts)[props.lang].input_labels;
+    const [texts, setTexts] = React.useState(Texts[props.lang].input_labels[type]);
 
     const {
         background,
