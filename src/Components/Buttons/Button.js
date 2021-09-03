@@ -25,7 +25,7 @@ export default function Button({ onPress, keyText, isDark, width }) {
         touchable: {
             backgroundColor: backgroundColor,
             width: newWidth,
-            height: "100%",
+            height: 60,
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 4

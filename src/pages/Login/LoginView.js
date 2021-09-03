@@ -152,6 +152,7 @@ export default function LoginView(props) {
 
             <Button
                 onPress={signIn}
+                flex={1}
                 keyText={loading ? (
                     <ActivityIndicator size="small" color="#FFF" />
                 ) : (
