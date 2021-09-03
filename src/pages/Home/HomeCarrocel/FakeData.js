@@ -7,3 +7,10 @@ export default FakeData = [
     { title: 'SmartCommerce2 ', description: 'Economia', image: defaultBackground, logo: defaultLogo },
     { title: 'SmartCommerce3 ', description: 'Economia', image: defaultBackground, logo: defaultLogo },
 ]
+
+export const mostVotted = [
+    { title: 'SmartCommerce', qtdVotos: '100', qtdTotalVotos: '200', image: defaultLogo },
+    { title: 'SmartCommerce', qtdVotos: '100', qtdTotalVotos: '200', image: defaultLogo },
+    { title: 'SmartCommerce', qtdVotos: '100', qtdTotalVotos: '200', image: defaultLogo },
+
+]

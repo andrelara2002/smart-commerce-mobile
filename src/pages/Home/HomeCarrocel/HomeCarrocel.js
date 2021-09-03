@@ -19,8 +19,9 @@ export default function HomeCarrocel() {
 
     const styles = StyleSheet.create({
         container: {
-            padding: 2,
-            margin: 2,
+            paddingLeft: 0,
+            margin: 0,
+
         },
     })
 
@@ -32,8 +33,9 @@ export default function HomeCarrocel() {
                 keyExtractor={item => item.title}
                 horizontal={true}
                 pagingEnabled={true}
-                renderItem={({ item }) => (
+                renderItem={({ item, index }) => (
                     <NormalCard
+                        index={index}
                         image={item.image}
                         title={item.title}
                         description={item.description}
