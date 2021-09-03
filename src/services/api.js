@@ -58,8 +58,7 @@ api.interceptors.response.use(
 api.interceptors.request.use(
   config => {
     return getUserToken()
-      .then(user => {
-        user = JSON.parse(user)
+      .then(user => {        
         if (user && user.token)
           config.headers.Authorization = `Bearer ${user.token}`
         return Promise.resolve(config)

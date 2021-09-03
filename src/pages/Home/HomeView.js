@@ -46,19 +46,20 @@ export default function HomeView(props) {
     const [user, setUser] = useState(null);
     const [language, setLanguage] = useState("pt_br");
 
-    useEffect(() => {
-        setVariables();
-    })
-
     async function setVariables() {
+        
         await getUser().then(user => {
             setUser(user.nomeCliente + ' ' + user.sobrenome)
         })
+        
         await getSettings().then(settings => {
             setLanguage(settings.app.language)
         })
     }
 
+    useEffect(() => {
+        setVariables();
+    })
 
     return (
         <View style={styles.container}>
