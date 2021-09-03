@@ -12,6 +12,9 @@ import {
 // Configurações padrão ->
 
 import DefaultColors from '../../assets/colors/DefaultColors';
+=======
+import HomeHeader from './Headers/HomeHeader';
+
 import { getUser, getUserToken, getSettings } from '../../utils'
 
 // <- Configurações padrão
