@@ -2,14 +2,13 @@ import React from 'react';
 
 import HomeView from './HomeView';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { getUser } from '../../utils'
 
 export default class HomeController extends React.Component {
 
     constructor({ navigation }) {
-        super();
-        this.settings = JSON.parse(AsyncStorage.getItem('settings'));
+        super(navigation);
+        this.settings = getUser();
     }
 
     render() {
