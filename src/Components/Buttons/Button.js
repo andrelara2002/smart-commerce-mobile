@@ -28,7 +28,8 @@ export default function Button({ onPress, keyText, isDark, width }) {
             height: 60,
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: 10
+            borderRadius: 10,
+            opacity: 1,
         },
         text: {
             color: textColor,

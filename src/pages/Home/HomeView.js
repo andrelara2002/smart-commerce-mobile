@@ -16,6 +16,11 @@ import DefaultColors from '../../assets/colors/DefaultColors';
 
 import { getUser, getUserToken, getSettings } from '../../utils'
 
+const {
+    background,
+    textColor,
+    border } = DefaultColors["dark"];
+
 // <- Configurações padrão
 
 // Componentes customizados ->
@@ -29,15 +34,17 @@ import MostVotted from '../../components/Graphs/HorBarGraph/MostVotted';
 const styles = StyleSheet.create({
     container: {
         height: '100%',
-        backgroundColor: DefaultColors["dark"].background,
+        backgroundColor: background,
     },
     title: {
-        fontSize: 40,
-        color: DefaultColors["dark"].text,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color: textColor,
     },
     subText: {
         fontSize: 20,
-        color: DefaultColors["dark"].border,
+        color: border,
     }
 })
 
@@ -47,11 +54,11 @@ export default function HomeView(props) {
     const [language, setLanguage] = useState("pt_br");
 
     async function setVariables() {
-        
+
         await getUser().then(user => {
             setUser(user.nomeCliente + ' ' + user.sobrenome)
         })
-        
+
         await getSettings().then(settings => {
             setLanguage(settings.app.language)
         })

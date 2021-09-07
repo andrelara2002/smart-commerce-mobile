@@ -15,7 +15,7 @@ export default function NormalCard(props) {
 
     React.useEffect(() => {
         if (props.index === 0) {
-            setInitialMargin(60);
+            setInitialMargin(20);
         }
     })
 
