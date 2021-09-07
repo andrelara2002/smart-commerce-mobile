@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Text } from 'react-native';
+import SearchView from './SearchView'
 
 export default function SearchController() {
     return (
-        <Text>SearchController</Text>
+        <SearchView />
     )
 }
