@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-    Text,
     View,
     StyleSheet,
     Image,
@@ -9,10 +8,12 @@ import {
     ScrollView
 } from 'react-native';
 
-// Configurações padrão ->
+// Arquivos de configurações ->
 
 import DefaultColors from '../../assets/colors/DefaultColors';
+import texts from '../../texts';
 
+const sessions_title = texts["pt_br"].sessions_title
 
 import { getUser, getUserToken, getSettings } from '../../utils'
 
@@ -21,13 +22,15 @@ const {
     textColor,
     border } = DefaultColors["dark"];
 
-// <- Configurações padrão
+// <- Arquivos de configurações
 
 // Componentes customizados ->
 
 import HomeHeader from './Headers/HomeHeader';
 import HomeCarrocel from './HomeCarrocel/HomeCarrocel';
 import MostVotted from '../../components/Graphs/HorBarGraph/MostVotted';
+import Spacer from '../../components/Util/Spacer';
+import Title from '../../components/Util/Title';
 
 // <- Componentes customizados
 
@@ -35,12 +38,6 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         backgroundColor: background,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        color: textColor,
     },
     subText: {
         fontSize: 20,
@@ -75,8 +72,14 @@ export default function HomeView(props) {
                     name={user}
                     language={language}
                 />
+                <Spacer height={30} />
+                <Title text={sessions_title.close_to_you} />
                 <HomeCarrocel />
+                <Spacer height={30} />
+                <Title text={sessions_title.most_voted} />
                 <MostVotted />
+                
+                <Spacer height={30} />
             </ScrollView>
         </View>
     )

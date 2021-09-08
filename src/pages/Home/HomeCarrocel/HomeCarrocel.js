@@ -30,7 +30,7 @@ export default function HomeCarrocel() {
             <FlatList
                 data={data}
                 showsHorizontalScrollIndicator={false}
-                keyExtractor={item => item.title}
+                keyExtractor={(item, index) => index.toString()}
                 horizontal={true}
                 pagingEnabled={true}
                 renderItem={({ item, index }) => (
