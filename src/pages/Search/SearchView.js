@@ -1,11 +1,24 @@
 import React from 'react'
 
-import { Text, StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { SearchBar } from 'react-native-elements'
-import { color } from 'react-native-reanimated';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+// Arquivos de configurações ->
+
 import DefaultColors from '../../assets/colors/DefaultColors'
+
+// <- Arquivos de configurações
+
+// Componentes customizados ->
+
+import Title from '../../components/Util/Title';
+import Spacer from '../../components/Util/Spacer';
+import CategoriesCarrousel from '../../components/Carrousel/CategoriesCarrousel';
+import LittleCompaniesCarrousel from '../../components/Carrousel/LittleCompaniesCarroucel';
+
+// <- Componentes customizados
 
 export default function SearchView() {
 
@@ -30,7 +43,7 @@ export default function SearchView() {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <SearchBar
                 placeholder="Type Here..."
                 cancelButtonTitle="Cancel"
@@ -63,6 +76,14 @@ export default function SearchView() {
                     />
                 }
             />
-        </View>
+            <Spacer height={20} />
+            <Title text="Categorias" />
+            <CategoriesCarrousel />
+            <Spacer height={20} />
+            <Title text="Pequenas empresas" />
+            <LittleCompaniesCarrousel />
+
+            <Spacer height={30} />
+        </ScrollView>
     )
 }

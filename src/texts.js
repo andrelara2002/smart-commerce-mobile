@@ -14,6 +14,11 @@ export default Texts = {
             "good_afternoon": "Boa tarde",
             "good_night": "Boa noite"
         },
+        sessions_title: {
+            "close_to_you": "Próximas a você",
+            "most_voted": "Mais votadas",
+            "categories": "Categorias",
+        }
     },
     "en": {
         login_introduction: "Let's Start!",
@@ -30,6 +35,11 @@ export default Texts = {
             "good_afternoon": "Good afternoon",
             "good_night": "Good evening"
         },
+        sessions_title: {
+            "close_to_you": "Close to you",
+            "most_voted": "Most voted",
+            "categories": "Categories",
+        }
     }
 
 }

@@ -15,7 +15,9 @@ export default function MostVotted(props) {
 
     const styles = StyleSheet.create({
         container: {
-            padding: 20,
+            paddingBottom: 20,
+            paddingLeft: 20,
+            paddingRight: 20,
         },
         title: {
             fontSize: 20,
@@ -27,7 +29,6 @@ export default function MostVotted(props) {
             backgroundColor: backgroundSecondary,
             padding: 10,
             borderRadius: 10,
-            width: '98%',
         }
     })
 
@@ -49,7 +50,6 @@ export default function MostVotted(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Most Votted</Text>
             <View style={styles.flatList}>
                 {renderItens()}
             </View>
