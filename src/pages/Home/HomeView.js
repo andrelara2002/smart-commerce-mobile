@@ -77,8 +77,8 @@ export default function HomeView(props) {
                 <HomeCarrocel />
                 <Spacer height={30} />
                 <Title text={sessions_title.most_voted} />
-                <MostVotted />
-                
+                <MostVotted text={texts["pt_br"].sessions_title.see_more} />
+
                 <Spacer height={30} />
             </ScrollView>
         </View>
