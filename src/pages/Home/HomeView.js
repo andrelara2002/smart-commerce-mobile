@@ -13,15 +13,13 @@ import {
 import DefaultColors from '../../assets/colors/DefaultColors';
 import texts from '../../texts';
 
-const sessions_title = texts["pt_br"].sessions_title
-
 import { getUser, getUserToken, getSettings } from '../../utils'
 
-const {
+/* const {
     background,
     textColor,
     border } = DefaultColors["dark"];
-
+ */
 // <- Arquivos de configurações
 
 // Componentes customizados ->
@@ -34,31 +32,38 @@ import Title from '../../components/Util/Title';
 
 // <- Componentes customizados
 
-const styles = StyleSheet.create({
-    container: {
-        height: '100%',
-        backgroundColor: background,
-    },
-    subText: {
-        fontSize: 20,
-        color: border,
-    }
-})
-
 export default function HomeView(props) {
 
-    const [user, setUser] = useState(null);
-    const [language, setLanguage] = useState("pt_br");
+    const {
+        background,
+        textColor,
+        border } = props.colors;
+
+    const styles = StyleSheet.create({
+        container: {
+            height: '100%',
+            backgroundColor: background,
+        },
+        subText: {
+            fontSize: 20,
+            color: border,
+        }
+    })
+
+    const [user, setUser] = useState(props.username || '');
+    const [language, setLanguage] = useState(props.lang || "en");
+
+    const sessions_title = texts[language].sessions_title
 
     async function setVariables() {
 
-        await getUser().then(user => {
+        /* await getUser().then(user => {
             setUser(user.nomeCliente + ' ' + user.sobrenome)
-        })
+        }) */
 
-        await getSettings().then(settings => {
+        /* await getSettings().then(settings => {
             setLanguage(settings.app.language)
-        })
+        }) */
     }
 
     useEffect(() => {
@@ -72,13 +77,12 @@ export default function HomeView(props) {
                     name={user}
                     language={language}
                 />
-                <Spacer height={30} />
+                <Spacer height={20} />
                 <Title text={sessions_title.close_to_you} />
-                <HomeCarrocel />
-                <Spacer height={30} />
+                <HomeCarrocel navigation={props.navigation} />
+                <Spacer height={20} />
                 <Title text={sessions_title.most_voted} />
-                <MostVotted />
-                
+                <MostVotted text={texts[language].sessions_title.see_more} />
                 <Spacer height={30} />
             </ScrollView>
         </View>

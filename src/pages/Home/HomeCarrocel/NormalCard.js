@@ -60,7 +60,7 @@ export default function NormalCard(props) {
     })
 
     return (
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={props.onPress}>
             <Image source={props.image} style={styles.image} />
             <View style={styles.itemHeader}>
                 <Image source={props.logo} style={styles.logo} />

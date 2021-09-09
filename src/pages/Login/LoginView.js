@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //Api
 import api from '../../services/api'
 
-import {  storeUser, storeUserToken } from '../../utils'
+import { storeUser, storeUserToken } from '../../utils'
 
 //Page texts
 import Texts from '../../texts';
@@ -16,6 +16,7 @@ import { StackActions, NavigationActions } from 'react-navigation'
 //Custom Components
 import LoginInput from './LoginInput/LoginInput';
 import DefaultColors from '../../assets/colors/DefaultColors'
+import Spacer from '../../components/Util/Spacer';
 
 import Button from '../../components/Buttons/Button';
 import SignIn from '../../components/Buttons/SignIn';
@@ -27,8 +28,9 @@ import FacebookLoginButton from './SocialButtons/FacebookLoginButton '
 export default function LoginView(props) {
 
 
-    const lang = "pt_br";
-  
+    const lang = props.lang;
+    const [colors, setColors] = useState(props.colors);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -46,6 +48,7 @@ export default function LoginView(props) {
         })
     }
     async function signIn() {
+
         if (username.length === 0 || password.length === 0) {
             setErrorMessage(texts.login_error_empty_fields);
             return;
@@ -85,10 +88,13 @@ export default function LoginView(props) {
 
     const styles = StyleSheet.create({
         container: {
-            flex: 1,
+            /* flex: 1, */
+            width: '100%',
+            height: '100%',
             justifyContent: 'center',
-            backgroundColor: DefaultColors["dark"].background,
+            backgroundColor: colors.background,
             flexDirection: 'column',
+            alignItems: 'center',
             padding: 25
         },
         title: {
@@ -106,9 +112,9 @@ export default function LoginView(props) {
             marginTop: 10
         },
         image: {
-            flex: 1,
-            width: 200,
-            height: 200,
+            /* flex: 1, */
+            width: 150,
+            height: 150,
         },
         header: {
             flexDirection: 'row',
@@ -149,10 +155,10 @@ export default function LoginView(props) {
                 <GoogleLoginButton lang={lang} />
                 <FacebookLoginButton lang={lang} />
             </View>
-
+            <Spacer height={20} />
             <Button
+                flex={null}
                 onPress={signIn}
-                flex={1}
                 keyText={loading ? (
                     <ActivityIndicator size="small" color="#FFF" />
                 ) : (

@@ -2,24 +2,40 @@ import React from 'react';
 
 import LoginView from './LoginView';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getUser } from '../../utils'
+import { getSettings } from '../../utils';
+import Loading from '../../components/Util/Loading';
 
 
-export default class LoginController extends React.Component {
+export default function LoginController(props) {
 
-    constructor({ navigation }) {
-        super(navigation);
-        this.settings = getUser();
+    const [loading, setLoading] = React.useState(true);
+    const [settings, setSettings] = React.useState({});
+
+    const navigation = props.navigation;
+
+    async function getSettingsFromStorage() {
+        const settings = await getSettings()
+        setSettings(settings);
+        setLoading(false);
     }
 
-    render() {
+    React.useEffect(() => {
+        getSettingsFromStorage();
+    }, [])
+
+
+    if (loading) {
         return (
-            <LoginView
-                lang={this.settings.app["language"]}
-                navigation={navigation}
-                colors={this.settings.app["colors"]}
-            />
-        );
+            <Loading />
+        )
     }
+
+    return (
+        <LoginView
+            lang={settings.app.language}
+            navigation={navigation}
+            colors={settings.app.colors}
+        />
+    );
+
 }

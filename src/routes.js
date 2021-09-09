@@ -1,7 +1,7 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 
-import Login from './pages/Login/LoginView'
+import Login from './pages/Login/LoginController'
 import NavigationTabScreen from './pages/NavigationTab/NavigationTabScreen'
 import AuthLoadingScreen from './pages/AuthLoading/AuthLoadingScreen'
 

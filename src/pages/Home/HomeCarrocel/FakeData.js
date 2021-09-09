@@ -20,3 +20,14 @@ export const categories = [
     { id: 1, title: "Economia", icon: { name: "cash-usd-outline", type: "material-community" } },
     { id: 2, title: "Educação", icon: { name: "book-outline", type: "material-community" } },
 ]
+
+export const companies = [
+    {
+        id: 0,
+        name: "LLC Integer",
+        description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here",
+        products: [],
+        rank: "1",
+        qtdVotacoes: 10
+    }
+]

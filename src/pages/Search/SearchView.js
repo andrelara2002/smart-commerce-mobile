@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Arquivos de configurações ->
 
-import DefaultColors from '../../assets/colors/DefaultColors'
+/* import DefaultColors from '../../assets/colors/DefaultColors' */
+import Texts from '../../texts'
 
 // <- Arquivos de configurações
 
@@ -20,10 +21,12 @@ import LittleCompaniesCarrousel from '../../components/Carrousel/LittleCompanies
 
 // <- Componentes customizados
 
-export default function SearchView() {
+export default function SearchView(props) {
 
-    const [Colors, setColors] = React.useState(DefaultColors["dark"])
+    const [Colors, setColors] = React.useState(props.colors)
     const [search, setSearch] = React.useState("")
+    const [text, setText] = React.useState(Texts[props.lang])
+
 
     const styles = StyleSheet.create({
         container: {
@@ -36,6 +39,11 @@ export default function SearchView() {
             borderBottomColor: 'transparent',
             borderTopColor: 'transparent',
         },
+        searchbarView: {
+            paddingLeft: 15,
+            paddingRight: 15,
+            marginTop: 10,
+        }
     })
 
     function updateSearch(search) {
@@ -44,43 +52,45 @@ export default function SearchView() {
 
     return (
         <ScrollView style={styles.container}>
-            <SearchBar
-                placeholder="Type Here..."
-                cancelButtonTitle="Cancel"
-                value={search}
-                onChangeText={(search) => { updateSearch(search) }}
+            <View style={styles.searchbarView}>
+                <SearchBar
+                    placeholder={text.search_placeholder}
+                    cancelButtonTitle="Cancel"
+                    value={search}
+                    onChangeText={(search) => { updateSearch(search) }}
 
-                containerStyle={styles.containerStyle}
-                inputContainerStyle={{ backgroundColor: Colors.backgroundSecondary }}
-                inputStyle={{
-                    backgroundColor: Colors.backgroundSecondary,
-                    color: Colors.textColor
-                }}
+                    containerStyle={styles.containerStyle}
+                    inputContainerStyle={{ backgroundColor: Colors.backgroundSecondary }}
+                    inputStyle={{
+                        backgroundColor: Colors.backgroundSecondary,
+                        color: Colors.textColor
+                    }}
 
-                placeholderTextColor={Colors.border}
-                cancelButtonColor={Colors.text}
-                searchIcon={{
-                    color: Colors.border,
-                    borderRightWidth: 1,
-                    borderRightColor: Colors.background,
-                    size: 20,
-                    paddingRight: 10,
-                    paddingLeft: 10,
-                }}
-                clearIcon={{ color: Colors.text }}
-                icon={
-                    <Icon
-                        name="search"
-                        size={20}
-                        color={"white"}
-                    />
-                }
-            />
+                    placeholderTextColor={Colors.border}
+                    cancelButtonColor={Colors.text}
+                    searchIcon={{
+                        color: Colors.border,
+                        borderRightWidth: 1,
+                        borderRightColor: Colors.background,
+                        size: 20,
+                        paddingRight: 10,
+                        paddingLeft: 10,
+                    }}
+                    clearIcon={{ color: Colors.text }}
+                    icon={
+                        <Icon
+                            name="search"
+                            size={20}
+                            color={"white"}
+                        />
+                    }
+                />
+            </View>
             <Spacer height={20} />
-            <Title text="Categorias" />
-            <CategoriesCarrousel />
+            <Title text={text.sessions_title.categories} />
+            <CategoriesCarrousel more={text.sessions_title.see_more} />
             <Spacer height={20} />
-            <Title text="Pequenas empresas" />
+            <Title text={text.sessions_title.little_companies} />
             <LittleCompaniesCarrousel />
 
             <Spacer height={30} />

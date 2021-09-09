@@ -16,13 +16,14 @@ const styles = {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        marginLeft: 0,
 
         height: 60,
-        width: 125,
+         width: "70%",
 
-        marginLeft: 10,
-        paddingLeft: 10,
-        paddingRight: 10,
+        /* marginLeft: 10, */
+        paddingLeft: 20,
+        paddingRight: 20,
 
         borderRadius: 10,
         backgroundColor: accent,

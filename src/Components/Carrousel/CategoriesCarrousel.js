@@ -13,7 +13,7 @@ import { categories } from "../../pages/Home/HomeCarrocel/FakeData";
 
 import DefaultColors from "../../assets/colors/DefaultColors";
 
-export default function CategoriesCarrousel() {
+export default function CategoriesCarrousel({ more }) {
 
     const [colors, setColors] = React.useState(DefaultColors["dark"]);
     const [data, setData] = React.useState(categories);
@@ -89,7 +89,7 @@ export default function CategoriesCarrousel() {
                 )}
             />
             <TouchableOpacity>
-                <Text style={styles.more}>Ver todas</Text>
+                <Text style={styles.more}>{more}</Text>
             </TouchableOpacity>
         </View>
     )
