@@ -74,7 +74,7 @@ export default function HomeView(props) {
                 />
                 <Spacer height={30} />
                 <Title text={sessions_title.close_to_you} />
-                <HomeCarrocel />
+                <HomeCarrocel navigation={props.navigation} />
                 <Spacer height={30} />
                 <Title text={sessions_title.most_voted} />
                 <MostVotted text={texts["pt_br"].sessions_title.see_more} />
