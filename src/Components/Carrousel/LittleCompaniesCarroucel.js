@@ -45,6 +45,7 @@ export default function LittleCompaniesCarrousel(props) {
         <FlatList style={styles.container}
             data={data}
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
                 <TouchableOpacity style={styles.card}>

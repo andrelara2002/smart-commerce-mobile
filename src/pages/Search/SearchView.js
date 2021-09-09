@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Arquivos de configurações ->
 
-import DefaultColors from '../../assets/colors/DefaultColors'
+/* import DefaultColors from '../../assets/colors/DefaultColors' */
 import Texts from '../../texts'
 
 // <- Arquivos de configurações
@@ -21,11 +21,11 @@ import LittleCompaniesCarrousel from '../../components/Carrousel/LittleCompanies
 
 // <- Componentes customizados
 
-export default function SearchView() {
+export default function SearchView(props) {
 
-    const [Colors, setColors] = React.useState(DefaultColors["dark"])
+    const [Colors, setColors] = React.useState(props.colors)
     const [search, setSearch] = React.useState("")
-    const [text, setText] = React.useState(Texts["pt_br"])
+    const [text, setText] = React.useState(Texts[props.lang])
 
 
     const styles = StyleSheet.create({

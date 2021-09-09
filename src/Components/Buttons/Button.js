@@ -6,21 +6,23 @@ import DefaultColors from '../../assets/colors/DefaultColors';
 const { background, accent, textColor, border, backgroundSecondary } = DefaultColors["dark"];
 
 
-export default function Button({ onPress, keyText, isDark, width }) {
+export default function Button({ onPress, keyText, isDark, width ,style }) {
 
     const [backgroundColor, setBackgroundColor] = useState(accent);
     const [newWidth, setNewWidth] = useState("100%");
     const [flex, setFlex] = useState(1);
 
-    const styles = StyleSheet.create({
+    const styles = style || StyleSheet.create({
         container: {
-            flex: flex,
+            /* flex: flex, */
             width: newWidth,
             height: 0,
             justifyContent: "center",
             alignItems: "center",
             marginTop: 10,
             marginBottom: 10,
+            marginRight: 0,
+            /* borderWidth: 1, */
         },
         touchable: {
             backgroundColor: backgroundColor,

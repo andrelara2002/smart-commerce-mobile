@@ -59,7 +59,6 @@ export async function setSettings(settings) {
 
 export async function getSettings() {
     try {
-       
         let settings = await AsyncStorage.getItem('settings');
         if (settings === null || settings === undefined) {
             settings = {
@@ -67,12 +66,14 @@ export async function getSettings() {
                     "theme": "dark",
                     "language": "pt_br",
                     "colors": DefaultColors["dark"]
-                }                
+                }
             }
             await setSettings(settings);
-
+            return settings;
         }
-        return JSON.parse(settings);
+        else {
+            return JSON.parse(settings);
+        }
     } catch (e) {
         throw e;
     }
