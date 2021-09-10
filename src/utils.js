@@ -69,9 +69,11 @@ export async function getSettings() {
                 }
             }
             await setSettings(settings);
+            console.log("Default settings loaded")
             return settings;
         }
         else {
+            console.log("Custom settings loaded")
             return JSON.parse(settings);
         }
     } catch (e) {
