@@ -6,10 +6,11 @@ import DefaultColors from '../../assets/colors/DefaultColors';
 const { background, accent, textColor, border, backgroundSecondary } = DefaultColors["dark"];
 
 
-export default function Button({ onPress, keyText, isDark, width ,style }) {
+export default function Button({ onPress, keyText, isDark, width, style, height }) {
 
     const [backgroundColor, setBackgroundColor] = useState(accent);
     const [newWidth, setNewWidth] = useState("100%");
+    const [newHeight, setNewHeight] = useState(60);
     const [flex, setFlex] = useState(1);
 
     const styles = style || StyleSheet.create({
@@ -27,7 +28,7 @@ export default function Button({ onPress, keyText, isDark, width ,style }) {
         touchable: {
             backgroundColor: backgroundColor,
             width: newWidth,
-            height: 60,
+            height: newHeight,
             justifyContent: "center",
             alignItems: "center",
             borderRadius: 10,
@@ -45,6 +46,7 @@ export default function Button({ onPress, keyText, isDark, width ,style }) {
     useEffect(() => {
         if (isDark) { setBackgroundColor(backgroundSecondary) }
         if (width != null || width != undefined) { setNewWidth(width) }
+        if (height != null || height != undefined) { setNewHeight(height) }
         if (flex != null || flex != undefined) { setFlex(flex) }
     })
 

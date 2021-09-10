@@ -40,6 +40,8 @@ export default Texts = {
             "unfollow": "deixar de seguir",
             "followed": "seguindo",
             "followers_label": "Seguidores",
+            "participants" : "Participantes",
+            "participations": "Participações",
         }
         // --------------------------------------------------
     },
@@ -83,6 +85,8 @@ export default Texts = {
             "unfollow": "unfollow",
             "followed": "followed",
             "followers_label": "Followers",
+            "participants" : "Participants",
+            "participations": "Participations",
         }
         // --------------------------------------------------
     }
