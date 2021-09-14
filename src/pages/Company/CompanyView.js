@@ -9,10 +9,10 @@ import {
     Image
 } from 'react-native'
 
-import Spacer from '../Util/Spacer'
+import Spacer from '../../components/Util/Spacer'
 import CompanyCard from './Components/CompanyCard'
-import Button from '../Buttons/Button'
-import Divisor from '../Util/Divisor'
+import Button from '../../components/Buttons/Button'
+import Divisor from '../../components/Util/Divisor'
 
 export default function CompanyView(props) {
     const {

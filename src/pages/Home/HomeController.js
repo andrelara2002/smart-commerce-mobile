@@ -8,23 +8,26 @@ import { getSettings, getUser } from '../../utils'
 export default function HomeController(props) {
 
     //const { navigation } = props;
-    const [settings, setSettings] = React.useState({});
+    const [settings, setSettings] = React.useState(props.route.params.settings);
     const [username, setUsername] = React.useState('');
 
     const [loading, setLoading] = React.useState(true);
 
     async function getSettingsFromStorage() {
-        const settings = await getSettings();
+        /* const settings = await getSettings(); */
         const username = await getUser();
 
         setUsername(username.nomeCliente + ' ' + username.sobrenome)
-        setSettings(settings);
+        /* setSettings(settings); */
 
         setLoading(false);
     }
 
     useEffect(() => {
         getSettingsFromStorage();
+        props.navigation.setParams({
+            companyid: null
+        })
         console.log("HOME CONTROLLER LOADED")
     }, [])
 
@@ -34,11 +37,11 @@ export default function HomeController(props) {
     } */
 
     if (loading) {
-        return <View style ={{
+        return <View style={{
             width: '100%',
             height: '100%',
             backgroundColor: "#252731"
-        }}/>
+        }} />
     }
 
     return (

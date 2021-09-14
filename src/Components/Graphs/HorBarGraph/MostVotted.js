@@ -13,10 +13,10 @@ export default function MostVotted(props) {
 
     const { accent, textColor, backgroundSecondary } = DefaultColors["dark"]
 
-    React.useEffect(() => {
+   /*  React.useEffect(() => {
         console.log("MOST VOTTED LOADED")
     })
-
+ */
     const styles = StyleSheet.create({
         container: {
             paddingBottom: 20,

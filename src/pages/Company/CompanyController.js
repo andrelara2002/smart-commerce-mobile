@@ -2,12 +2,12 @@ import React from 'react'
 import { View } from 'react-native'
 
 /* import DefaultColors from '../../assets/colors/DefaultColors' */
-import Loading from '../Util/Loading'
+import Loading from '../../components/Util/Loading'
 import CompanyView from './CompanyView'
 
 import { getSettings } from '../../utils'
 
-import { companies } from '../../pages/Home/HomeCarrocel/FakeData'
+import { companies } from '../Home/HomeCarrocel/FakeData'
 
 export default function CompanyController(props) {
 
@@ -27,7 +27,7 @@ export default function CompanyController(props) {
 
     async function getSettingsFromStorage() {
         try {
-            const settings = await getSettings()
+            const settings = props.route.params.settings
             await setSettings(settings)
             setLoading(false)
             //console.log(settings.app.language)
