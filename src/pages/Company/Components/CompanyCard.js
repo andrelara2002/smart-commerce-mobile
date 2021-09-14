@@ -2,7 +2,7 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import texts from '../../../texts'
 
-import CompanyRank, { renderRank } from '../../Util/CompanyRank'
+import CompanyRank, { renderRank } from '../../../components/Util/CompanyRank'
 
 import {
     View,

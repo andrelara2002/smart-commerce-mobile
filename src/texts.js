@@ -32,6 +32,11 @@ export default Texts = {
             "coming_soon": "Em breve",
 
         },
+        warnings: {
+            "try_to_click_in_company":
+                "Cards indisponíveis no momento, clique em uma empresa para ter os detalhes",
+            "map_is_unavaliable": "Mapa indisponível no momento",
+        },
         words: {
             "votes": "votos",
             "votation": "votação",
@@ -78,6 +83,11 @@ export default Texts = {
             "see_more": "See more",
             "see_less": "See less",
             "coming_soon": "Coming soon",
+        },
+        warnings: {
+            "try_to_click_in_company":
+                "Cards unavailable at the moment, click in a company to have the details",
+            "map_is_unavaliable": "Map unavailable at the moment",
         },
         words: {
             "votes": "votes",
