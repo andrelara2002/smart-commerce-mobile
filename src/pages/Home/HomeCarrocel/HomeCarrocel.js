@@ -53,7 +53,7 @@ export default function HomeCarrocel(props) {
                         index={index}
                         image={item.image}
                         title={item.title}
-                        description={item.description}
+                        segment={item.segment}
                         logo={item.logo}
                     />
                 )}

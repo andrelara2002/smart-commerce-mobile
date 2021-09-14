@@ -40,6 +40,7 @@ export default function CompanyController(props) {
     React.useEffect(() => {
         getSettingsFromStorage()
         getCompany()
+        console.log("COMPANY CONTROLLER LOADED")
     }, [])
 
     if (loading) {

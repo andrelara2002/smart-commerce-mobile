@@ -12,6 +12,7 @@ import {
 import Spacer from '../Util/Spacer'
 import CompanyCard from './Components/CompanyCard'
 import Button from '../Buttons/Button'
+import Divisor from '../Util/Divisor'
 
 export default function CompanyView(props) {
     const {
@@ -65,6 +66,10 @@ export default function CompanyView(props) {
         }
     })
 
+    React.useEffect(() => {
+        console.log("COMPANY VIEW LOADED")
+    })
+
     return (
         <ScrollView style={styles.container}>
             <Spacer height={30} />
@@ -114,7 +119,7 @@ export default function CompanyView(props) {
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item }) => {
-                    console.log(item.image)
+                    //console.log(item.image)
                     return (
                         <View style={styles.productsCard}>
                             <Image
@@ -127,6 +132,7 @@ export default function CompanyView(props) {
                         </View>
                     )
                 }} />
+            <Divisor height={20} color={colors.backgroundSecondary} />
         </ScrollView>
     )
 }
