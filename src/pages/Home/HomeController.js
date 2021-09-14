@@ -25,6 +25,7 @@ export default function HomeController(props) {
 
     useEffect(() => {
         getSettingsFromStorage();
+        console.log("HOME CONTROLLER LOADED")
     }, [])
 
     /* constructor({ navigation }) {

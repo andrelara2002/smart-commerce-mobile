@@ -67,8 +67,9 @@ export default function HomeView(props) {
     }
 
     useEffect(() => {
-        setVariables();
-    })
+        /* setVariables(); */
+        console.log("HOME VIEW LOADED")
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -76,6 +77,7 @@ export default function HomeView(props) {
                 <HomeHeader
                     name={user}
                     language={language}
+                    colors = {props.colors}
                 />
                 <Spacer height={20} />
                 <Title text={sessions_title.close_to_you} />

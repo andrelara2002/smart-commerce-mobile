@@ -50,6 +50,10 @@ export default function SearchView(props) {
         setSearch(search)
     }
 
+    React.useEffect(() => {
+        console.log("SEARCH VIEW LOADED")
+    }, [])
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.searchbarView}>

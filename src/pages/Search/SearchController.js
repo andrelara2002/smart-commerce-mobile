@@ -23,6 +23,7 @@ export default function SearchController() {
 
     useEffect(() => {
         getSettingsFromStorage();
+        console.log('SEARCH CONTROLLER LOADED');
     }, [])
 
     if (loading) {

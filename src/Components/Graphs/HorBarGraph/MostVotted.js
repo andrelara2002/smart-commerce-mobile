@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { View, FlatList, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 import HotBarGraph from './HotBarGraph'
 import { mostVotted } from '../../../pages/Home/HomeCarrocel/FakeData'
@@ -12,6 +12,10 @@ export default function MostVotted(props) {
     const data = mostVotted
 
     const { accent, textColor, backgroundSecondary } = DefaultColors["dark"]
+
+    React.useEffect(() => {
+        console.log("MOST VOTTED LOADED")
+    })
 
     const styles = StyleSheet.create({
         container: {

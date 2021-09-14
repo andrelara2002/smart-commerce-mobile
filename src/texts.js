@@ -27,7 +27,10 @@ export default Texts = {
             "most_recent": "Mais recentes",
             "most_viewed": "Mais visualizadas",
             "little_companies": "Pequenas empresas",
-            "see_more": "Ver mais"
+            "see_more": "Ver mais",
+            "see_less": "Ver menos",
+            "coming_soon": "Em breve",
+
         },
         words: {
             "votes": "votos",
@@ -40,7 +43,7 @@ export default Texts = {
             "unfollow": "deixar de seguir",
             "followed": "seguindo",
             "followers_label": "Seguidores",
-            "participants" : "Participantes",
+            "participants": "Participantes",
             "participations": "Participações",
         }
         // --------------------------------------------------
@@ -72,7 +75,9 @@ export default Texts = {
             "most_recent": "Most recent",
             "most_viewed": "Most viewed",
             "little_companies": "Little companies",
-            "see_more": "See more"
+            "see_more": "See more",
+            "see_less": "See less",
+            "coming_soon": "Coming soon",
         },
         words: {
             "votes": "votes",
@@ -85,7 +90,7 @@ export default Texts = {
             "unfollow": "unfollow",
             "followed": "followed",
             "followers_label": "Followers",
-            "participants" : "Participants",
+            "participants": "Participants",
             "participations": "Participations",
         }
         // --------------------------------------------------

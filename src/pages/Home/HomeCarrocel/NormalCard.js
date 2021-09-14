@@ -39,7 +39,7 @@ export default function NormalCard(props) {
             fontWeight: 'bold',
             color: DefaultColors["dark"].textColor,
         },
-        description: {
+        segment: {
             fontSize: 14,
             color: DefaultColors["dark"].border,
         },
@@ -66,7 +66,7 @@ export default function NormalCard(props) {
                 <Image source={props.logo} style={styles.logo} />
                 <View style={styles.itemText}>
                     <Text style={styles.title}>{props.title}</Text>
-                    <Text style={styles.description}>{props.description}</Text>
+                    <Text style={styles.segment}>{props.segment}</Text>
                 </View>
             </View>
         </TouchableOpacity>
