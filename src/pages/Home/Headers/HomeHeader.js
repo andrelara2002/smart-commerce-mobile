@@ -80,7 +80,7 @@ export default function HomeHeader({ name, language, colors }) {
                         fontSize: 20,
                         fontWeight: 'bold',
                         color: colors.textColor,
-                    }}>Adicionar empresa</Text>
+                    }}>Adicionar local</Text>
                 </TouchableOpacity>
                 <LevelButton text={200} image={diamond} />
             </View>

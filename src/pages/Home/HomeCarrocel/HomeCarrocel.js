@@ -2,6 +2,7 @@ import React from 'react'
 import { CommonActions } from '@react-navigation/native';
 
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 import {
     View,
@@ -12,13 +13,14 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-import FakeData from './FakeData'
+/* import FakeData from './FakeData' */
 
 import NormalCard from './NormalCard'
 
 export default function HomeCarrocel(props) {
+    /* const dataset = useSelector(state => state.settings) */
 
-    const [data, setData] = React.useState(FakeData)
+    const [data, setData] = React.useState(props.data)
     const navigation = useNavigation()
 
     const styles = StyleSheet.create({
@@ -28,6 +30,10 @@ export default function HomeCarrocel(props) {
 
         },
     })
+
+    React.useEffect(() => {
+        console.log(data)
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -49,10 +55,10 @@ export default function HomeCarrocel(props) {
                         }}
                         navigation={props.navigation}
                         index={index}
-                        image={item.image}
-                        title={item.title}
-                        segment={item.segment}
-                        logo={item.logo}
+                        image={item.imageURL}
+                        title={item.nome}
+                        segment={item.segmento.nome}
+                        logo={item.imageURL}
                     />
                 )}
             />

@@ -34,6 +34,7 @@ import Title from '../../components/Util/Title';
 
 export default function HomeView(props) {
 
+
     const {
         background,
         textColor,
@@ -69,6 +70,7 @@ export default function HomeView(props) {
     useEffect(() => {
         /* setVariables(); */
         console.log("HOME VIEW LOADED")
+        /* console.log(props) */
     }, [])
 
     return (
@@ -77,11 +79,13 @@ export default function HomeView(props) {
                 <HomeHeader
                     name={user}
                     language={language}
-                    colors = {props.colors}
+                    colors={props.colors}
                 />
                 <Spacer height={20} />
                 <Title text={sessions_title.close_to_you} />
-                <HomeCarrocel navigation={props.navigation} />
+                <HomeCarrocel
+                    navigation={props.navigation}
+                    data={props.locais} />
                 <Spacer height={20} />
                 <Title text={sessions_title.most_voted} />
                 <MostVotted text={texts[language].sessions_title.see_more} />

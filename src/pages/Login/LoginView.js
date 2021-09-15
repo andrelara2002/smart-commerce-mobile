@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //Api
 import api from '../../services/api'
 
-import { storeUser, storeUserToken } from '../../utils'
+import { storeLocal, storeUser, storeUserToken } from '../../utils'
 
 //Page texts
 import Texts from '../../texts';
@@ -68,6 +68,9 @@ export default function LoginView(props) {
 
             const userResponse = await api.get('/usuario');
             await storeUser(userResponse.data);
+
+            const localResponse = await api.get('/local');
+            await storeLocal(localResponse.data.data);
 
             const resetAction = StackActions.reset({
                 index: 0,

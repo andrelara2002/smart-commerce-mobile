@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import HomeView from './HomeView';
 import { Text, View } from 'react-native';
 
-import { getSettings, getUser } from '../../utils'
+import { getSettings, getUser, getLocal } from '../../utils'
+
 import { useSelector } from 'react-redux';
 
 export default function HomeController(props) {
@@ -15,13 +16,15 @@ export default function HomeController(props) {
     /* const [settings, setSettings] = React.useState(props.route.params.settings); */
     const settings = useSelector(state => state.settings);
     const [username, setUsername] = React.useState('');
-
+    const [locais, setLocais] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
     async function getSettingsFromStorage() {
         /* const settings = await getSettings(); */
         const username = await getUser();
+        const local = await getLocal();
 
+        setLocais(local)
         setUsername(username.nomeCliente + ' ' + username.sobrenome)
         /* setSettings(settings); */
 
@@ -30,6 +33,7 @@ export default function HomeController(props) {
 
     useEffect(() => {
         getSettingsFromStorage();
+
         props.navigation.setParams({
             companyid: null
         })
@@ -52,6 +56,7 @@ export default function HomeController(props) {
     return (
         <HomeView
             lang={settings.app.language}
+            locais={locais}
             //navigation={navigation}
             colors={settings.app.colors}
             username={username}

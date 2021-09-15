@@ -36,6 +36,7 @@ export default function SearchController(props) {
         <SearchView
             lang={settings.app.language}
             colors={settings.app.colors}
+            settings={settings}
         />
     )
 }
