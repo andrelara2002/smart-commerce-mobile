@@ -10,7 +10,8 @@ const initialState = {
     },
     navigation: {
         currentCompanyId: null,
-    }
+    },
+    locals: []
 }
 
 function settings(state = initialState, action) {
@@ -26,7 +27,7 @@ function settings(state = initialState, action) {
                     }
                 }
             }
-            
+
         case 'SET_LANGUAGE':
             return {
                 ...state,
@@ -38,7 +39,7 @@ function settings(state = initialState, action) {
                     }
                 }
             }
-            
+
         case 'SET_COLORS':
             return {
                 ...state,
@@ -50,7 +51,12 @@ function settings(state = initialState, action) {
                     }
                 }
             }
-            
+
+        case "SET_LOCALS":
+            return {
+                ...state,
+                locals: action.payload
+            }
         default:
             return state
     }
