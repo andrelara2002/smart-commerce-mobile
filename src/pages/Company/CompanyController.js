@@ -5,7 +5,7 @@ import { View } from 'react-native'
 import Loading from '../../components/Util/Loading'
 import CompanyView from './CompanyView'
 
-import { getSettings } from '../../utils'
+import { useSelector } from 'react-redux'
 
 import { companies } from '../Home/HomeCarrocel/FakeData'
 
@@ -14,7 +14,7 @@ export default function CompanyController(props) {
     const [company, setCompany] = React.useState({})
     const [companyId, setCompanyId] = React.useState(0)
     const [loading, setLoading] = React.useState(true)
-    const [settings, setSettings] = React.useState({})
+    const settings = useSelector(state => state.settings)
 
     async function getCompany() {
         try {
@@ -27,8 +27,8 @@ export default function CompanyController(props) {
 
     async function getSettingsFromStorage() {
         try {
-            const settings = props.route.params.settings
-            await setSettings(settings)
+            /* const settings = props.route.params.settings
+            await setSettings(settings) */
             setLoading(false)
             //console.log(settings.app.language)
         }
