@@ -28,8 +28,8 @@ export default function CompanyView(props) {
             width: '100%',
             height: '100%',
             backgroundColor: colors.background,
-            paddingLeft: 40,
-            paddingRight: 40
+            paddingLeft: 20,
+            paddingRight: 20
         },
         description: {
             fontSize: 16,

@@ -5,15 +5,17 @@ import { getSettings } from '../../utils';
 import Loading from '../../components/Util/Loading';
 import SearchView from './SearchView'
 
+import { useSelector } from 'react-redux';
+
 export default function SearchController(props) {
 
-    const [settings, setSettings] = React.useState({});
+    const settings = useSelector(state => state.settings);
     const [loading, setLoading] = React.useState(true);
 
     async function getSettingsFromStorage() {
         try {
-            const settings = props.route.params.settings
-            setSettings(settings);
+            /* const settings = props.route.params.settings
+            setSettings(settings); */
             setLoading(false);
         }
         catch (error) {

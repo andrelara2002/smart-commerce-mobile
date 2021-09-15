@@ -4,11 +4,16 @@ import HomeView from './HomeView';
 import { Text, View } from 'react-native';
 
 import { getSettings, getUser } from '../../utils'
+import { useSelector } from 'react-redux';
 
 export default function HomeController(props) {
 
+    /* const data = useSelector(state => state.settings);
+    console.log(data); */
+
     //const { navigation } = props;
-    const [settings, setSettings] = React.useState(props.route.params.settings);
+    /* const [settings, setSettings] = React.useState(props.route.params.settings); */
+    const settings = useSelector(state => state.settings);
     const [username, setUsername] = React.useState('');
 
     const [loading, setLoading] = React.useState(true);
