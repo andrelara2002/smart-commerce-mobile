@@ -67,7 +67,7 @@ export default function LoginView(props) {
             await storeUserToken(loginResponse.data);
 
             const userResponse = await api.get('/usuario');
-            await storeUser(userResponse.data);
+            await storeUser(userResponse.data.data);
 
             const localResponse = await api.get('/local');
             await storeLocal(localResponse.data.data);
