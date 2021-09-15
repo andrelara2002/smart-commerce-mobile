@@ -36,7 +36,7 @@ export default function Button({ onPress, keyText, isDark, width, style, height 
         },
         text: {
             color: textColor,
-            fontSize: 15,
+            fontSize: 18,
             fontWeight: "bold",
             textAlign: "center",
             textTransform: "uppercase",

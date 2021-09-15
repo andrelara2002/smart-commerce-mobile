@@ -35,6 +35,23 @@ export async function storeUser(userToken) {
     }
 }
 
+
+export async function storeLocal(local) {
+    try {
+        return await AsyncStorage.setItem('local', JSON.stringify(local));
+    } catch (e) {
+        throw e;
+    }
+}
+
+export async function getLocal() {
+    try {
+        return JSON.parse(await AsyncStorage.getItem('local'));
+    } catch (e) {
+        throw e;
+    }
+}
+
 export async function deleteAsyncStorage() {
     try {
         return await AsyncStorage.clear();

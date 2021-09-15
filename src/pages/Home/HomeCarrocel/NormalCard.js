@@ -41,7 +41,7 @@ export default function NormalCard(props) {
         },
         segment: {
             fontSize: 14,
-            color: DefaultColors["dark"].border,
+            color: DefaultColors["dark"].accent,
         },
         image: {
             width: 250,
@@ -61,9 +61,9 @@ export default function NormalCard(props) {
 
     return (
         <TouchableOpacity style={styles.item} onPress={props.onPress}>
-            <Image source={props.image} style={styles.image} />
+            <Image source={{ uri: props.image }} style={styles.image} />
             <View style={styles.itemHeader}>
-                <Image source={props.logo} style={styles.logo} />
+                {/* <Image source={{ uri: props.logo }} style={styles.logo} /> */}
                 <View style={styles.itemText}>
                     <Text style={styles.title}>{props.title}</Text>
                     <Text style={styles.segment}>{props.segment}</Text>
