@@ -9,24 +9,31 @@ import { useSelector } from 'react-redux';
 
 export default function HomeController(props) {
 
-    /* const data = useSelector(state => state.settings);
-    console.log(data); */
-
-    //const { navigation } = props;
-    /* const [settings, setSettings] = React.useState(props.route.params.settings); */
     const settings = useSelector(state => state.settings);
     const [username, setUsername] = React.useState('');
+    const [locaisVotacao, setLocaisVotacao] = React.useState([]);
     const [locais, setLocais] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
     async function getSettingsFromStorage() {
-        /* const settings = await getSettings(); */
+        
         const username = await getUser();
         const local = await getLocal();
 
-        setLocais(local)
+        setLocais(local.slice(1, 10));
+        setLocaisVotacao(
+            local
+                .sort(function (a, b) {
+                    if (a.totalVotacao < b.totalVotacao) {
+                        return 1;
+                    }
+                    if (a.totalVotacao > b.totalVotacao) {
+                        return -1;
+                    }
+                    return 0;
+                })
+                .slice(1, 11));
         setUsername(username.nomeCliente + ' ' + username.sobrenome)
-        /* setSettings(settings); */
 
         setLoading(false);
     }
@@ -57,6 +64,7 @@ export default function HomeController(props) {
         <HomeView
             lang={settings.app.language}
             locais={locais}
+            locaisVotacao={locaisVotacao}
             //navigation={navigation}
             colors={settings.app.colors}
             username={username}

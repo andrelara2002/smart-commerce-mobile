@@ -64,12 +64,12 @@ export default function HotBarGraph({ image, qtdTotalVotos, qtdVotos, index, tit
 
     return (
         <View style={styles.container}>
-            <Image source={image} style={styles.image} />
+            <Image source={{ uri: image }} style={styles.image} />
             <Text style={styles.position}>{index + 1}</Text>
             <View style={styles.item}>
                 <View style={styles.texts}>
                     <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.percent}>{`${qtdVotos} Votos`}</Text>
+                    <Text style={styles.percent}>{`${qtdVotos}👍🏽`}</Text>
                 </View>
                 <ProgressBar
                     style={styles.progressbar}

@@ -87,8 +87,8 @@ export default function HomeView(props) {
                     navigation={props.navigation}
                     data={props.locais} />
                 <Spacer height={20} />
-                <Title text={sessions_title.most_voted} />
-                <MostVotted text={texts[language].sessions_title.see_more} />
+                <Title text={sessions_title.most_voted}  />
+                <MostVotted text={texts[language].sessions_title.see_more}  data={props.locaisVotacao}/>
                 <Spacer height={30} />
             </ScrollView>
         </View>
