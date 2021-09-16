@@ -31,10 +31,6 @@ export default function HomeCarrocel(props) {
         },
     })
 
-    React.useEffect(() => {
-        console.log(data)
-    }, [])
-
     return (
         <View style={styles.container}>
             <FlatList
