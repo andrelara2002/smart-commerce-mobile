@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //Api
 import api from '../../services/api'
 
-import { storeLocal, storeUser, storeUserToken } from '../../utils'
+import { storeCategoria, storeLocal, storeUser, storeUserToken } from '../../utils'
 
 //Page texts
 import Texts from '../../texts';
@@ -47,6 +47,39 @@ export default function LoginView(props) {
 
         })
     }
+
+    async function loadDatasFromAPI() {
+        var localResponse = await api.get('/local');
+        var categoriaResponse = await api.get('/segmento');
+
+        const porcentagemTotal = 100 / (localResponse.data.totalPages + categoriaResponse.data.totalPages)
+        var porcentagemAtual = 1;
+        var localDatas = [];
+        var categoriaDatas = [];
+
+        while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
+            localDatas = localDatas.concat(localResponse.data.data);
+            console.log({ 'pagina': localResponse.data.pageNumber });
+            var localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
+
+            porcentagemAtual++;
+            setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
+        }
+
+        while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
+            categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
+            console.log({ 'pagina': categoriaResponse.data.pageNumber });
+            var categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
+
+            porcentagemAtual++;
+            setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
+        }
+
+        await storeLocal(localDatas);
+        await storeCategoria(categoriaDatas);
+
+    }
+
     async function signIn() {
 
         if (username.length === 0 || password.length === 0) {
@@ -67,10 +100,12 @@ export default function LoginView(props) {
             await storeUserToken(loginResponse.data);
 
             const userResponse = await api.get('/usuario');
-            await storeUser(userResponse.data);
+            await storeUser(userResponse.data.data);
 
-            const localResponse = await api.get('/local');
-            await storeLocal(localResponse.data.data);
+            // const localResponse = await api.get('/local');
+            // await storeLocal(localResponse.data.data);
+
+            await loadDatasFromAPI();
 
             const resetAction = StackActions.reset({
                 index: 0,
@@ -88,6 +123,7 @@ export default function LoginView(props) {
             setErrorMessage(texts.login_error_invalid_credentials);
         }
     }
+
 
     const styles = StyleSheet.create({
         container: {

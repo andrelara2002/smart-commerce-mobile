@@ -52,6 +52,23 @@ export async function getLocal() {
     }
 }
 
+export async function storeCategoria(categoria) {
+    try {
+        return await AsyncStorage.setItem('categoria', JSON.stringify(categoria));
+    } catch (e) {
+        throw e;
+    }
+}
+
+export async function getCategoria() {
+    try {
+        return JSON.parse(await AsyncStorage.getItem('categoria'));
+    } catch (e) {
+        throw e;
+    }
+}
+
+
 export async function deleteAsyncStorage() {
     try {
         return await AsyncStorage.clear();

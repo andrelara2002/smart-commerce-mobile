@@ -3,20 +3,16 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
 import HotBarGraph from './HotBarGraph'
-import { mostVotted } from '../../../pages/Home/HomeCarrocel/FakeData'
 
 import DefaultColors from '../../../assets/colors/DefaultColors'
 
 export default function MostVotted(props) {
 
-    const data = mostVotted
+    const [data, setData] = React.useState(props.data)
 
     const { accent, textColor, backgroundSecondary } = DefaultColors["dark"]
 
-   /*  React.useEffect(() => {
-        console.log("MOST VOTTED LOADED")
-    })
- */
+
     const styles = StyleSheet.create({
         container: {
             paddingBottom: 20,
@@ -41,10 +37,10 @@ export default function MostVotted(props) {
             return (
                 <HotBarGraph
                     key={index}
-                    image={item.image}
-                    title={item.title}
-                    qtdVotos={item.qtdVotos}
-                    qtdTotalVotos={item.qtdTotalVotos}
+                    image={item.imageURL}
+                    title={item.nome}
+                    qtdVotos={item.totalVotacao}
+                    qtdTotalVotos={10000}
                     index={index}
                 />
             )
