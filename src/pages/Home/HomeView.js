@@ -10,16 +10,8 @@ import {
 
 // Arquivos de configurações ->
 
-import DefaultColors from '../../assets/colors/DefaultColors';
 import texts from '../../texts';
 
-import { getUser, getUserToken, getSettings } from '../../utils'
-
-/* const {
-    background,
-    textColor,
-    border } = DefaultColors["dark"];
- */
 // <- Arquivos de configurações
 
 // Componentes customizados ->
@@ -67,6 +59,15 @@ export default function HomeView(props) {
         }) */
     }
 
+    function goToCompany() {
+        /* const resetAction = StackActions.reset({
+            index: 0,
+            actions: [],
+        }) */
+        props.navigation.navigate("Company",{ screen: 'CompanyDetails' })
+        /* navigation.dispatch(resetAction) */
+    }
+
     useEffect(() => {
         /* setVariables(); */
         console.log("HOME VIEW LOADED")
@@ -77,6 +78,7 @@ export default function HomeView(props) {
         <View style={styles.container}>
             <ScrollView>
                 <HomeHeader
+                    navigation = {props.navigation}
                     name={user}
                     language={language}
                     colors={props.colors}

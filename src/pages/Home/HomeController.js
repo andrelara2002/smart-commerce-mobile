@@ -64,7 +64,11 @@ export default function HomeController(props) {
         <HomeView
             lang={settings.app.language}
             locais={locais}
+
+            navigation={props.navigation}
+
             locaisVotacao={locaisVotacao}
+
             //navigation={navigation}
             colors={settings.app.colors}
             username={username}

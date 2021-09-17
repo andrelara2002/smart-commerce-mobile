@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 /* import DefaultColors from '../../assets/colors/DefaultColors' */
 import Loading from '../../components/Util/Loading'
@@ -47,8 +47,15 @@ export default function CompanyController(props) {
         return <Loading />
     }
 
+    const styles = StyleSheet.create({
+        container:{
+            flex:1,
+        }
+    })
+
     return (
-        <CompanyView
+        <View style={styles.container}>
+            <CompanyView
             //Settings  
             id={company.id}
             colors={settings.app.colors}
@@ -63,5 +70,6 @@ export default function CompanyController(props) {
             products={company.products}
             distance={company.distance}
         />
+        </View>
     )
 }
