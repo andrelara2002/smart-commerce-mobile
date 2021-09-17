@@ -77,7 +77,7 @@ export default function CompanyCard(props) {
         <View
             style={styles.container}>
             <View style={styles.header}>
-                <Image source={logo} style={styles.logo} />
+                <Image source={{uri: logo}} style={styles.logo} />
                 <View>
                     {destructureName()}
                 </View>

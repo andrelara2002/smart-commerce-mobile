@@ -32,7 +32,6 @@ export default function NavigationTabScreen() {
   React.useEffect(() => {
     getSettingsFromStorage()
   }, [])
-  [rtw]
   if (loading) { return <Loading /> }
   ''
   function CompanyStack() {
