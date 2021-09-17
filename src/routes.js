@@ -5,13 +5,15 @@ import Login from './pages/Login/LoginController'
 import NavigationTabScreen from './pages/NavigationTab/NavigationTabScreen'
 import AuthLoadingScreen from './pages/AuthLoading/AuthLoadingScreen'
 import CompanyController from './pages/Company/CompanyController.js'
+import HomeController from './pages/Home/HomeController'
+
 
 const StackNavigator = createStackNavigator(
     {
         Home: NavigationTabScreen,
-        Company: CompanyController
     },
     {
+        name: 'StackNavigator',
         initialRouteName: 'Home',
         headerMode: 'none',
         header: null,

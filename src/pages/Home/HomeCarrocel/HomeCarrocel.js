@@ -46,10 +46,13 @@ export default function HomeCarrocel(props) {
                 renderItem={({ item, index }) => (
                     <NormalCard
                         onPress={() => {
-                            navigation.setParams({ companyid: item.id })
+                            /* navigation.setParams({ companyid: item.id }) */
                             navigation.dispatch(
-                                CommonActions.navigate({
-                                    name: 'Company',
+                                CommonActions.navigate("Company", {
+                                    screen: "CompanyDetails",
+                                    params: {
+                                        companyid: item.id
+                                    }
                                 })
                             );
                         }}
