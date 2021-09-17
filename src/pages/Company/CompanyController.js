@@ -18,7 +18,8 @@ export default function CompanyController(props) {
 
     async function getCompany() {
         try {
-            await setCompany(companies.find(company => company.id === companyId))
+            /* await setCompany(companies.find(company => company.id === companyId)) */
+            await setCompany(props.route.params.company)
         }
         catch (error) {
             console.log(error)
@@ -40,6 +41,7 @@ export default function CompanyController(props) {
     React.useEffect(() => {
         getSettingsFromStorage()
         getCompany()
+        console.log(props.route.params)
         console.log("COMPANY CONTROLLER LOADED")
     }, [])
 
@@ -57,18 +59,18 @@ export default function CompanyController(props) {
         <View style={styles.container}>
             <CompanyView
             //Settings  
-            id={company.id}
+            id={companyId}
             colors={settings.app.colors}
             language={settings.app.language}
             //Company Info
-            name={company.name}
-            description={company.description}
-            image={company.image}
-            logo={company.logo}
-            rank={company.rank}
-            qtdVotacoes={company.qtdVotacoes}
-            products={company.products}
-            distance={company.distance}
+            name={company.nome}
+            description={company.segmento.descricao}
+            image={company.imageURL}
+            logo={company.imageURL}
+            rank={1}
+            qtdVotacoes={company.totalVotacao}
+            products={company.produtos}
+            distance={0}
         />
         </View>
     )

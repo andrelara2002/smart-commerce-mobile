@@ -47,7 +47,7 @@ export default function HomeCarrocel(props) {
                                 CommonActions.navigate("Company", {
                                     screen: "CompanyDetails",
                                     params: {
-                                        companyid: item.id
+                                        company: item
                                     }
                                 })
                             );
