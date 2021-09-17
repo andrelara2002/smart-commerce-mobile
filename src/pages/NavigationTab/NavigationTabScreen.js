@@ -9,10 +9,14 @@ import Home from '../Home/HomeController'
 import Search from '../Search/SearchController';
 import Map from '../Map/MapController';
 import Company from '../Company/CompanyController';
+import CompanyCardsController from '../../CompanyCards/CompanyCardsController';
+
+import { createStackNavigator } from '@react-navigation/stack';
 
 import { Icon } from 'react-native-elements';
 
 const Tab = createMaterialBottomTabNavigator();
+const Stack = createStackNavigator()
 
 export default function NavigationTabScreen() {
 
@@ -30,6 +34,23 @@ export default function NavigationTabScreen() {
   }, [])
 
   if (loading) { return <Loading /> }
+
+  function CompanyStack() {
+    return (
+      <Stack.Navigator
+        initialRouteName="CompanyCards"
+      >
+        <Stack.Screen
+          name="CompanyDetails"
+          component={Company}
+          options={{ headerShown: false }} />
+        <Stack.Screen
+          name="CompanyCards"
+          component={CompanyCardsController}
+          options={{ headerShown: false }} />
+      </Stack.Navigator>
+    )
+  }
 
   return (
     <NavigationContainer>
@@ -73,7 +94,7 @@ export default function NavigationTabScreen() {
                   color="#fff" />)
             }
           }} />
-        <Tab.Screen name="Company" component={Company}
+        <Tab.Screen name="Company" component={CompanyStack}
           initialParams={{ settings: settings }}
           options={{
             tabBarIcon: () => {
