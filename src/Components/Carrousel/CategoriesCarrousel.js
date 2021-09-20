@@ -9,22 +9,21 @@ import {
 } from "react-native";
 
 import { Icon } from "react-native-elements";
-import { categories } from "../../pages/Home/HomeCarrocel/FakeData";
 
 import DefaultColors from "../../assets/colors/DefaultColors";
 
-export default function CategoriesCarrousel({ more }) {
+export default function CategoriesCarrousel(props) {
 
     const [colors, setColors] = React.useState(DefaultColors["dark"]);
-    const [data, setData] = React.useState(categories);
-
+    const [data, setData] = React.useState(props.data);
+    console.log({ 'categoriasss': props.data })
     const styles = StyleSheet.create({
         container: {
             paddingLeft: 20,
             width: "100%",
         },
         card: {
-            width: 120,
+            width: 140,
             height: 160,
             borderRadius: 10,
             marginRight: 10,
@@ -46,6 +45,9 @@ export default function CategoriesCarrousel({ more }) {
             color: colors.textColor,
             fontWeight: "bold",
             marginTop: 10,
+            textAlign: "center",
+            textAlignVertical: "bottom"
+
         },
         more: {
             fontSize: 18,
@@ -57,21 +59,22 @@ export default function CategoriesCarrousel({ more }) {
     })
 
     function renderCategories(category) {
+        console.log({ 'category': category })
         return (
             <TouchableOpacity
                 key={category.id}
                 style={styles.card}>
                 <View style={styles.iconFrame}>
                     <Icon
-                        name={category.icon.name}
-                        type={category.icon.type}
+                        name={category.iconeNome}
+                        type='material-community'
                         size={25}
                         color={colors.textColor}
                     />
                 </View>
                 <Text
                     style={styles.category}>
-                    {category.title}
+                    {category.nome}
                 </Text>
             </TouchableOpacity>
         )
@@ -81,7 +84,6 @@ export default function CategoriesCarrousel({ more }) {
         <View style={styles.container}>
             <FlatList
                 data={data}
-                /* numColumns={3} */
                 horizontal={true}
                 keyExtractor={item => item.id}
                 renderItem={(category) => (
@@ -89,7 +91,7 @@ export default function CategoriesCarrousel({ more }) {
                 )}
             />
             <TouchableOpacity>
-                <Text style={styles.more}>{more}</Text>
+                <Text style={styles.more}>{props.more}</Text>
             </TouchableOpacity>
         </View>
     )

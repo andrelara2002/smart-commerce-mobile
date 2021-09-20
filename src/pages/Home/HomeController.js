@@ -21,6 +21,7 @@ export default function HomeController(props) {
         const local = await getLocal();
 
         setLocais(local.slice(1, 10));
+        console.log({'locais': locais})
         setLocaisVotacao(
             local
                 .sort(function (a, b) {
