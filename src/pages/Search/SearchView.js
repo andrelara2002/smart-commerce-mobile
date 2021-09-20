@@ -51,7 +51,7 @@ export default function SearchView(props) {
     }
 
     React.useEffect(() => {
-        console.log("SEARCH VIEW LOADED")
+        console.log("SEARCH VIEW LOADED")        
     }, [])
 
     return (
@@ -92,7 +92,7 @@ export default function SearchView(props) {
             </View>
             <Spacer height={20} />
             <Title text={text.sessions_title.categories} />
-            <CategoriesCarrousel more={text.sessions_title.see_more} />
+            <CategoriesCarrousel more={text.sessions_title.see_more} data={props.categorias}/>
             <Spacer height={20} />
             <Title text={text.sessions_title.little_companies} />
             <LittleCompaniesCarrousel />
