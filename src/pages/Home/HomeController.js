@@ -18,6 +18,8 @@ export default function HomeController(props) {
     async function getSettingsFromStorage() {
 
         const username = await getUser();
+        setUsername(username.nomeCliente)
+        
         const local = await getLocal();
 
         setLocais(local.slice(1, 10));
@@ -34,7 +36,7 @@ export default function HomeController(props) {
                 })
                 .slice(1, 6));
 
-        setUsername(username.nomeCliente)
+        
         setLoading(false);
     }
 
