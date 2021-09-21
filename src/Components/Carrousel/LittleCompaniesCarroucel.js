@@ -14,7 +14,7 @@ import DefaultColors from "../../assets/colors/DefaultColors";
 
 export default function LittleCompaniesCarrousel(props) {
 
-    const [data, setData] = React.useState(FakeData);
+    const [data, setData] = React.useState(props.data);
     const [colors, setColors] = React.useState(DefaultColors["dark"]);
 
     const styles = StyleSheet.create({
@@ -34,7 +34,7 @@ export default function LittleCompaniesCarrousel(props) {
             color: colors.accent,
         },
         image: {
-            width: 140,
+            width: '100%',
             height: 200,
             borderRadius: 10,
             marginBottom: 10,
@@ -44,13 +44,13 @@ export default function LittleCompaniesCarrousel(props) {
     return (
         <FlatList style={styles.container}
             data={data}
-            horizontal={true}
+            horizontal={false}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
                 <TouchableOpacity style={styles.card}>
-                    <Image style={styles.image} source={{uri: item.image}} />
-                    <Text style={styles.title}>{item.title}</Text>
+                    <Image style={styles.image} source={{uri: item.imageURL}} />
+                    <Text style={styles.title}>{item.nome}</Text>
                     <Text style={styles.distance}>{`${item.distance / 1000} Km`}</Text>
                 </TouchableOpacity>
             )}

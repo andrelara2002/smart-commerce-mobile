@@ -85,14 +85,6 @@ export default function HomeView(props) {
                     language={language}
                     colors={props.colors}
                 />
-                <Button
-                    keyText="SignUp"
-                    onPress={() => {
-                        props.navigation.navigate('Company', {
-                            screen: 'SignUp'
-                        })
-                    }}
-                />
                 <Spacer height={20} />
                 <Title text={sessions_title.close_to_you} />
                 <HomeCarrocel
