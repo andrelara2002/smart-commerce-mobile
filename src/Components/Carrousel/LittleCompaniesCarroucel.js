@@ -34,7 +34,7 @@ export default function LittleCompaniesCarrousel(props) {
             color: colors.accent,
         },
         image: {
-            width: '100%',
+            width: 140,
             height: 200,
             borderRadius: 10,
             marginBottom: 10,
@@ -44,7 +44,7 @@ export default function LittleCompaniesCarrousel(props) {
     return (
         <FlatList style={styles.container}
             data={data}
-            horizontal={false}
+            horizontal={true}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
