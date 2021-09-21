@@ -54,7 +54,7 @@ export default function HomeCarrocel(props) {
                         }}
                         navigation={props.navigation}
                         index={index}
-                        image={item.imageURL}
+                        image={item.imagemURL}
                         title={item.nome}
                         segment={item.segmento.nome}
                         logo={item.imageURL}

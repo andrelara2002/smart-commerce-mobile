@@ -3,10 +3,13 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { ProgressBar, Colors } from 'react-native-paper';
 
 import DefaultColors from '../../../assets/colors/DefaultColors';
+import { Icon } from 'react-native-elements';
+import { useSelector } from 'react-redux';
 
 export default function HotBarGraph({ image, qtdTotalVotos, qtdVotos, index, title }) {
 
-    const { accent, textColor, background } = DefaultColors["dark"];
+    const colors = useSelector(state => state.settings.app.colors);
+    const { accent, textColor, background } = colors;
 
     const [
         porcentagem,
@@ -69,7 +72,16 @@ export default function HotBarGraph({ image, qtdTotalVotos, qtdVotos, index, tit
             <View style={styles.item}>
                 <View style={styles.texts}>
                     <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.percent}>{`${qtdVotos}👍🏽`}</Text>
+                    <Text style={styles.percent}>{`${qtdVotos}`}
+                        <Icon
+                            name="vote-outline"
+                            type="material-community"
+                            size={10}
+                            color={textColor}
+                            style={{ marginLeft: 5 }}
+                        />
+                    </Text>
+
                 </View>
                 <ProgressBar
                     style={styles.progressbar}

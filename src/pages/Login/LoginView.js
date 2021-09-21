@@ -124,6 +124,14 @@ export default function LoginView(props) {
         }
     }
 
+    function SignUp() {
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'SignUp' })],
+        })
+
+        props.navigation.dispatch(resetAction)
+    }
 
     const styles = StyleSheet.create({
         container: {
@@ -204,6 +212,13 @@ export default function LoginView(props) {
                     <Text>Entrar</Text>
                 )}>
 
+            </Button>
+            <Spacer height={50} />
+            <Button
+                flex={null}
+                isDark={true}
+                onPress={SignUp}
+                keyText={"Cadastrar-se"}>
             </Button>
         </View>
     )

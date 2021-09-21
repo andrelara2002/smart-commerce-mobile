@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 import LevelButton from '../../../components/Buttons/LevelButton'
+import Button from '../../../components/Buttons/Button'
 
 import Texts from '../../../texts'
 import diamond from '../../../assets/image/diamond.png'

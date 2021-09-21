@@ -16,7 +16,7 @@ export default function CategoriesCarrousel(props) {
 
     const [colors, setColors] = React.useState(DefaultColors["dark"]);
     const [data, setData] = React.useState(props.data);
-    console.log({ 'categoriasss': props.data })
+    /* console.log({ 'categoriasss': props.data }) */
     const styles = StyleSheet.create({
         container: {
             paddingLeft: 20,
@@ -83,6 +83,8 @@ export default function CategoriesCarrousel(props) {
     return (
         <View style={styles.container}>
             <FlatList
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
                 data={data}
                 horizontal={true}
                 keyExtractor={item => item.id}
@@ -90,9 +92,9 @@ export default function CategoriesCarrousel(props) {
                     renderCategories(category.item)
                 )}
             />
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
                 <Text style={styles.more}>{props.more}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     )
 }

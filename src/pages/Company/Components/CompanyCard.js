@@ -2,6 +2,8 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import texts from '../../../texts'
 
+import defaultLogo from '../../../assets/image/FakeData/Logos/defaultLogo.png'
+
 import CompanyRank, { renderRank } from '../../../components/Util/CompanyRank'
 
 import {
@@ -13,6 +15,15 @@ import {
 
 
 export default function CompanyCard(props) {
+
+    const [height, setHeight] = React.useState(200)
+
+    React.useEffect(() => {
+        if (props.name.length > 20) {
+            setHeight(250)
+        }
+    })
+
     const {
         logo,
         name,
@@ -26,7 +37,7 @@ export default function CompanyCard(props) {
     const styles = StyleSheet.create({
         container: {
             width: '100%',
-            height: 200,
+            height: height,
             alignSelf: 'center',
             borderRadius: 10,
             justifyContent: 'center',
@@ -37,6 +48,8 @@ export default function CompanyCard(props) {
             fontWeight: 'bold',
             color: colors.textColor,
             marginLeft: 20,
+            width: 100,
+            flexShrink: 1,
         },
         header: {
             flex: 3,
@@ -66,20 +79,32 @@ export default function CompanyCard(props) {
         }
     })
 
-    function destructureName() {
-        const nameArray = name.split(' ')
-        return nameArray.map((item, index) => {
-            return <Text key={index} style={styles.name}>{item}</Text>
-        })
+    function mountImage() {
+        if (image) {
+            return (
+                <Image
+                    style={styles.logo}
+                    source={{ uri: image }}
+                />
+            )
+        } else {
+            return (
+                <Image
+                    style={styles.logo}
+                    source={defaultLogo}
+                />
+            )
+        }
     }
+
 
     return (
         <View
             style={styles.container}>
             <View style={styles.header}>
-                <Image source={{uri: logo}} style={styles.logo} />
+                {mountImage()}
                 <View>
-                    {destructureName()}
+                    <Text style={styles.name}>{props.name}</Text>
                 </View>
             </View>
             <View style={styles.footer}>

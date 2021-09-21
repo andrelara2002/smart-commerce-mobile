@@ -10,6 +10,8 @@ export default function CompanyRank(rank) {
             return { label: 'Conhecida', color: '#FFD700' };
         case 3:
             return { label: 'Renomada', color: '#212121' };
+        default:
+            return { label: '', color: '' };
     }
 }
 
