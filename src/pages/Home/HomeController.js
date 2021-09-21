@@ -21,7 +21,6 @@ export default function HomeController(props) {
         const local = await getLocal();
 
         setLocais(local.slice(1, 10));
-        console.log({'locais': locais})
         setLocaisVotacao(
             local
                 .sort(function (a, b) {
@@ -33,9 +32,10 @@ export default function HomeController(props) {
                     }
                     return 0;
                 })
-                .slice(1, 11));
+                .slice(1, 6));
         setUsername(username.nomeCliente + ' ' + username.sobrenome)
 
+        console.log({'locais': locais})
         setLoading(false);
     }
 

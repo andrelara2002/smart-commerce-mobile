@@ -1,7 +1,7 @@
 import React from 'react';
 import SplashScreen from 'react-native-splash-screen'
 import Navigator from './src/routes'
-/* import Navigator from './src/routes_new'; */
+/* import Navigator from './src/new_routes' */
 
 import { Provider } from 'react-redux'
 import store from './src/store'
@@ -20,7 +20,6 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <Navigator />
-        {/* <AppContainer /> */}
       </Provider>
     )
   }

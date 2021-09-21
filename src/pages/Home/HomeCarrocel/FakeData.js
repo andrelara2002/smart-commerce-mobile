@@ -1,12 +1,14 @@
 import defaultBackground from '../../../assets/image/FakeData/Background/defaultBackground.jpg'
 import defaultLogo from '../../../assets/image/FakeData/Logos/defaultLogo.png'
 
+const defaultImage = "https://images-ext-1.discordapp.net/external/asAfQ5pK2fmmNtIRu642DF_rlhO0ObPnJuuWvRvpQRw/https/lh5.googleusercontent.com/p/AF1QipPdzmykezIQO_1UqkHuObPiMRNgLUPc7DcHYBE6%3Dw408-h306-k-no"
+
 export default FakeData = [
     {
         id: 0, title: 'Smart Commerce ',
         description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here",
         segment: 'Economia',
-        image: defaultBackground,
+        image: defaultImage,
         logo: defaultLogo,
         distance: 23000,
         products: [
@@ -19,9 +21,9 @@ export default FakeData = [
         logo: defaultLogo,
         distance: 23000,
     },
-    { id: 1, title: 'Smart Commerce ', segment: 'Economia', image: defaultBackground, logo: defaultLogo, distance: 23000 },
-    { id: 2, title: 'Smart Commerce ', segment: 'Economia', image: defaultBackground, logo: defaultLogo, distance: 23000 },
-    { id: 3, title: 'Smart Commerce ', segment: 'Economia', image: defaultBackground, logo: defaultLogo, distance: 23000 },
+    { id: 1, title: 'Smart Commerce ', segment: 'Economia', image: defaultImage, logo: defaultLogo, distance: 23000 },
+    { id: 2, title: 'Smart Commerce ', segment: 'Economia', image: defaultImage, logo: defaultLogo, distance: 23000 },
+    { id: 3, title: 'Smart Commerce ', segment: 'Economia', image: defaultImage, logo: defaultLogo, distance: 23000 },
 ]
 
 export const mostVotted = [

@@ -49,7 +49,7 @@ export default function LittleCompaniesCarrousel(props) {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
                 <TouchableOpacity style={styles.card}>
-                    <Image style={styles.image} source={item.image} />
+                    <Image style={styles.image} source={{uri: item.image}} />
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.distance}>{`${item.distance / 1000} Km`}</Text>
                 </TouchableOpacity>

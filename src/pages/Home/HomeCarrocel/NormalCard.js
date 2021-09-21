@@ -38,6 +38,8 @@ export default function NormalCard(props) {
             fontSize: 18,
             fontWeight: 'bold',
             color: DefaultColors["dark"].textColor,
+            width: 200,
+            flexShrink: 1,
         },
         segment: {
             fontSize: 14,

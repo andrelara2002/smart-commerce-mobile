@@ -10,6 +10,7 @@ import Search from '../Search/SearchController';
 import Map from '../Map/MapController';
 import Company from '../Company/CompanyController';
 import CompanyCardsController from '../../CompanyCards/CompanyCardsController';
+import SignUpController from '../SignUp/SiginUpController';
 
 import { createStackNavigator } from '@react-navigation/stack';
 

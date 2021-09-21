@@ -21,6 +21,7 @@ import HomeCarrocel from './HomeCarrocel/HomeCarrocel';
 import MostVotted from '../../components/Graphs/HorBarGraph/MostVotted';
 import Spacer from '../../components/Util/Spacer';
 import Title from '../../components/Util/Title';
+import Button from '../../components/Buttons/Button';
 
 // <- Componentes customizados
 
@@ -64,13 +65,14 @@ export default function HomeView(props) {
             index: 0,
             actions: [],
         }) */
-        props.navigation.navigate("Company",{ screen: 'CompanyDetails' })
+        props.navigation.navigate("Company", { screen: 'CompanyDetails' })
         /* navigation.dispatch(resetAction) */
     }
 
     useEffect(() => {
         /* setVariables(); */
-        console.log("HOME VIEW LOADED")
+        console.log("HOME VIEW LOADED")/* 
+        console.log(props.locais) */
         /* console.log(props) */
     }, [])
 
@@ -78,10 +80,18 @@ export default function HomeView(props) {
         <View style={styles.container}>
             <ScrollView>
                 <HomeHeader
-                    navigation = {props.navigation}
+                    navigation={props.navigation}
                     name={user}
                     language={language}
                     colors={props.colors}
+                />
+                <Button
+                    keyText="SignUp"
+                    onPress={() => {
+                        props.navigation.navigate('Company', {
+                            screen: 'SignUp'
+                        })
+                    }}
                 />
                 <Spacer height={20} />
                 <Title text={sessions_title.close_to_you} />
@@ -89,8 +99,8 @@ export default function HomeView(props) {
                     navigation={props.navigation}
                     data={props.locais} />
                 <Spacer height={20} />
-                <Title text={sessions_title.most_voted}  />
-                <MostVotted text={texts[language].sessions_title.see_more}  data={props.locaisVotacao}/>
+                <Title text={sessions_title.most_voted} />
+                <MostVotted text={texts[language].sessions_title.see_more} data={props.locaisVotacao} />
                 <Spacer height={30} />
             </ScrollView>
         </View>
