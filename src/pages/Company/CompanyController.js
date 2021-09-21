@@ -64,7 +64,7 @@ export default function CompanyController(props) {
             language={settings.app.language}
             //Company Info
             name={company.nome}
-            description={company.segmento.descricao}
+            description={company.descricao}
             image={company.imageURL}
             logo={company.imageURL}
             rank={1}

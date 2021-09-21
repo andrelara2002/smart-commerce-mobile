@@ -16,7 +16,7 @@ export default function HomeController(props) {
     const [loading, setLoading] = React.useState(true);
 
     async function getSettingsFromStorage() {
-        
+
         const username = await getUser();
         const local = await getLocal();
 
@@ -33,9 +33,8 @@ export default function HomeController(props) {
                     return 0;
                 })
                 .slice(1, 6));
-        setUsername(username.nomeCliente + ' ' + username.sobrenome)
 
-        console.log({'locais': locais})
+        setUsername(username.nomeCliente)
         setLoading(false);
     }
 

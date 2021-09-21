@@ -95,7 +95,7 @@ export default function SearchView(props) {
             <CategoriesCarrousel more={text.sessions_title.see_more} data={props.categorias}/>
             <Spacer height={20} />
             <Title text={text.sessions_title.little_companies} />
-            <LittleCompaniesCarrousel />
+            <LittleCompaniesCarrousel data={props.locais}/>
 
             <Spacer height={30} />
         </ScrollView>

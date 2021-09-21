@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { getUserToken } from '../../utils'
+import api from '../../services/api'
+import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken } from '../../utils'
+import Error from '../../components/Text/Error';
 
-import { storeCategoria, storeLocal, storeUser, storeUserToken } from '../../utils'
 
 export default function AuthLoadingScreen(props) {
   const [loading, setLoading] = React.useState(true);
+  const [errorMessage, setErrorMessage] = React.useState(null);
 
   async function loadDatasFromAPI() {
     var localResponse = await api.get('/local');
@@ -45,16 +47,13 @@ export default function AuthLoadingScreen(props) {
     async function handleUserNextScreen() {
       const userToken = await getUserToken();
       if (userToken) {
-        loadDatasFromAPI();
-        if (!loading) {
-          props.navigation.navigate('App');
-        }
+        await loadDatasFromAPI();
+        setLoading(false);
+        props.navigation.navigate('App');
       }
       else {
         setLoading(false);
-        if (!loading) {
-          props.navigation.navigate('Auth');
-        }
+        props.navigation.navigate('Auth');
       }
 
       /* if (loading == false) {
@@ -68,6 +67,7 @@ export default function AuthLoadingScreen(props) {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <ActivityIndicator size="large" color="#00ff00" />
+      <Error errorMessage={errorMessage} />
     </View>
   );
 }
