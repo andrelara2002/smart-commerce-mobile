@@ -2,11 +2,8 @@ import React from 'react'
 
 import SignUpView from './SignUpView'
 
-export default function SignUpController() {
+export default function SignUpController(props) {
+    const navigation = props.navigation;
 
-    function SignUp(data) {
-        console.log(data)
-    }
-
-    return <SignUpView SignUp={SignUp} />
+    return <SignUpView navigation={navigation} />
 }
