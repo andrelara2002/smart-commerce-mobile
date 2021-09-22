@@ -125,12 +125,18 @@ export default function LoginView(props) {
     }
 
     function SignUp() {
-        const resetAction = StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'SignUp' })],
-        })
+        // const resetAction = StackActions.reset({
+        //     index: 0,
+        //     actions: [NavigationActions.navigate({ routeName: 'SignUp' })],
+        // })
 
-        props.navigation.dispatch(resetAction)
+        const navigateAction = NavigationActions.navigate({
+            routeName: 'SignUp',          
+            params: {},          
+            action: NavigationActions.navigate({ routeName: 'SignUp' }),
+          });
+
+        props.navigation.dispatch(navigateAction)
     }
 
     const styles = StyleSheet.create({

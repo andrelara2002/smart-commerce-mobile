@@ -1,5 +1,9 @@
 import React from 'react';
 
+//Api
+import api from '../../services/api'
+import Texts from '../../texts';
+
 import {
     View,
     StyleSheet,
@@ -7,21 +11,29 @@ import {
     TextInput,
     TouchableOpacity,
     Image,
+    ActivityIndicator
 } from 'react-native';
-
+import { StackActions, NavigationActions } from 'react-navigation'
 import Input from '../../components/Inputs/Input';
 import CompanyCard from '../Company/Components/CompanyCard';
 import Spacer from '../../components/Util/Spacer';
 import Button from '../../components/Buttons/Button';
+import Error from '../../components/Text/Error';
 
 import { useSelector } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default function SignUpView(props) {
+
+    const lang = useSelector(state => state.settings.app.language);
+    const texts = Texts[lang];
     const colors = useSelector(state => state.settings.app.colors);
-    const [name, setName] = React.useState('Your Name');
+    const [name, setName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [email, setEmail] = React.useState('');
+    const [errorMessage, setErrorMessage] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);
 
     const styles = StyleSheet.create({
         container: {
@@ -35,13 +47,48 @@ export default function SignUpView(props) {
         }
     })
 
-    function handleSignUp() {
-        const data = {
-            name,
-            password,
-            email,
+    async function handleSignUp() {
+
+        if (name.length === 0 || lastName.length === 0 || email.length === 0 || password.length === 0) {
+            setErrorMessage(texts.login_error_empty_fields);
+            return;
         }
-        return data;
+
+        setLoading(true);
+
+        try {
+
+            const data = {
+                'nome': name,
+                'sobrenome': lastName,
+                'email': email,
+                'senha': password
+            }
+
+            const loginResponse = await api.post('/login/create', data)
+                .catch(function (error) {
+                    return error.response;
+                });
+
+            if (loginResponse.data.succeeded == false) {
+                setLoading(false)
+                setErrorMessage(loginResponse.data.message)
+                return;
+            }
+
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
+            })
+
+            setLoading(false)
+            props.navigation.dispatch(resetAction)
+
+        } catch (err) {
+            console.log(err)
+            setLoading(false)
+            setErrorMessage(err);
+        }
     }
 
     return (
@@ -53,10 +100,18 @@ export default function SignUpView(props) {
                 name={name}
                 qtdVotacoes={0}
             />
+
+            {!!errorMessage && <Error errorMessage={errorMessage} />}
+
             <Input
                 label='Nome'
                 colors={colors}
                 onChangeText={setName}
+            />
+            <Input
+                label='Sobrenome'
+                colors={colors}
+                onChangeText={setLastName}
             />
             <Input
                 label='Email'
@@ -71,9 +126,13 @@ export default function SignUpView(props) {
             />
             <Spacer height={40} />
             <Button
-                flex={0}
-                keyText='Cadastrar'
-                onPress={() => props.SignUp(handleSignUp())}
+                flex={null}
+                onPress={handleSignUp}
+                keyText={loading ? (
+                    <ActivityIndicator size="small" color="#FFF" />
+                ) : (
+                    <Text>Cadastrar</Text>
+                )}
             />
             <Spacer height={20} />
         </ScrollView>
