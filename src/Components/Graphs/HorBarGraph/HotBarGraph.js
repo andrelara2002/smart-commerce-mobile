@@ -65,13 +65,24 @@ export default function HotBarGraph({ image, qtdTotalVotos, qtdVotos, index, tit
         }
     })
 
+    function splitText(title) {
+        let limit = 25;
+        let response = title;
+
+        if (title.length > limit) {
+            response = title.substring(0, limit) + '...';
+        }
+
+        return response;
+    }
+
     return (
         <View style={styles.container}>
             <Image source={{ uri: image }} style={styles.image} />
             <Text style={styles.position}>{index + 1}</Text>
             <View style={styles.item}>
                 <View style={styles.texts}>
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.title}>{splitText(title)}</Text>
                     <Text style={styles.percent}>{`${qtdVotos}`}
                         <Icon
                             name="vote-outline"

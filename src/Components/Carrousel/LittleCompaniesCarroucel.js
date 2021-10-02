@@ -28,6 +28,8 @@ export default function LittleCompaniesCarrousel(props) {
             fontSize: 18,
             fontWeight: "bold",
             color: colors.textColor,
+            flexShrink: 1,
+            width: 100
         },
         distance: {
             fontSize: 12,
