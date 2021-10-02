@@ -43,7 +43,7 @@ export default function NavigationTabScreen() {
         <Stack.Screen
           name="CompanyDetails"
           component={Company}
-          /* options={{ headerShown: false }} */ />
+          options={{ headerShown: false }} />
         <Stack.Screen
           name="CompanyCards"
           component={CompanyCardsController}
