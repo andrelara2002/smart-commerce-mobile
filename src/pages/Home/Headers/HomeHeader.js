@@ -14,7 +14,7 @@ import diamond from '../../../assets/image/diamond.png'
     backgroundSecondary } = DefaultColors["dark"]
  */
 
-export default function HomeHeader({ name, language, colors }) {
+export default function HomeHeader({ name, language, colors, navigation }) {
 
     const styles = StyleSheet.create({
         container: {
@@ -50,7 +50,7 @@ export default function HomeHeader({ name, language, colors }) {
             width: '60%',
         }
     })
-    
+
 
     const [saudacao, setSaudacao] = useState('');
     const greetings = Texts[language].greetings;
@@ -74,7 +74,11 @@ export default function HomeHeader({ name, language, colors }) {
             <Text style={styles.subtitle}>{saudacao}</Text>
             <Text style={styles.title}>{name}</Text>
             <View style={styles.buttons}>
-                <TouchableOpacity style={styles.darkButton}>
+                <TouchableOpacity
+                    style={styles.darkButton}
+                    onPress={() => {
+                        navigation.navigate("Company", { screen: "RegisterCompany" })
+                    }}>
                     <Text style={{
                         fontSize: 20,
                         fontWeight: 'bold',

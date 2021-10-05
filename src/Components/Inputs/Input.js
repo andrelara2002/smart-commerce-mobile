@@ -4,6 +4,7 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 export default function Input(props) {
     const { text, setText } = useState('')
     const [type, setType] = useState(props.type || 'text')
+    const { onChangeText } = props
 
     const {
         background,
@@ -26,9 +27,12 @@ export default function Input(props) {
         input: {
             width: "100%",
             backgroundColor: backgroundSecondary,
+            textAlign: 'left',
+            textAlignVertical: props.multiline ? 'top' : 'center',
             borderRadius: 4,
             padding: 10,
-            height: 60,
+            minHeight: props.multiline ? 120 : 60,
+            height: props.multiline ? "auto" : 60,
             fontSize: 24,
             color: textColor
         },
@@ -43,7 +47,8 @@ export default function Input(props) {
         <View style={styles.container}>
             <Text style={styles.text}>{props.label}</Text>
             <TextInput style={styles.input}
-                onChangeText={text => props.onChangeText(text)}
+                multiline={props.multiline}
+                onChangeText={text => onChangeText(text)}
                 defaultValue={text}
                 secureTextEntry={type === 'password'}
             />

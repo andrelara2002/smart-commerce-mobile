@@ -11,6 +11,7 @@ import {
 // Arquivos de configurações ->
 
 import texts from '../../texts';
+import HomeStyles from './HomeStyles'
 
 // <- Arquivos de configurações
 
@@ -21,28 +22,12 @@ import HomeCarrocel from './HomeCarrocel/HomeCarrocel';
 import MostVotted from '../../components/Graphs/HorBarGraph/MostVotted';
 import Spacer from '../../components/Util/Spacer';
 import Title from '../../components/Util/Title';
-import Button from '../../components/Buttons/Button';
 
 // <- Componentes customizados
 
 export default function HomeView(props) {
 
-
-    const {
-        background,
-        textColor,
-        border } = props.colors;
-
-    const styles = StyleSheet.create({
-        container: {
-            height: '100%',
-            backgroundColor: background,
-        },
-        subText: {
-            fontSize: 20,
-            color: border,
-        }
-    })
+    const styles = HomeStyles(props.colors)
 
     const [user, setUser] = useState(props.username || '');
     const [language, setLanguage] = useState(props.lang || "en");

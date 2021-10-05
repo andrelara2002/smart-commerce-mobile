@@ -18,6 +18,7 @@ import Title from '../../components/Util/Title';
 import Spacer from '../../components/Util/Spacer';
 import CategoriesCarrousel from '../../components/Carrousel/CategoriesCarrousel';
 import LittleCompaniesCarrousel from '../../components/Carrousel/LittleCompaniesCarroucel';
+import SearchStyles from './SearchStyles';
 
 // <- Componentes customizados
 
@@ -27,24 +28,7 @@ export default function SearchView(props) {
     const [search, setSearch] = React.useState("")
     const [text, setText] = React.useState(Texts[props.lang])
 
-
-    const styles = StyleSheet.create({
-        container: {
-            backgroundColor: Colors.background,
-            width: '100%',
-            height: '100%',
-        },
-        containerStyle: {
-            backgroundColor: Colors.background,
-            borderBottomColor: 'transparent',
-            borderTopColor: 'transparent',
-        },
-        searchbarView: {
-            paddingLeft: 15,
-            paddingRight: 15,
-            marginTop: 10,
-        }
-    })
+    const styles = SearchStyles(props.colors)
 
     function updateSearch(search) {
         setSearch(search)

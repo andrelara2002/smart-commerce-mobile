@@ -20,6 +20,7 @@ import Button from '../../components/Buttons/Button';
 import Error from '../../components/Text/Error';
 import GoogleLoginButton from './SocialButtons/GoogleLoginButton';
 import FacebookLoginButton from './SocialButtons/FacebookLoginButton '
+import LoginStyles from './LoginStyles';
 
 export default function LoginView(props) {
 
@@ -82,44 +83,7 @@ export default function LoginView(props) {
         props.navigation.navigate('SignUp')
     }
 
-    const styles = StyleSheet.create({
-        container: {
-            /* flex: 1, */
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-            backgroundColor: colors.background,
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: 25
-        },
-        title: {
-            flex: 1,
-            fontSize: 40,
-            color: '#fff',
-            fontWeight: 'bold',
-            marginBottom: 20,
-        },
-        socialButtons: {
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            flexDirection: 'row',
-            marginBottom: 10,
-            marginTop: 10
-        },
-        image: {
-            /* flex: 1, */
-            width: 150,
-            height: 150,
-        },
-        header: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: "baseline",
-            marginBottom: 20,
-        }
-    })
-
+    const styles = LoginStyles(colors)
 
     return (
 
