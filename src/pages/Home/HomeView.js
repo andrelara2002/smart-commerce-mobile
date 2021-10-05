@@ -46,34 +46,10 @@ export default function HomeView(props) {
 
     const [user, setUser] = useState(props.username || '');
     const [language, setLanguage] = useState(props.lang || "en");
-
     const sessions_title = texts[language].sessions_title
 
-    async function setVariables() {
-
-        /* await getUser().then(user => {
-            setUser(user.nomeCliente + ' ' + user.sobrenome)
-        }) */
-
-        /* await getSettings().then(settings => {
-            setLanguage(settings.app.language)
-        }) */
-    }
-
-    function goToCompany() {
-        /* const resetAction = StackActions.reset({
-            index: 0,
-            actions: [],
-        }) */
-        props.navigation.navigate("Company", { screen: 'CompanyDetails' })
-        /* navigation.dispatch(resetAction) */
-    }
-
-    useEffect(() => {
-        /* setVariables(); */
-        console.log("HOME VIEW LOADED")/* 
-        console.log(props.locais) */
-        /* console.log(props) */
+    useEffect(() => {       
+        console.log("HOME VIEW LOADED")     
     }, [])
 
     return (

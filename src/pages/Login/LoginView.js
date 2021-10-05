@@ -60,7 +60,7 @@ export default function LoginView(props) {
         while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
             localDatas = localDatas.concat(localResponse.data.data);
             console.log({ 'pagina': localResponse.data.pageNumber });
-            var localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
+            localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
 
             porcentagemAtual++;
             setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
@@ -69,7 +69,7 @@ export default function LoginView(props) {
         while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
             categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
             console.log({ 'pagina': categoriaResponse.data.pageNumber });
-            var categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
+            categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
 
             porcentagemAtual++;
             setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');

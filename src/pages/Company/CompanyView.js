@@ -16,7 +16,7 @@ import Divisor from '../../components/Util/Divisor'
 
 export default function CompanyView(props) {
     const {
-        id, description,
+        description,
         products, distance,
         name, rank, logo, image,
         qtdVotacoes, colors, type, language
@@ -120,7 +120,6 @@ export default function CompanyView(props) {
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item }) => {
-                    //console.log(item.image)
                     return (
                         <View style={styles.productsCard}>
                             <Image

@@ -4,21 +4,16 @@ import { View, StyleSheet } from 'react-native'
 /* import DefaultColors from '../../assets/colors/DefaultColors' */
 import Loading from '../../components/Util/Loading'
 import CompanyView from './CompanyView'
-
 import { useSelector } from 'react-redux'
-
-import { companies } from '../Home/HomeCarrocel/FakeData'
 
 export default function CompanyController(props) {
 
     const [company, setCompany] = React.useState({})
-    const [companyId, setCompanyId] = React.useState(0)
-    const [loading, setLoading] = React.useState(true)
+    const [loading, setLoading] = React.useState(false)
     const settings = useSelector(state => state.settings)
 
     async function getCompany() {
         try {
-            /* await setCompany(companies.find(company => company.id === companyId)) */
             await setCompany(props.route.params.company)
         }
         catch (error) {
@@ -26,24 +21,11 @@ export default function CompanyController(props) {
         }
     }
 
-    async function getSettingsFromStorage() {
-        try {
-            /* const settings = props.route.params.settings
-            await setSettings(settings) */
-            setLoading(false)
-            //console.log(settings.app.language)
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-
     React.useEffect(() => {
-        getSettingsFromStorage()
-        getCompany()/* 
-        console.log(company)
-        console.log("COMPANY CONTROLLER LOADED") */
-    },)
+        setLoading(true)
+        getCompany()
+        setLoading(false)
+    })
 
     if (loading) {
         return <Loading />
@@ -60,7 +42,6 @@ export default function CompanyController(props) {
         <View style={styles.container}>
             <CompanyView
                 //Settings  
-                id={companyId}
                 colors={settings.app.colors}
                 language={settings.app.language}
                 //Company Info

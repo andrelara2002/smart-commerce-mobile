@@ -67,8 +67,6 @@ export default function HomeHeader({ name, language, colors }) {
         else {
             setSaudacao(greetings.good_night)
         }
-
-        /* console.log("HOME HEADER LOADED") */
     })
 
     return (

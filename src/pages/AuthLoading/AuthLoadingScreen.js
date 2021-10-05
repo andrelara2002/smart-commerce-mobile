@@ -1,46 +1,55 @@
 import React, { useEffect } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Image } from 'react-native';
+import { StackActions, NavigationActions } from 'react-navigation'
+
+import { ProgressBar } from 'react-native-paper';
+
 import api from '../../services/api'
 import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken } from '../../utils'
 import Error from '../../components/Text/Error';
-
+import { useSelector } from 'react-redux';
 
 export default function AuthLoadingScreen(props) {
-  const [loading, setLoading] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState(null);
+  const [porcentagem, setPorcentagem] = React.useState(0);
+  const colors = useSelector(state => state.settings.app.colors);
+  const { accent, textColor, background } = colors;
+
+  function setProgress(porcentagemAtual, total) {
+    const porcentagemUnitario = 100 / total
+
+    const valor = (porcentagemAtual * porcentagemUnitario) / 100
+    console.log(valor);
+    setErrorMessage('atualizando base ' + valor + '%');
+    setPorcentagem(valor)
+  }
 
   async function loadDatasFromAPI() {
     var localResponse = await api.get('/local');
     var categoriaResponse = await api.get('/segmento');
 
-    const porcentagemTotal = 100 / (localResponse.data.totalPages + categoriaResponse.data.totalPages)
-    var porcentagemAtual = 1;
+    const totalPaginas = localResponse.data.totalPages + categoriaResponse.data.totalPages;
+    console.log({ 'totalPaginas': totalPaginas })
+    var porcentagemAtual = 0;
     var localDatas = [];
     var categoriaDatas = [];
 
     while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
       localDatas = localDatas.concat(localResponse.data.data);
-      console.log({ 'pagina': localResponse.data.pageNumber });
-      var localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
-
-      porcentagemAtual++;
-      setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
+      localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
+      setProgress(++porcentagemAtual, totalPaginas)
     }
 
     while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
       categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
-      console.log({ 'pagina': categoriaResponse.data.pageNumber });
-      var categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
-
-      porcentagemAtual++;
-      setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
+      categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
+      setProgress(++porcentagemAtual, totalPaginas)
     }
+
+    setProgress(totalPaginas, totalPaginas)
 
     await storeLocal(localDatas);
     await storeCategoria(categoriaDatas);
-
-    setLoading(false);
-
   }
 
   useEffect(() => {
@@ -48,17 +57,19 @@ export default function AuthLoadingScreen(props) {
       const userToken = await getUserToken();
       if (userToken) {
         await loadDatasFromAPI();
-        setLoading(false);
-        props.navigation.navigate('App');
+        
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'App' })],
+      })
+
+      props.navigation.dispatch(resetAction)
+        //props.navigation.navigate('App');
       }
       else {
-        setLoading(false);
         props.navigation.navigate('Auth');
       }
 
-      /* if (loading == false) {
-        props.navigation.navigate(userToken ? 'App' : 'Auth');
-      } */
     }
 
     handleUserNextScreen();
@@ -66,9 +77,24 @@ export default function AuthLoadingScreen(props) {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" color="#00ff00" />
+      <Image source={require('../../assets/image/splash_icon.png')}
+        style={{
+          resizeMode: 'center'
+        }} />
+
+      {/* <ActivityIndicator size="large" color="#00ff00" /> */}
       <Error errorMessage={errorMessage} />
+      <ProgressBar
+        progress={porcentagem}
+        style={{
+          height: 10,
+          width: 200,
+          borderRadius: 10,
+          backgroundColor: 'red'
+        }}
+      />
     </View>
+
   );
 }
 

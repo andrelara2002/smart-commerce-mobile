@@ -4,14 +4,11 @@ import { createStackNavigator } from 'react-navigation-stack'
 import Login from './pages/Login/LoginController'
 import NavigationTabScreen from './pages/NavigationTab/NavigationTabScreen'
 import AuthLoadingScreen from './pages/AuthLoading/AuthLoadingScreen'
-import CompanyController from './pages/Company/CompanyController.js'
-import HomeController from './pages/Home/HomeController'
 import SignUpController from './pages/SignUp/SiginUpController'
-
 
 const StackNavigator = createStackNavigator(
     {
-        Home: NavigationTabScreen,
+        Home: NavigationTabScreen
     },
     {
         name: 'StackNavigator',
@@ -25,7 +22,7 @@ const AuthStack = createStackNavigator(
     {
         SignIn: Login,
         SignUp: SignUpController,
-        App: StackNavigator,
+        App: StackNavigator
     },
     {
         initialRouteName: 'SignIn',

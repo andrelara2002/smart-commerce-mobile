@@ -59,7 +59,6 @@ export default function CategoriesCarrousel(props) {
     })
 
     function renderCategories(category) {
-        console.log({ 'category': category })
         return (
             <TouchableOpacity
                 key={category.id}
