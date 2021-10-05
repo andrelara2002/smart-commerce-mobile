@@ -109,8 +109,8 @@ export default function AuthLoadingScreen(props) {
   );
 }
 
-AuthLoadingScreen.navigationOptions = () => {
-  return {
-    header: null,
-  };
-};
+// AuthLoadingScreen.navigationOptions = () => {
+//   return {
+//     header: null,
+//   };
+// };
