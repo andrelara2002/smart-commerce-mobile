@@ -11,10 +11,12 @@ import Map from '../Map/MapController';
 import Company from '../Company/CompanyController';
 import CompanyCardsController from '../../CompanyCards/CompanyCardsController';
 import SignUpController from '../SignUp/SiginUpController';
+import RegisterCompanyController from '../RegisterCompany/RegisterCompanyController';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Icon } from 'react-native-elements';
+import LoginStyles from '../Login/LoginStyles';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator()
@@ -43,7 +45,7 @@ export default function NavigationTabScreen() {
         <Stack.Screen
           name="CompanyDetails"
           component={Company}
-          /* options={{ headerShown: false }} */ />
+          options={{ headerShown: false }} />
         <Stack.Screen
           name="CompanyCards"
           component={CompanyCardsController}

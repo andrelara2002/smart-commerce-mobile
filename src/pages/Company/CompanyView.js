@@ -13,6 +13,7 @@ import Spacer from '../../components/Util/Spacer'
 import CompanyCard from './Components/CompanyCard'
 import Button from '../../components/Buttons/Button'
 import Divisor from '../../components/Util/Divisor'
+import CompanyStyles from './CompanyStyles'
 
 export default function CompanyView(props) {
     const {
@@ -23,49 +24,7 @@ export default function CompanyView(props) {
     } = props
 
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            width: '100%',
-            height: '100%',
-            backgroundColor: colors.background,
-            paddingLeft: 20,
-            paddingRight: 20
-        },
-        description: {
-            fontSize: 16,
-            color: colors.textColor,
-            fontWeight: '100',
-        },
-        distance: {
-            fontSize: 14,
-            color: colors.accent,
-            fontStyle: 'italic',
-        },
-        products: {},
-        productsCard: {
-            padding: 10,
-            borderRadius: 5,
-            backgroundColor: colors.background,
-        },
-        productsCardImage: {
-            width: 100,
-            height: 100,
-            borderRadius: 5,
-        },
-        productsCardTitle: {
-            fontSize: 16,
-            marginTop: 5,
-            paddingLeft: 10,
-            color: colors.textColor,
-            fontWeight: "bold",
-        },
-        buttons: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            width: '100%',
-        }
-    })
+    const styles = CompanyStyles(colors)
 
     React.useEffect(() => {
         console.log("COMPANY VIEW LOADED")

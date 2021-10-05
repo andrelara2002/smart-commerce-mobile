@@ -17,7 +17,7 @@ export default function Button({ onPress, keyText, isDark, width, style, height 
         container: {
             /* flex: flex, */
             width: newWidth,
-            height: 0,
+            height: newHeight,
             justifyContent: "center",
             alignItems: "center",
             marginTop: 10,

@@ -40,38 +40,39 @@ export default function CompanyController(props) {
 
     React.useEffect(() => {
         getSettingsFromStorage()
-        getCompany()
-        console.log(props.route.params)
-        console.log("COMPANY CONTROLLER LOADED")
-    }, [])
+        getCompany()/* 
+        console.log(company)
+        console.log("COMPANY CONTROLLER LOADED") */
+    },)
 
     if (loading) {
         return <Loading />
     }
 
     const styles = StyleSheet.create({
-        container:{
-            flex:1,
+        container: {
+            flex: 1,
         }
     })
+
 
     return (
         <View style={styles.container}>
             <CompanyView
-            //Settings  
-            id={companyId}
-            colors={settings.app.colors}
-            language={settings.app.language}
-            //Company Info
-            name={company.nome}
-            description={company.descricao}
-            image={company.imageURL}
-            logo={company.imageURL}
-            rank={1}
-            qtdVotacoes={company.totalVotacao}
-            products={company.produtos}
-            distance={0}
-        />
+                //Settings  
+                id={companyId}
+                colors={settings.app.colors}
+                language={settings.app.language}
+                //Company Info
+                name={company.nome}
+                description={company.descricao}
+                image={company.imageURL}
+                logo={company.imageURL}
+                rank={1}
+                qtdVotacoes={company.totalVotacao}
+                products={company.produtos}
+                distance={0}
+            />
         </View>
     )
 }
