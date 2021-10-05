@@ -29,14 +29,47 @@ export default function NavigationTabScreen() {
   React.useEffect(() => {
     getSettingsFromStorage()
   }, [])
+  
   if (loading) { return <Loading /> }
 
+  
   function HomeScreen() {
     return (
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Home2">
         <Stack.Screen
           name="Home2"
           component={Home}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="Company"
+          component={Company}
+          options={{
+            headerShown: true,
+            title: 'Detalhes da empresa',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },            
+          }}
+        />
+      </Stack.Navigator>
+    )
+  }
+
+  function SearchScreen() {
+    return (
+      <Stack.Navigator initialRouteName="Search2">
+        <Stack.Screen
+          name="Search2"
+          component={Search}
           options={{
             headerShown: false
           }}
@@ -82,7 +115,7 @@ export default function NavigationTabScreen() {
                   color="#fff" />)
             }
           }} />
-        <Tab.Screen name="Search" component={Search}
+        <Tab.Screen name="Search" component={SearchScreen}
           initialParams={{ settings: settings }}
           options={{
             tabBarIcon: () => {

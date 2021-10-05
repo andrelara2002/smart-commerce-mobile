@@ -10,10 +10,9 @@ export default function HomeController(props) {
     const [username, setUsername] = React.useState('');
     const [locaisVotacao, setLocaisVotacao] = React.useState([]);
     const [locais, setLocais] = React.useState([]);
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
 
     async function getSettingsFromStorage() {
-        setLoading(true);
         const username = await getUser();
         setUsername(username.nomeCliente)
         

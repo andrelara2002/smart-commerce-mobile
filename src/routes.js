@@ -20,12 +20,13 @@ const StackNavigator = createStackNavigator(
 
 const AuthStack = createStackNavigator(
     {
+        AuthLoading: AuthLoadingScreen,
         SignIn: Login,
         SignUp: SignUpController,
-        App: StackNavigator
+        App: StackNavigator,
     },
     {
-        initialRouteName: 'SignIn',
+        initialRouteName: 'AuthLoading',
         headerMode: 'none',
         header: null,
     },
@@ -44,6 +45,6 @@ const RootStack = createSwitchNavigator(
     },
 );
 
-const RootStackContainer = createAppContainer(RootStack)
+const RootStackContainer = createAppContainer(AuthStack)
 
 export default RootStackContainer

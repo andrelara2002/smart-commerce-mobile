@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, ActivityIndicator, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation'
 
 import { ProgressBar } from 'react-native-paper';
@@ -10,17 +10,11 @@ import Error from '../../components/Text/Error';
 import { useSelector } from 'react-redux';
 
 export default function AuthLoadingScreen(props) {
-  const [errorMessage, setErrorMessage] = React.useState(null);
   const [porcentagem, setPorcentagem] = React.useState(0);
-  const colors = useSelector(state => state.settings.app.colors);
-  const { accent, textColor, background } = colors;
 
   function setProgress(porcentagemAtual, total) {
     const porcentagemUnitario = 100 / total
-
     const valor = (porcentagemAtual * porcentagemUnitario) / 100
-    console.log(valor);
-    setErrorMessage('atualizando base ' + valor + '%');
     setPorcentagem(valor)
   }
 
@@ -29,7 +23,6 @@ export default function AuthLoadingScreen(props) {
     var categoriaResponse = await api.get('/segmento');
 
     const totalPaginas = localResponse.data.totalPages + categoriaResponse.data.totalPages;
-    console.log({ 'totalPaginas': totalPaginas })
     var porcentagemAtual = 0;
     var localDatas = [];
     var categoriaDatas = [];
@@ -57,17 +50,23 @@ export default function AuthLoadingScreen(props) {
       const userToken = await getUserToken();
       if (userToken) {
         await loadDatasFromAPI();
-        
+
         const resetAction = StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'App' })],
-      })
+        })
 
-      props.navigation.dispatch(resetAction)
-        //props.navigation.navigate('App');
+        props.navigation.dispatch(resetAction)
+        //props.navigation.navigate('App'); 
       }
       else {
-        props.navigation.navigate('Auth');
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
+        })
+
+        props.navigation.dispatch(resetAction)
+        //props.navigation.navigate('SignIn');
       }
 
     }
@@ -76,23 +75,35 @@ export default function AuthLoadingScreen(props) {
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{
+      backgroundColor: '#22252e',
+      flex: 1, justifyContent: 'center', alignItems: 'center'
+    }}>
       <Image source={require('../../assets/image/splash_icon.png')}
         style={{
           resizeMode: 'center'
         }} />
 
-      {/* <ActivityIndicator size="large" color="#00ff00" /> */}
-      <Error errorMessage={errorMessage} />
       <ProgressBar
         progress={porcentagem}
+        color='#3F8CFF'
         style={{
           height: 10,
           width: 200,
           borderRadius: 10,
-          backgroundColor: 'red'
+          backgroundColor: '#22252e',
+          marginBottom: 20,
         }}
       />
+
+      <Text style={{
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
+        marginBottom: 20,
+      }}>ANDROID BETA</Text>
+
+
     </View>
 
   );
