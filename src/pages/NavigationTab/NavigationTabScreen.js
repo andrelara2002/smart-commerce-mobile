@@ -29,10 +29,9 @@ export default function NavigationTabScreen() {
   React.useEffect(() => {
     getSettingsFromStorage()
   }, [])
-  
   if (loading) { return <Loading /> }
 
-  
+
   function HomeScreen() {
     return (
       <Stack.Navigator initialRouteName="Home2">
@@ -57,7 +56,7 @@ export default function NavigationTabScreen() {
             headerTintColor: '#fff',
             headerTitleStyle: {
               fontWeight: 'bold'
-            },            
+            },
           }}
         />
       </Stack.Navigator>
@@ -88,7 +87,7 @@ export default function NavigationTabScreen() {
             headerTintColor: '#fff',
             headerTitleStyle: {
               fontWeight: 'bold'
-            },            
+            },
           }}
         />
       </Stack.Navigator>

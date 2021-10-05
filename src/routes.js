@@ -1,50 +1,25 @@
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 
-import Login from './pages/Login/LoginController'
+import LoginScreen from './pages/Login/LoginController'
 import NavigationTabScreen from './pages/NavigationTab/NavigationTabScreen'
 import AuthLoadingScreen from './pages/AuthLoading/AuthLoadingScreen'
-import SignUpController from './pages/SignUp/SiginUpController'
+import SignUpScreen from './pages/SignUp/SiginUpController'
 
-const StackNavigator = createStackNavigator(
-    {
-        Home: NavigationTabScreen
-    },
-    {
-        name: 'StackNavigator',
-        initialRouteName: 'Home',
-        headerMode: 'none',
-        header: null,
-    }
-);
-
-const AuthStack = createStackNavigator(
+const AppStack = createStackNavigator(
     {
         AuthLoading: AuthLoadingScreen,
-        SignIn: Login,
-        SignUp: SignUpController,
-        App: StackNavigator,
+        SignIn: LoginScreen,
+        SignUp: SignUpScreen,
+        App: NavigationTabScreen,
     },
     {
         initialRouteName: 'AuthLoading',
         headerMode: 'none',
-        header: null,
+        headerShown: false,        
     },
 );
 
-const RootStack = createSwitchNavigator(
-    {
-        AuthLoading: AuthLoadingScreen,
-        Auth: AuthStack,
-        App: StackNavigator,
-    },
-    {
-        initialRouteName: 'AuthLoading',
-        headerMode: 'none',
-        header: null,
-    },
-);
-
-const RootStackContainer = createAppContainer(AuthStack)
+const RootStackContainer = createAppContainer(AppStack)
 
 export default RootStackContainer
