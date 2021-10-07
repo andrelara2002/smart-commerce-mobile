@@ -5,6 +5,7 @@ import RegisterCompanyStyle from './RegisterCompanyStyles'
 import Input from '../../components/Inputs/Input'
 import Button from '../../components/Buttons/Button'
 import Spacer from '../../components/Util/Spacer'
+
 import AppendCompany from '../../assets/image/icons/append_company.png'
 
 import {
@@ -21,9 +22,16 @@ export default function RegisterCompanyView(props) {
     //Company Variables
     const [name, setName] = React.useState('')
     const [category, setCategory] = React.useState('')
+
     const [address, setAddress] = React.useState('')
+    const [streetNumber, setStreetNumber] = React.useState('')
+    const [postalCode, setPostalCode] = React.useState('')
+    const [city, setCity] = React.useState('')
+    const [bairro, setBairro] = React.useState('')
+    const [state, setState] = React.useState('')
+
     const [description, setDescription] = React.useState('')
-    const [sugestions, setSugestions] = React.useState([])
+    const [sugestions, setSugestions] = React.useState('')
 
     const styles = RegisterCompanyStyle(colors)
 
@@ -34,49 +42,41 @@ export default function RegisterCompanyView(props) {
     return (
         <ScrollView style={styles.container}>
             <Image source={AppendCompany} style={styles.image} />
+            <Spacer height={20} />
             <Input
                 label='Nome'
-                colors={colors}
                 onChangeText={setName}
             />
             <Input
                 label={"category"}
-                colors={colors}
                 onChangeText={setCategory}
             />
             <Input
                 label={"address"}
-                colors={colors}
                 onChangeText={setAddress}
             />
             <Input
                 label={"street number"}
-                colors={colors}
-                onChangeText={setAddress}
+                onChangeText={setStreetNumber}
             />
             <Input
                 label={"postal code"}
-                colors={colors}
-                onChangeText={setAddress}
+                onChangeText={setPostalCode}
             />
             <Input
                 label={"bairro"}
-                colors={colors}
-                onChangeText={setAddress}
+                onChangeText={setBairro}
             />
             <Input
                 label={"cidade"}
-                colors={colors}
-                onChangeText={setAddress}
+                onChangeText={setCity}
             />
             <Input
                 label={"uf"}
-                colors={colors}
-                onChangeText={setAddress}
+                onChangeText={setState}
             />
             <Input
                 label={"description"}
-                colors={colors}
                 multiline={true}
                 onChangeText={setDescription}
             />
@@ -84,9 +84,32 @@ export default function RegisterCompanyView(props) {
             <Spacer height={20} />
 
             <Button
+                keyText={"Recomendar produtos"}
+                isDark={true}
+                onPress={() => {
+                    navigation.navigate('RegisterProduct')
+                }}
+            />
+            <Button
                 keyText={"Finalizar"}
                 colors={colors}
-                onPress={() => { console.log(name) }} />
+                onPress={() => {
+                    props.onSubmit({
+                        name,
+                        category,
+                        description,
+                        sugestions,
+                        location: {
+                            address,
+                            streetNumber,
+                            postalCode,
+                            city,
+                            bairro,
+                            state,
+                        }
+                    })
+                }} />
+
             <Spacer height={30} />
         </ScrollView>
     )
