@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 export default function Input(props) {
     const { text, setText } = useState('')
     const [type, setType] = useState(props.type || 'text')
@@ -15,7 +17,7 @@ export default function Input(props) {
         deactivate,
         textColor,
         backgroundSecondary
-    } = props.colors;
+    } = useSelector(state => state.settings.app.colors);
 
     const styles = StyleSheet.create({
         container: {
@@ -32,7 +34,7 @@ export default function Input(props) {
             borderRadius: 4,
             padding: 10,
             minHeight: props.multiline ? 120 : 60,
-            height: props.multiline ? "auto" : 60,
+            height: props.multiline ? "auto" : props.numberOfLines ? props.numberOfLines * 20 : 60,
             fontSize: 24,
             color: textColor
         },

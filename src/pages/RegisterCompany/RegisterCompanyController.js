@@ -13,6 +13,15 @@ export default function RegisterCompanyController(props) {
     const [colors, setColors] = React.useState({})
     const [language, setLanguage] = React.useState({})
 
+    const [registerCompany, setRegisterCompany] = React.useState({})
+
+    function onSubmit(data){
+        setRegisterCompany(data)
+        console.log(data)
+
+        navigation.navigate('RegisterCompanySuccess')
+    }
+
     React.useEffect(() => {
         setColors(settings.app.colors)
         setLanguage(settings.app.language)
@@ -23,6 +32,7 @@ export default function RegisterCompanyController(props) {
             navigation={navigation}
             colors={colors}
             language={language}
+            onSubmit={onSubmit}
         />
     )
 }

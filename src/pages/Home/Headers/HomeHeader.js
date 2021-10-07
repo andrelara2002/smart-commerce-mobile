@@ -85,7 +85,12 @@ export default function HomeHeader({ name, language, colors, navigation }) {
                         color: colors.textColor,
                     }}>Adicionar local</Text>
                 </TouchableOpacity>
-                <LevelButton text={200} image={diamond} />
+                <LevelButton
+                    text={200}
+                    image={diamond}
+                    onPress={() => {
+                        navigation.navigate("RegisterProduct")
+                    }} />
             </View>
         </View>
     )

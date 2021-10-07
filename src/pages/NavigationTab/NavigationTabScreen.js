@@ -11,7 +11,9 @@ import Company from '../Company/CompanyController';
 import CompanyCardsController from '../../CompanyCards/CompanyCardsController';
 import SignUpController from '../SignUp/SiginUpController';
 import RegisterCompanyController from '../RegisterCompany/RegisterCompanyController';
-
+import RegisterProductController from '../RegisterProduct/RegisterProductController';
+import RegisterProductSuccess from '../RegisterProduct/RegisterProductSuccess';
+import RegisterCompanySuccess from '../RegisterCompany/RegisterCompanySuccess';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Icon } from 'react-native-elements';
@@ -80,6 +82,37 @@ export default function NavigationTabScreen() {
             headerTitleStyle: {
               fontWeight: 'bold'
             },
+          }}
+        />
+        <Stack.Screen
+          name="RegisterCompanySuccess"
+          component={RegisterCompanySuccess}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="RegisterProduct"
+          component={RegisterProductController}
+          options={{
+            headerShown: true,
+            title: 'Adicionar Produto',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+          }}
+        />
+        <Stack.Screen
+          name="RegisterProductSuccess"
+          component={RegisterProductSuccess}
+          options={{
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
