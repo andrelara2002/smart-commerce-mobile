@@ -5,7 +5,7 @@ import RegisterCompanyStyle from './RegisterCompanyStyles'
 import Input from '../../components/Inputs/Input'
 import Button from '../../components/Buttons/Button'
 import Spacer from '../../components/Util/Spacer'
-import AppendCompany from '../../assets/image/icons/append_company.svg'
+import AppendCompany from '../../assets/image/icons/append_company.png'
 
 import {
     View,
@@ -50,6 +50,31 @@ export default function RegisterCompanyView(props) {
                 onChangeText={setAddress}
             />
             <Input
+                label={"street number"}
+                colors={colors}
+                onChangeText={setAddress}
+            />
+            <Input
+                label={"postal code"}
+                colors={colors}
+                onChangeText={setAddress}
+            />
+            <Input
+                label={"bairro"}
+                colors={colors}
+                onChangeText={setAddress}
+            />
+            <Input
+                label={"cidade"}
+                colors={colors}
+                onChangeText={setAddress}
+            />
+            <Input
+                label={"uf"}
+                colors={colors}
+                onChangeText={setAddress}
+            />
+            <Input
                 label={"description"}
                 colors={colors}
                 multiline={true}
@@ -62,6 +87,7 @@ export default function RegisterCompanyView(props) {
                 keyText={"Finalizar"}
                 colors={colors}
                 onPress={() => { console.log(name) }} />
+            <Spacer height={30} />
         </ScrollView>
     )
 }

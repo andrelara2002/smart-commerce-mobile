@@ -10,8 +10,8 @@ export default function RegisterCompanyStyle(colors) {
             height: '100%',
         },
         image: {
-            width: 200,
-            height: 200,
+            width: 80,
+            height: 80,
             alignSelf: 'center',
             marginTop: 20,
 

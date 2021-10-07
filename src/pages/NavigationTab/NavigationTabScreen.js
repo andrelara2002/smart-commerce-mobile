@@ -64,6 +64,24 @@ export default function NavigationTabScreen() {
             },
           }}
         />
+
+        <Stack.Screen
+          name="RegisterCompany"
+          component={RegisterCompanyController}
+          options={{
+            headerShown: true,
+            title: 'Adicionar Local',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+          }}
+        />
       </Stack.Navigator>
     )
   }
@@ -95,7 +113,8 @@ export default function NavigationTabScreen() {
             },
           }}
         />
-      </Stack.Navigator>
+
+      </Stack.Navigator >
     )
   }
 

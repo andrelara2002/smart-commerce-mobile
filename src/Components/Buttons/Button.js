@@ -31,7 +31,7 @@ export default function Button({ onPress, keyText, isDark, width, style, height 
             height: newHeight,
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: 10,
+            borderRadius: 5,
             opacity: 1,
         },
         text: {

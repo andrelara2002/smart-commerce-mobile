@@ -77,7 +77,7 @@ export default function HomeHeader({ name, language, colors, navigation }) {
                 <TouchableOpacity
                     style={styles.darkButton}
                     onPress={() => {
-                        navigation.navigate("Company", { screen: "RegisterCompany" })
+                        navigation.navigate("RegisterCompany")
                     }}>
                     <Text style={{
                         fontSize: 20,

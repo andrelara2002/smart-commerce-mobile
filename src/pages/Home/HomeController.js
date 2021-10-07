@@ -3,6 +3,7 @@ import Loading from '../../components/Util/Loading';
 import HomeView from './HomeView';
 import { getUser, getLocal } from '../../utils'
 import { useSelector } from 'react-redux';
+import { StackActions } from '@react-navigation/routers';
 
 export default function HomeController(props) {
 
