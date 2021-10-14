@@ -5,7 +5,7 @@ import { Alert } from 'react-native'
 import { getUserToken, navigate, deleteAsyncStorage } from '../utils'
 
 const api = axios.create({
-  baseURL: 'https://smart-commerce-back.azurewebsites.net',  
+  baseURL: 'https://smart-commerce-back.azurewebsites.net',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -14,9 +14,7 @@ const api = axios.create({
 
 api.interceptors.response.use(
   response => {
-
-    // Do something with response data
-
+    // Do something with response data    
     return response
   },
   error => {
@@ -33,7 +31,7 @@ api.interceptors.response.use(
       Alert.alert(
         'Aviso',
         'Não foi possível conectar aos nossos servidores, sem conexão a internet',
-        [ { text: 'OK' } ],
+        [{ text: 'OK' }],
         { cancelable: false },
       )
     }
@@ -58,7 +56,7 @@ api.interceptors.response.use(
 api.interceptors.request.use(
   config => {
     return getUserToken()
-      .then(user => {        
+      .then(user => {
         if (user && user.token)
           config.headers.Authorization = `Bearer ${user.token}`
         return Promise.resolve(config)

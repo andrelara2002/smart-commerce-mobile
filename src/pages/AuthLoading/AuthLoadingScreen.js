@@ -6,8 +6,6 @@ import { ProgressBar } from 'react-native-paper';
 
 import api from '../../services/api'
 import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken } from '../../utils'
-import Error from '../../components/Text/Error';
-import { useSelector } from 'react-redux';
 
 export default function AuthLoadingScreen(props) {
   const [porcentagem, setPorcentagem] = React.useState(0);
@@ -19,54 +17,55 @@ export default function AuthLoadingScreen(props) {
   }
 
   async function loadDatasFromAPI() {
-    var localResponse = await api.get('/local');
-    var categoriaResponse = await api.get('/segmento');
+    try {
 
-    const totalPaginas = localResponse.data.totalPages + categoriaResponse.data.totalPages;
-    var porcentagemAtual = 0;
-    var localDatas = [];
-    var categoriaDatas = [];
+      var localResponse = await api.get('/local');
+      var categoriaResponse = await api.get('/segmento');
 
-    while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
-      localDatas = localDatas.concat(localResponse.data.data);
-      localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
-      setProgress(++porcentagemAtual, totalPaginas)
+      const totalPaginas = localResponse.data.totalPages + categoriaResponse.data.totalPages;
+      var porcentagemAtual = 0;
+      var localDatas = [];
+      var categoriaDatas = [];
+
+      while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
+        localDatas = localDatas.concat(localResponse.data.data);
+        localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
+        setProgress(++porcentagemAtual, totalPaginas)
+      }
+
+      while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
+        categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
+        categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
+        setProgress(++porcentagemAtual, totalPaginas)
+      }
+
+      setProgress(totalPaginas, totalPaginas)
+
+      await storeLocal(localDatas);
+      await storeCategoria(categoriaDatas);
+      return true;
+    } catch {
+      return false;
     }
-
-    while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
-      categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
-      categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
-      setProgress(++porcentagemAtual, totalPaginas)
-    }
-
-    setProgress(totalPaginas, totalPaginas)
-
-    await storeLocal(localDatas);
-    await storeCategoria(categoriaDatas);
   }
 
   useEffect(() => {
     async function handleUserNextScreen() {
-      const userToken = await getUserToken();
-      if (userToken) {
-        await loadDatasFromAPI();
-
+      
+      if ((await getUserToken()) && (await loadDatasFromAPI())) {
         const resetAction = StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'App' })],
         })
 
         props.navigation.dispatch(resetAction)
-        //props.navigation.navigate('App'); 
       }
       else {
         const resetAction = StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
         })
-
         props.navigation.dispatch(resetAction)
-        //props.navigation.navigate('SignIn');
       }
 
     }
@@ -108,9 +107,3 @@ export default function AuthLoadingScreen(props) {
 
   );
 }
-
-// AuthLoadingScreen.navigationOptions = () => {
-//   return {
-//     header: null,
-//   };
-// };

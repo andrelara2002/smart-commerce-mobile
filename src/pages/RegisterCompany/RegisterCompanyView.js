@@ -17,7 +17,7 @@ import {
 
 export default function RegisterCompanyView(props) {
 
-    const { navigation, colors, language } = props
+    const { navigation, colors, language, categorias } = props
 
     //Company Variables
     const [name, setName] = React.useState('')
@@ -37,7 +37,7 @@ export default function RegisterCompanyView(props) {
 
     React.useEffect(() => {
         console.log('REGISTER COMPANY VIEW LOADED')
-    })
+    }, [])
 
     return (
         <ScrollView style={styles.container}>
@@ -46,6 +46,7 @@ export default function RegisterCompanyView(props) {
             <Input
                 label='Nome'
                 onChangeText={setName}
+
             />
             <Input
                 label={"category"}
