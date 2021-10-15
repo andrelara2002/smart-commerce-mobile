@@ -27,13 +27,17 @@ export default function AuthLoadingScreen(props) {
       var localDatas = [];
       var categoriaDatas = [];
 
-      while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
+      while (localResponse.data.pageNumber <= localResponse.data.totalPages && localResponse.data.succeeded == true) {
         localDatas = localDatas.concat(localResponse.data.data);
+        console.log({
+          'localResponse.data.pageNumbe': localResponse.data.pageNumber,
+          'localResponse.data.totalPages': localResponse.data.totalPages
+        })
         localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
         setProgress(++porcentagemAtual, totalPaginas)
       }
 
-      while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
+      while (categoriaResponse.data.pageNumber <= categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
         categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
         categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
         setProgress(++porcentagemAtual, totalPaginas)
@@ -51,7 +55,7 @@ export default function AuthLoadingScreen(props) {
 
   useEffect(() => {
     async function handleUserNextScreen() {
-      
+
       if ((await getUserToken()) && (await loadDatasFromAPI())) {
         const resetAction = StackActions.reset({
           index: 0,
