@@ -81,13 +81,11 @@ export default function CompanyView(props) {
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.productsCard}>
-                            <Image
-                                source={item.image}
-                                style={styles.productsCardImage}
-                            />
                             <Text
                                 style={styles.productsCardTitle}
-                            >{item.name}</Text>
+                            >{item.nome}
+                            </Text>
+                            <Text style={styles.productsCardTitle}>{item.descricao}</Text>
                         </View>
                     )
                 }} />

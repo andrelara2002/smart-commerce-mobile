@@ -14,7 +14,7 @@ export default function CompanyController(props) {
 
     async function getCompany() {
         try {
-            await setCompany(props.route.params.company)
+            await setCompany(props.route.params.company)            
         }
         catch (error) {
             console.log(error)

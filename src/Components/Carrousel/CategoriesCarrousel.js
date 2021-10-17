@@ -16,7 +16,7 @@ export default function CategoriesCarrousel(props) {
 
     const [colors, setColors] = React.useState(DefaultColors["dark"]);
     const [data, setData] = React.useState(props.data);
-    /* console.log({ 'categoriasss': props.data }) */
+    
     const styles = StyleSheet.create({
         container: {
             paddingLeft: 20,

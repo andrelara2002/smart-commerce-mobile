@@ -25,8 +25,8 @@ export default function RegisterProductController(props) {
     function onSubmit(data) {
         console.log(data)
         setRegisterProduct(data);
-        
-        navigation.navigate('RegisterProductSuccess');
+        navigation.goBack()
+        //navigation.navigate('RegisterProductSuccess');
     }
 
     React.useEffect(() => {

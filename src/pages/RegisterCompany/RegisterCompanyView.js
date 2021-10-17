@@ -107,7 +107,17 @@ export default function RegisterCompanyView(props) {
                         cidade,
                         bairro,
                         estado: UFs.find(x => x.id == estado).sigla,
-                        imagemURL: 'https://c7.alamy.com/comp/2AXAP2A/error-template-icon-dead-site-page-not-found-404-trouble-with-system-eps-10-2AXAP2A.jpg'
+                        imagemURL: 'https://c7.alamy.com/comp/2AXAP2A/error-template-icon-dead-site-page-not-found-404-trouble-with-system-eps-10-2AXAP2A.jpg',
+                        localProdutos: [
+                            {
+                                produto: {
+                                    nome: "produto 0",
+                                    descricao: "produto 0",
+                                    dataCadastro: "2021-10-17T21:16:58.409Z",
+                                },
+                                dataCadastro: "2021-10-17T21:16:58.409Z"
+                            }
+                        ]
                     })
                 }} />
 

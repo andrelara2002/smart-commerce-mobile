@@ -56,8 +56,7 @@ export default function RegisterCompanyController(props) {
     }
     async function getCategoriaFromStorage() {
         const categoria = await getCategoria();
-        setCategorias(categoria);
-        // console.log({ 'categorias: ': categorias })
+        setCategorias(categoria);        
         setLoading(false);
     }
 

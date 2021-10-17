@@ -5,7 +5,7 @@ import { StackActions, NavigationActions } from 'react-navigation'
 import { ProgressBar } from 'react-native-paper';
 
 import api from '../../services/api'
-import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken } from '../../utils'
+import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken, getCredentials } from '../../utils'
 
 export default function AuthLoadingScreen(props) {
   const [porcentagem, setPorcentagem] = React.useState(0);
@@ -28,11 +28,7 @@ export default function AuthLoadingScreen(props) {
       var categoriaDatas = [];
 
       while (localResponse.data.pageNumber <= localResponse.data.totalPages && localResponse.data.succeeded == true) {
-        localDatas = localDatas.concat(localResponse.data.data);
-        console.log({
-          'localResponse.data.pageNumbe': localResponse.data.pageNumber,
-          'localResponse.data.totalPages': localResponse.data.totalPages
-        })
+        localDatas = localDatas.concat(localResponse.data.data);       
         localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
         setProgress(++porcentagemAtual, totalPaginas)
       }
@@ -53,10 +49,24 @@ export default function AuthLoadingScreen(props) {
     }
   }
 
+  async function refreshToken() {
+    const credentials = await getCredentials();
+
+    if (credentials) {
+      const loginResponse = await api.post('/login', credentials)
+      await storeUserToken(loginResponse.data);
+    }
+  }
+
   useEffect(() => {
     async function handleUserNextScreen() {
 
-      if ((await getUserToken()) && (await loadDatasFromAPI())) {
+      const userToken = await getUserToken();
+      if (userToken) {
+        await refreshToken();
+      }
+
+      if (userToken && (await loadDatasFromAPI())) {
         const resetAction = StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'App' })],
