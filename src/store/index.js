@@ -10,6 +10,11 @@ const initialState = {
     },
     navigation: {
         currentCompanyId: null,
+    },
+    actualCompany:{
+        name: "",
+        products: []
+
     }
 }
 
@@ -48,6 +53,15 @@ function settings(state = initialState, action) {
                         ...state.settings.app,
                         colors: action.payload
                     }
+                }
+            }
+
+        case 'ADD_PRODUCT':
+            return {
+                ...state,
+                actualCompany: {
+                    ...state.actualCompany,
+                    products: [...state.actualCompany.products, action.payload]
                 }
             }
             
