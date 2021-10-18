@@ -123,9 +123,9 @@ export default function HomeHeader({ name, language, colors, navigation, image }
                 <LevelButton
                     text={200}
                     image={diamond}
-                    onPress={() => {
+                    /* onPress={() => {
                         navigation.navigate("RegisterProduct")
-                    }} />
+                    }} */ />
             </View>
         </View>
     )

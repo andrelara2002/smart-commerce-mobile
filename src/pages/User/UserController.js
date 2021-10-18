@@ -32,6 +32,7 @@ export default function UserController(props) {
         <UserView
             username={userdata.nomeCliente}
             styles={styles}
+            navigation={props.navigation}
         />
     )
 }

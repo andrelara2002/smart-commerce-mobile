@@ -27,7 +27,7 @@ export default function RegisterProductView(props) {
             />
             <Spacer height={20} />
             <Input
-                label={'Produto'}
+                label={'Nome do produto'}
                 colors={props.colors}
                 onChangeText={setProduct}
             />

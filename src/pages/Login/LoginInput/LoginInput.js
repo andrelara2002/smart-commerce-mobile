@@ -35,7 +35,7 @@ export default function LoginInput(props) {
             borderWidth: 1,
             borderColor: border,
             padding: 6,
-            borderRadius: 10,
+            borderRadius: 5,
             marginBottom: 10
         },
         label: {
@@ -61,10 +61,8 @@ export default function LoginInput(props) {
             <TextInput
                 style={style.input}
                 secureTextEntry={hidePassword}
-                onChangeText={a => props.onChange(a)}
-                onKeyPress={() => {
-                    setTexts("Show")
-                }}
+                onChangeText={a => props.onChange(a.toLowerCase())}
+                
             />
             <Text style={style.label}>
                 {texts}

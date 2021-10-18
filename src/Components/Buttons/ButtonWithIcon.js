@@ -25,12 +25,14 @@ export default function ButtonWithIcon(props) {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'flex-start',
-            backgroundColor: colors.backgroundSecondary,
+            backgroundColor: label === 'Sair' ? colors.background :  colors.backgroundSecondary,
+            borderWidth: 1,
+            borderColor: label === 'Sair' ? colors.red :  colors.backgroundSecondary,
             marginBottom: 10,
             padding: 20,
             borderRadius: 5,
             width: '100%',
-            height: 60,
+            height: 65,
         },
         label: {
             fontSize: 18,
@@ -52,7 +54,7 @@ export default function ButtonWithIcon(props) {
                 style={styles.icon}
                 name={iconName}
                 type={iconType}
-                color={colors.accent}
+                color={label === 'Sair' ? colors.red :  colors.accent}
                 size={20}
 
             />

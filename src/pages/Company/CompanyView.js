@@ -98,7 +98,7 @@ export default function CompanyView(props) {
                     color: colors.textColor,
                     fontSize: 20,
                     fontWeight: 'bold'
-                }}>Produtos</Text>
+                }}>Produtos recomendados</Text>
             <FlatList
                 horizontal={true}
                 data={products}
@@ -109,13 +109,18 @@ export default function CompanyView(props) {
                         <View style={styles.productsCard}>
                             <Text
                                 style={styles.productsCardTitle}
-                            >{item.nome}
+                            >{
+                                    item.nome[0].toUpperCase() + item.nome.slice(1)
+                                }
                             </Text>
-                            <Text style={styles.productsCardTitle}>{item.descricao}</Text>
+                            <Text style={styles.productsDescription}>{
+                                item.descricao[0].toUpperCase() + item.descricao.slice(1)
+                            }</Text>
                         </View>
                     )
                 }} />
-            <Divisor height={20} color={colors.backgroundSecondary} />
+            <Spacer height={20} />
+
         </ScrollView>
     )
 }

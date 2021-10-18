@@ -6,6 +6,9 @@ import Spacer from '../../components/Util/Spacer'
 import Picker from '../../components/Pickers/CustomPicker'
 import { UFs } from '../../services/UFs'
 import AppendCompany from '../../assets/image/icons/append_company.png'
+import Divisor from '../../components/Util/Divisor'
+
+import getCorreiosApi from '../../services/correios'
 
 import {
     View,
@@ -38,6 +41,28 @@ export default function RegisterCompanyView(props) {
         console.log('REGISTER COMPANY VIEW LOADED')
     }, [])
 
+    async function handleCEP(cep) {
+        setCep(cep)
+        if (cep.length === 8) {
+            await getCorreiosApi(cep).then(response => {
+                if (response.localidade === undefined) {
+                    return
+                }
+                else {
+                    setLogradouro(`${response.logradouro} ${response.complemento}`)
+                    setCidade(response.localidade)
+                    setBairro(response.bairro)
+                    setEstado(response.estado)
+                    setCep(response.cep)
+                    setEstado(response.uf)
+                }
+
+                console.log(response)
+            })
+        }
+
+    }
+
     return (
         <ScrollView style={styles.container}>
             <Image source={AppendCompany} style={styles.image} />
@@ -52,39 +77,45 @@ export default function RegisterCompanyView(props) {
                 items={categorias}
             />
             <Input
-                label={"cep"}
-                onChangeText={setCep}
+                label={"descricao"}
+                multiline={true}
+                onChangeText={setDescricao}
             />
-            <Input
-                label={"numero"}
-                onChangeText={setNumero}
+            <Divisor
+                height={50}
+                text={'Endereço'}
             />
-            <Input
-                label={"endereço"}
-                onChangeText={setLogradouro}
-            />
-            <Input
-                label={"bairro"}
-                onChangeText={setBairro}
-            />
-            <Input
-                label={"cidade"}
-                onChangeText={setCidade}
-            />
-
             <Picker
                 label='UF'
                 onChangeIndex={setEstado}
                 items={UFs}
             />
-
             <Input
-                label={"descricao"}
-                multiline={true}
-                onChangeText={setDescricao}
+                label={"cep"}
+                onChangeText={handleCEP}
+            />
+            <Input
+                label={"numero"}
+                onChangeText={setNumero}
+                value={numero}
+            />
+            <Input
+                label={"endereço"}
+                onChangeText={setLogradouro}
+                value={logradouro}
+            />
+            <Input
+                label={"bairro"}
+                onChangeText={setBairro}
+                value={bairro}
+            />
+            <Input
+                label={"cidade"}
+                onChangeText={setCidade}
+                value={cidade}
             />
 
-            <Spacer height={20} />
+            <Spacer height={50} />
 
             <Button
                 keyText={"Recomendar produtos"}

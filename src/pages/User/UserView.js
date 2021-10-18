@@ -4,6 +4,7 @@ import { View, Text } from 'react-native'
 
 import CompanyCard from '../Company/Components/CompanyCard'
 import ButtonWithIcon from '../../components/Buttons/ButtonWithIcon'
+import Spacer from '../../components/Util/Spacer'
 
 export default function UserView(props) {
 
@@ -19,9 +20,9 @@ export default function UserView(props) {
       onPress: () => props.navigation.navigate('UserVotes')
     },
     {
-      title: 'Ajustes de privacidade',
+      title: 'Ajustes',
       icon: 'settings',
-      onPress: () => props.navigation.navigate('UserPrivacy')
+      onPress: () => props.navigation.navigate('Settings')
     },
     {
       title: 'Sair',
@@ -41,7 +42,7 @@ export default function UserView(props) {
         name={username}
         qtdVotacoes={0}
       />
-      <Text>UserView</Text>
+      <Spacer height={20} />
       {buttons.map((button, idx) => {
         return (
           <ButtonWithIcon
@@ -54,10 +55,12 @@ export default function UserView(props) {
       })}
       <Text style={{
         fontSize: 18,
+        position: 'absolute',
+        bottom: 0,
         fontWeight: 'bold',
         color: 'white',
         marginBottom: 20,
-        alignSelf: 'center',
+        flex: 1,
       }}>ANDROID BETA</Text>
     </View>
   )

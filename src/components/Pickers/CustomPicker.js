@@ -26,6 +26,7 @@ export default function CustomPicker(props) {
             justifyContent: 'flex-start',
             width: "100%",
             marginTop: 10,
+            borderRadius: 5,
         },
         text: {
             fontSize: 15,

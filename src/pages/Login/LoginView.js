@@ -10,12 +10,12 @@ import { storeUser, storeUserToken, storeCredentials } from '../../utils'
 import Texts from '../../texts';
 
 //Native Components
-import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, Text, Image, ActivityIndicator } from 'react-native';
 
 //Custom Components
 import LoginInput from './LoginInput/LoginInput';
 import Spacer from '../../components/Util/Spacer';
-
+import Divisor from '../../components/Util/Divisor';
 import Button from '../../components/Buttons/Button';
 import Error from '../../components/Text/Error';
 import GoogleLoginButton from './SocialButtons/GoogleLoginButton';
@@ -66,7 +66,7 @@ export default function LoginView(props) {
 
             const userResponse = await api.get('/usuario');
             await storeUser(userResponse.data.data);
-          
+
             await storeCredentials(credentials);
 
             setLoading(false)
@@ -111,12 +111,6 @@ export default function LoginView(props) {
                 lang={lang}
                 onChange={password => setPassword(password)}
             />
-
-            <View style={styles.socialButtons}>
-                <GoogleLoginButton lang={lang} />
-                <FacebookLoginButton lang={lang} />
-            </View>
-            <Spacer height={20} />
             <Button
                 flex={null}
                 onPress={signIn}
@@ -133,6 +127,12 @@ export default function LoginView(props) {
                 onPress={SignUp}
                 keyText={"Cadastrar-se"}>
             </Button>
+
+            <Divisor height={50} position={'center'} text={'Entre com redes sociais'}/>
+            <View style={styles.socialButtons}>
+                <GoogleLoginButton lang={lang} />
+                <FacebookLoginButton lang={lang} />
+            </View>
         </View>
     )
 }
