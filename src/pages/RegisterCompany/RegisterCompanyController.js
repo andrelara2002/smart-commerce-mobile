@@ -3,7 +3,7 @@ import ReactNative from 'react-native'
 
 import RegisterCompanyView from './RegisterCompanyView'
 import RegisterCompanyStyle from './RegisterCompanyStyles'
-import { getCategoria, getUser, storeLocal, getLocal } from '../../utils'
+import { getCategoria, storeLocal, getLocal } from '../../utils'
 import { useSelector } from 'react-redux'
 import Loading from '../../components/Util/Loading';
 
@@ -23,8 +23,6 @@ export default function RegisterCompanyController(props) {
 
     async function onSubmit(data) {
         setLoading(true);
-        const currentUser = await getUser();
-        data.usuarioId = currentUser.id;
 
         console.log({ 'onSubmit.data': data })
         const localResponse = await api.post('/local', data).catch(error => { console.log(error) })
@@ -46,7 +44,7 @@ export default function RegisterCompanyController(props) {
         } else {
             ReactNative.Alert.alert(
                 '',
-                'Falja ao cadastrar o local, tente novamente!',
+                'Falha ao cadastrar o local, tente novamente!',
                 [{ text: 'OK' }],
                 { cancelable: false }
             )
@@ -56,15 +54,14 @@ export default function RegisterCompanyController(props) {
     }
     async function getCategoriaFromStorage() {
         const categoria = await getCategoria();
-        setCategorias(categoria);        
+        setCategorias(categoria);
         setLoading(false);
     }
 
-    React.useEffect(async () => {
+    React.useEffect(() => {
         setColors(settings.app.colors)
         setLanguage(settings.app.language)
-        await getCategoriaFromStorage();
-
+        getCategoriaFromStorage();
     }, [])
 
     if (loading) {
