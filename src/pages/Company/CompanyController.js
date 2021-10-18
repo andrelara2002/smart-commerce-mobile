@@ -1,49 +1,55 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
+import api from '../../services/api'
 
 /* import DefaultColors from '../../assets/colors/DefaultColors' */
 import Loading from '../../components/Util/Loading'
 import CompanyView from './CompanyView'
-
 import { useSelector } from 'react-redux'
-
-import { companies } from '../Home/HomeCarrocel/FakeData'
 
 export default function CompanyController(props) {
 
     const [company, setCompany] = React.useState({})
-    const [companyId, setCompanyId] = React.useState(0)
     const [loading, setLoading] = React.useState(true)
     const settings = useSelector(state => state.settings)
 
-    async function getCompany() {
+    async function onSubmitVotar(data) {
+        //setLoading(true);
+        console.log({ 'onSubmitVotar.data': data })
+        const response = await api.post('/votacao', data).catch(error => { console.log(error) })
+        // if (response != undefined && !response.request._hasError) {
+        //     Alert.alert(
+        //         '',
+        //         'Votou!',
+        //         [{ text: 'OK' }],
+        //         { cancelable: false }
+        //     )
+        // } else {
+        //     Alert.alert(
+        //         '',
+        //         'Falha ao votar!',
+        //         [{ text: 'OK' }],
+        //         { cancelable: false }
+        //     )
+        // }
+        company.votou = data.voto;
+        //setCompany(company);
+        //setLoading(false);
+    }
+
+    function getCompany() {
         try {
-            /* await setCompany(companies.find(company => company.id === companyId)) */
-            await setCompany(props.route.params.company)
+            setCompany(props.route.params.company)
         }
         catch (error) {
             console.log(error)
         }
     }
 
-    async function getSettingsFromStorage() {
-        try {
-            /* const settings = props.route.params.settings
-            await setSettings(settings) */
-            setLoading(false)
-            //console.log(settings.app.language)
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-
-    React.useEffect(() => {
-        getSettingsFromStorage()
-        getCompany()/* 
-        console.log(company)
-        console.log("COMPANY CONTROLLER LOADED") */
-    },)
+    React.useEffect(async () => {
+        getCompany()
+        setLoading(false);
+    }, [])
 
     if (loading) {
         return <Loading />
@@ -52,6 +58,7 @@ export default function CompanyController(props) {
     const styles = StyleSheet.create({
         container: {
             flex: 1,
+            backgroundColor: '#22252e'
         }
     })
 
@@ -60,7 +67,6 @@ export default function CompanyController(props) {
         <View style={styles.container}>
             <CompanyView
                 //Settings  
-                id={companyId}
                 colors={settings.app.colors}
                 language={settings.app.language}
                 //Company Info
@@ -72,6 +78,10 @@ export default function CompanyController(props) {
                 qtdVotacoes={company.totalVotacao}
                 products={company.produtos}
                 distance={0}
+                votou={company.votou}
+                id={company.id}
+                onSubmitVotar={onSubmitVotar}
+
             />
         </View>
     )

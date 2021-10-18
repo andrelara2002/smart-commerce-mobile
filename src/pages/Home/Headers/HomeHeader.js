@@ -67,8 +67,6 @@ export default function HomeHeader({ name, language, colors, navigation }) {
         else {
             setSaudacao(greetings.good_night)
         }
-
-        /* console.log("HOME HEADER LOADED") */
     })
 
     return (
@@ -79,7 +77,7 @@ export default function HomeHeader({ name, language, colors, navigation }) {
                 <TouchableOpacity
                     style={styles.darkButton}
                     onPress={() => {
-                        navigation.navigate("Company", { screen: "RegisterCompany" })
+                        navigation.navigate("RegisterCompany")
                     }}>
                     <Text style={{
                         fontSize: 20,
@@ -87,7 +85,12 @@ export default function HomeHeader({ name, language, colors, navigation }) {
                         color: colors.textColor,
                     }}>Adicionar local</Text>
                 </TouchableOpacity>
-                <LevelButton text={200} image={diamond} />
+                <LevelButton
+                    text={200}
+                    image={diamond}
+                    onPress={() => {
+                        navigation.navigate("RegisterProduct")
+                    }} />
             </View>
         </View>
     )

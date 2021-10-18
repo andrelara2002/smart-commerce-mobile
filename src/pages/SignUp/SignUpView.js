@@ -75,14 +75,8 @@ export default function SignUpView(props) {
                 setErrorMessage(loginResponse.data.message)
                 return;
             }
-
-            const resetAction = StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
-            })
-
             setLoading(false)
-            props.navigation.dispatch(resetAction)
+            props.navigation.goBack()
 
         } catch (err) {
             console.log(err)

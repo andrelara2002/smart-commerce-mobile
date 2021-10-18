@@ -31,11 +31,10 @@ export default function HomeView(props) {
 
     const [user, setUser] = useState(props.username || '');
     const [language, setLanguage] = useState(props.lang || "en");
-
     const sessions_title = texts[language].sessions_title
 
-    useEffect(() => {
-        console.log("HOME VIEW LOADED")
+    useEffect(() => {       
+        console.log("HOME VIEW LOADED")     
     }, [])
 
     return (

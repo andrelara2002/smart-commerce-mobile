@@ -17,13 +17,7 @@ import {
 export default function CompanyCard(props) {
 
     const [height, setHeight] = React.useState(200)
-
-    React.useEffect(() => {
-        if (props.name.length > 20) {
-            setHeight(250)
-        }
-    })
-
+ 
     const {
         logo,
         name,

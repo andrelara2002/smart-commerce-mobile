@@ -19,7 +19,7 @@ const styles = {
         marginLeft: 0,
 
         height: 60,
-         width: "70%",
+        width: "70%",
 
         /* marginLeft: 10, */
         paddingLeft: 20,
@@ -47,7 +47,9 @@ const styles = {
 
 export default function LevelButton(props) {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={props.onPress ? props.onPress : () => { }}
+        >
             <View style={styles.container}>
                 <Image source={props.image} style={styles.image} />
                 <Text style={styles.lvl}>{"lvl."}</Text>

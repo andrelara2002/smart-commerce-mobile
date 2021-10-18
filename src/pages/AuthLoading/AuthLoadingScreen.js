@@ -1,79 +1,123 @@
 import React, { useEffect } from 'react';
-import { View, ActivityIndicator } from 'react-native';
-import api from '../../services/api'
-import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken } from '../../utils'
-import Error from '../../components/Text/Error';
+import { View, Text, Image } from 'react-native';
+import { StackActions, NavigationActions } from 'react-navigation'
 
+import { ProgressBar } from 'react-native-paper';
+
+import api from '../../services/api'
+import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken, getCredentials } from '../../utils'
 
 export default function AuthLoadingScreen(props) {
-  const [loading, setLoading] = React.useState(true);
-  const [errorMessage, setErrorMessage] = React.useState(null);
+  const [porcentagem, setPorcentagem] = React.useState(0);
+
+  function setProgress(porcentagemAtual, total) {
+    const porcentagemUnitario = 100 / total
+    const valor = (porcentagemAtual * porcentagemUnitario) / 100
+    setPorcentagem(valor)
+  }
 
   async function loadDatasFromAPI() {
-    var localResponse = await api.get('/local');
-    var categoriaResponse = await api.get('/segmento');
+    try {
 
-    const porcentagemTotal = 100 / (localResponse.data.totalPages + categoriaResponse.data.totalPages)
-    var porcentagemAtual = 1;
-    var localDatas = [];
-    var categoriaDatas = [];
+      var localResponse = await api.get('/local');
+      var categoriaResponse = await api.get('/segmento');
 
-    while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
-      localDatas = localDatas.concat(localResponse.data.data);
-      console.log({ 'pagina': localResponse.data.pageNumber });
-      var localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
+      const totalPaginas = localResponse.data.totalPages + categoriaResponse.data.totalPages;
+      var porcentagemAtual = 0;
+      var localDatas = [];
+      var categoriaDatas = [];
 
-      porcentagemAtual++;
-      setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
+      while (localResponse.data.pageNumber <= localResponse.data.totalPages && localResponse.data.succeeded == true) {
+        localDatas = localDatas.concat(localResponse.data.data);       
+        localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
+        setProgress(++porcentagemAtual, totalPaginas)
+      }
+
+      while (categoriaResponse.data.pageNumber <= categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
+        categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
+        categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
+        setProgress(++porcentagemAtual, totalPaginas)
+      }
+
+      setProgress(totalPaginas, totalPaginas)
+
+      await storeLocal(localDatas);
+      await storeCategoria(categoriaDatas);
+      return true;
+    } catch {
+      return false;
     }
+  }
 
-    while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
-      categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
-      console.log({ 'pagina': categoriaResponse.data.pageNumber });
-      var categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
+  async function refreshToken() {
+    const credentials = await getCredentials();
 
-      porcentagemAtual++;
-      setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
+    if (credentials) {
+      const loginResponse = await api.post('/login', credentials)
+      await storeUserToken(loginResponse.data);
     }
-
-    await storeLocal(localDatas);
-    await storeCategoria(categoriaDatas);
-
-    setLoading(false);
-
   }
 
   useEffect(() => {
     async function handleUserNextScreen() {
+
       const userToken = await getUserToken();
       if (userToken) {
-        await loadDatasFromAPI();
-        setLoading(false);
-        props.navigation.navigate('App');
-      }
-      else {
-        setLoading(false);
-        props.navigation.navigate('Auth');
+        await refreshToken();
       }
 
-      /* if (loading == false) {
-        props.navigation.navigate(userToken ? 'App' : 'Auth');
-      } */
+      if (userToken && (await loadDatasFromAPI())) {
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'App' })],
+        })
+
+        props.navigation.dispatch(resetAction)
+      }
+      else {
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
+        })
+        props.navigation.dispatch(resetAction)
+      }
+
     }
 
     handleUserNextScreen();
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" color="#00ff00" />
-      <Error errorMessage={errorMessage} />
+    <View style={{
+      backgroundColor: '#22252e',
+      flex: 1, justifyContent: 'center', alignItems: 'center'
+    }}>
+      <Image source={require('../../assets/image/splash_icon.png')}
+        style={{
+          resizeMode: 'center'
+        }} />
+
+      <ProgressBar
+        progress={porcentagem}
+        color='#3F8CFF'
+        style={{
+          height: 10,
+          width: 200,
+          borderRadius: 10,
+          backgroundColor: '#22252e',
+          marginBottom: 20,
+        }}
+      />
+
+      <Text style={{
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
+        marginBottom: 20,
+      }}>ANDROID BETA</Text>
+
+
     </View>
+
   );
 }
-
-AuthLoadingScreen.navigationOptions = () => {
-  return {
-    header: null,
-  };
-};

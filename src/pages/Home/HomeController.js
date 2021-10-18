@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-
+import Loading from '../../components/Util/Loading';
 import HomeView from './HomeView';
-import { Text, View } from 'react-native';
-
-import { getSettings, getUser, getLocal } from '../../utils'
-
+import { getUser, getLocal } from '../../utils'
 import { useSelector } from 'react-redux';
+import { StackActions } from '@react-navigation/routers';
 
 export default function HomeController(props) {
 
@@ -16,7 +14,6 @@ export default function HomeController(props) {
     const [loading, setLoading] = React.useState(true);
 
     async function getSettingsFromStorage() {
-
         const username = await getUser();
         setUsername(username.nomeCliente)
         
@@ -36,16 +33,11 @@ export default function HomeController(props) {
                 })
                 .slice(1, 6));
 
-        
         setLoading(false);
     }
 
     useEffect(() => {
         getSettingsFromStorage();
-
-        props.navigation.setParams({
-            companyid: null
-        })
         console.log("HOME CONTROLLER LOADED")
     }, [])
 
@@ -55,11 +47,7 @@ export default function HomeController(props) {
     } */
 
     if (loading) {
-        return <View style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: "#252731"
-        }} />
+        return <Loading />
     }
 
     return (

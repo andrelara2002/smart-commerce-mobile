@@ -4,7 +4,6 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import { getSettings } from '../../utils';
 import Loading from '../../components/Util/Loading';
-
 import Home from '../Home/HomeController'
 import Search from '../Search/SearchController';
 import Map from '../Map/MapController';
@@ -12,7 +11,9 @@ import Company from '../Company/CompanyController';
 import CompanyCardsController from '../../CompanyCards/CompanyCardsController';
 import SignUpController from '../SignUp/SiginUpController';
 import RegisterCompanyController from '../RegisterCompany/RegisterCompanyController';
-
+import RegisterProductController from '../RegisterProduct/RegisterProductController';
+import RegisterProductSuccess from '../RegisterProduct/RegisterProductSuccess';
+import RegisterCompanySuccess from '../RegisterCompany/RegisterCompanySuccess';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Icon } from 'react-native-elements';
@@ -36,21 +37,117 @@ export default function NavigationTabScreen() {
     getSettingsFromStorage()
   }, [])
   if (loading) { return <Loading /> }
-  ''
-  function CompanyStack() {
+
+
+  function HomeScreen() {
     return (
-      <Stack.Navigator
-        initialRouteName="CompanyCards"
-      >
+      <Stack.Navigator initialRouteName="Home2">
         <Stack.Screen
-          name="CompanyDetails"
+          name="Home2"
+          component={Home}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="Company"
           component={Company}
-          options={{ headerShown: false }} />
+          options={{
+            headerShown: true,
+            title: 'Detalhes da empresa',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+          }}
+        />
+
         <Stack.Screen
-          name="CompanyCards"
-          component={CompanyCardsController}
-          options={{ headerShown: false }} />
+          name="RegisterCompany"
+          component={RegisterCompanyController}
+          options={{
+            headerShown: true,
+            title: 'Adicionar Local',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+          }}
+        />
+        <Stack.Screen
+          name="RegisterCompanySuccess"
+          component={RegisterCompanySuccess}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="RegisterProduct"
+          component={RegisterProductController}
+          options={{
+            headerShown: true,
+            title: 'Adicionar Produto',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+          }}
+        />
+        <Stack.Screen
+          name="RegisterProductSuccess"
+          component={RegisterProductSuccess}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
+    )
+  }
+
+  function SearchScreen() {
+    return (
+      <Stack.Navigator initialRouteName="Search2">
+        <Stack.Screen
+          name="Search2"
+          component={Search}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="Company"
+          component={Company}
+          options={{
+            headerShown: true,
+            title: 'Detalhes da empresa',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+          }}
+        />
+
+      </Stack.Navigator >
     )
   }
 
@@ -63,7 +160,7 @@ export default function NavigationTabScreen() {
         barStyle={{ backgroundColor: '#2D2E38' }}
       >
         <Tab.Screen name="Home"
-          component={Home}
+          component={HomeScreen}
           initialParams={{ settings: settings }}
           options={{
             tabBarIcon: () => {
@@ -74,7 +171,7 @@ export default function NavigationTabScreen() {
                   color="#fff" />)
             }
           }} />
-        <Tab.Screen name="Search" component={Search}
+        <Tab.Screen name="Search" component={SearchScreen}
           initialParams={{ settings: settings }}
           options={{
             tabBarIcon: () => {
@@ -96,18 +193,6 @@ export default function NavigationTabScreen() {
                   color="#fff" />)
             }
           }} />
-        <Tab.Screen name="Company" component={CompanyStack}
-          initialParams={{ settings: settings }}
-          options={{
-            tabBarIcon: () => {
-              return (
-                <Icon
-                  name="work-outline"
-                  type="material"
-                  color="#fff" />)
-            }
-          }}
-        />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
+import { Picker } from '@react-native-picker/picker';
 
-export default function Input(props) {
-    const { text, setText } = useState('')
-    const [type, setType] = useState(props.type || 'text')
-    const { onChangeText } = props
+export default function CustomPicker(props) {
+
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const { onChangeIndex } = props
+    const { items } = props
 
     const {
         background,
@@ -26,7 +27,13 @@ export default function Input(props) {
             width: "100%",
             marginTop: 10,
         },
-        input: {
+        text: {
+            fontSize: 15,
+            textTransform: "uppercase",
+            color: border,
+            marginBottom: 10
+        },
+        picker: {
             width: "100%",
             backgroundColor: backgroundSecondary,
             textAlign: 'left',
@@ -37,23 +44,25 @@ export default function Input(props) {
             height: props.multiline ? "auto" : props.numberOfLines ? props.numberOfLines * 20 : 60,
             fontSize: 24,
             color: textColor
-        },
-        text: {
-            fontSize: 15,
-            textTransform: "uppercase",
-            color: border,
-            marginBottom: 10
         }
     });
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{props.label}</Text>
-            <TextInput style={styles.input}
-                multiline={props.multiline}
-                onChangeText={text => onChangeText(text)}
-                defaultValue={text}
-                secureTextEntry={type === 'password'}
-            />
+            <Picker
+                style={styles.picker}
+                selectedValue={currentIndex}
+                onValueChange={(itemValue, itemIndex) => {
+                    onChangeIndex(itemValue)
+                    setCurrentIndex(itemIndex)
+                }}
+                mode="dropdown"
+            >
+                {items.map((item, index) => {
+                    return (<Picker.Item label={item.nome} value={item.id} key={item.id} />)
+                })}
+            </Picker>
         </View>
     )
 }

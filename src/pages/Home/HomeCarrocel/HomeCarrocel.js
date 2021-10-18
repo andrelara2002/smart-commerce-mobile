@@ -3,6 +3,7 @@ import { CommonActions } from '@react-navigation/native';
 
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import { NavigationActions } from 'react-navigation'
 
 import {
     View,
@@ -42,15 +43,7 @@ export default function HomeCarrocel(props) {
                 renderItem={({ item, index }) => (
                     <NormalCard
                         onPress={() => {
-                            /* navigation.setParams({ companyid: item.id }) */
-                            navigation.dispatch(
-                                CommonActions.navigate("Company", {
-                                    screen: "CompanyDetails",
-                                    params: {
-                                        company: item
-                                    }
-                                })
-                            );
+                            navigation.navigate('Company', { company: item })
                         }}
                         navigation={props.navigation}
                         index={index}

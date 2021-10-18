@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 import DefaultColors from '../../assets/colors/DefaultColors';
 
-const { background, accent, textColor, border, backgroundSecondary } = DefaultColors["dark"];
-
-
 export default function Button({ onPress, keyText, isDark, width, style, height }) {
+
+    const { background, accent, textColor, border, backgroundSecondary } = useSelector(state => state.settings.app.colors) || DefaultColors["dark"];
+
 
     const [backgroundColor, setBackgroundColor] = useState(accent);
     const [newWidth, setNewWidth] = useState("100%");
@@ -31,7 +33,7 @@ export default function Button({ onPress, keyText, isDark, width, style, height 
             height: newHeight,
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: 10,
+            borderRadius: 5,
             opacity: 1,
         },
         text: {

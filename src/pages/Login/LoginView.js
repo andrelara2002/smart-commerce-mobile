@@ -4,24 +4,20 @@ import React, { useState } from 'react';
 //Api
 import api from '../../services/api'
 
-import { storeCategoria, storeLocal, storeUser, storeUserToken } from '../../utils'
+import { storeUser, storeUserToken, storeCredentials } from '../../utils'
 
 //Page texts
 import Texts from '../../texts';
 
 //Native Components
-import { View, Text, StyleSheet, Image, StatusBar, ActivityIndicator } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation'
+import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 
 //Custom Components
 import LoginInput from './LoginInput/LoginInput';
-import DefaultColors from '../../assets/colors/DefaultColors'
 import Spacer from '../../components/Util/Spacer';
 
 import Button from '../../components/Buttons/Button';
-import SignIn from '../../components/Buttons/SignIn';
 import Error from '../../components/Text/Error';
-
 import GoogleLoginButton from './SocialButtons/GoogleLoginButton';
 import FacebookLoginButton from './SocialButtons/FacebookLoginButton '
 import LoginStyles from './LoginStyles';
@@ -49,38 +45,6 @@ export default function LoginView(props) {
         })
     }
 
-    async function loadDatasFromAPI() {
-        var localResponse = await api.get('/local');
-        var categoriaResponse = await api.get('/segmento');
-
-        const porcentagemTotal = 100 / (localResponse.data.totalPages + categoriaResponse.data.totalPages)
-        var porcentagemAtual = 1;
-        var localDatas = [];
-        var categoriaDatas = [];
-
-        while (localResponse.data.pageNumber != localResponse.data.totalPages && localResponse.data.succeeded == true) {
-            localDatas = localDatas.concat(localResponse.data.data);
-            console.log({ 'pagina': localResponse.data.pageNumber });
-            var localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
-
-            porcentagemAtual++;
-            setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
-        }
-
-        while (categoriaResponse.data.pageNumber != categoriaResponse.data.totalPages && categoriaResponse.data.succeeded == true) {
-            categoriaDatas = categoriaDatas.concat(categoriaResponse.data.data);
-            console.log({ 'pagina': categoriaResponse.data.pageNumber });
-            var categoriaResponse = await api.get('/segmento?PageNumber=' + (categoriaResponse.data.pageNumber + 1) + '&PageSize=10');
-
-            porcentagemAtual++;
-            setErrorMessage('atualizando base ' + (Math.round(porcentagemTotal * porcentagemAtual)) + '%');
-        }
-
-        await storeLocal(localDatas);
-        await storeCategoria(categoriaDatas);
-
-    }
-
     async function signIn() {
 
         if (username.length === 0 || password.length === 0) {
@@ -102,42 +66,22 @@ export default function LoginView(props) {
 
             const userResponse = await api.get('/usuario');
             await storeUser(userResponse.data.data);
-
-            // const localResponse = await api.get('/local');
-            // await storeLocal(localResponse.data.data);
-
-            await loadDatasFromAPI();
-
-            const resetAction = StackActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'App' })],
-            })
+          
+            await storeCredentials(credentials);
 
             setLoading(false)
-            props.navigation.dispatch(resetAction)
+            props.navigation.navigate('AuthLoading')
 
         } catch (err) {
 
-            console.log(err)
-
+            console.log(err);
             setLoading(false)
             setErrorMessage(texts.login_error_invalid_credentials);
         }
     }
 
     function SignUp() {
-        // const resetAction = StackActions.reset({
-        //     index: 0,
-        //     actions: [NavigationActions.navigate({ routeName: 'SignUp' })],
-        // })
-
-        const navigateAction = NavigationActions.navigate({
-            routeName: 'SignUp',          
-            params: {},          
-            action: NavigationActions.navigate({ routeName: 'SignUp' }),
-          });
-
-        props.navigation.dispatch(navigateAction)
+        props.navigation.navigate('SignUp')
     }
 
     const styles = LoginStyles(colors)

@@ -1,11 +1,11 @@
 import React from 'react'
-
 import RegisterCompanyStyle from './RegisterCompanyStyles'
-
 import Input from '../../components/Inputs/Input'
 import Button from '../../components/Buttons/Button'
 import Spacer from '../../components/Util/Spacer'
-import AppendCompany from '../../assets/image/icons/append_company.svg'
+import Picker from '../../components/Pickers/CustomPicker'
+import { UFs } from '../../services/UFs'
+import AppendCompany from '../../assets/image/icons/append_company.png'
 
 import {
     View,
@@ -16,52 +16,110 @@ import {
 
 export default function RegisterCompanyView(props) {
 
-    const { navigation, colors, language } = props
+    const { navigation, colors, language, categorias } = props
 
     //Company Variables
-    const [name, setName] = React.useState('')
-    const [category, setCategory] = React.useState('')
-    const [address, setAddress] = React.useState('')
-    const [description, setDescription] = React.useState('')
-    const [sugestions, setSugestions] = React.useState([])
+    const [nome, setNome] = React.useState('')
+    const [segmentoId, setSegmentoId] = React.useState(1)
+
+    const [logradouro, setLogradouro] = React.useState('')
+    const [numero, setNumero] = React.useState('')
+    const [cep, setCep] = React.useState('')
+    const [cidade, setCidade] = React.useState('')
+    const [bairro, setBairro] = React.useState('')
+    const [estado, setEstado] = React.useState(0)
+
+    const [descricao, setDescricao] = React.useState('')
+    const [sugestions, setSugestions] = React.useState('')
 
     const styles = RegisterCompanyStyle(colors)
 
     React.useEffect(() => {
         console.log('REGISTER COMPANY VIEW LOADED')
-    })
+    }, [])
 
     return (
         <ScrollView style={styles.container}>
             <Image source={AppendCompany} style={styles.image} />
+            <Spacer height={20} />
             <Input
                 label='Nome'
-                colors={colors}
-                onChangeText={setName}
+                onChangeText={setNome}
+            />
+            <Picker
+                label='categoria'
+                onChangeIndex={setSegmentoId}
+                items={categorias}
             />
             <Input
-                label={"category"}
-                colors={colors}
-                onChangeText={setCategory}
+                label={"cep"}
+                onChangeText={setCep}
             />
             <Input
-                label={"address"}
-                colors={colors}
-                onChangeText={setAddress}
+                label={"numero"}
+                onChangeText={setNumero}
             />
             <Input
-                label={"description"}
-                colors={colors}
+                label={"endereço"}
+                onChangeText={setLogradouro}
+            />
+            <Input
+                label={"bairro"}
+                onChangeText={setBairro}
+            />
+            <Input
+                label={"cidade"}
+                onChangeText={setCidade}
+            />
+
+            <Picker
+                label='UF'
+                onChangeIndex={setEstado}
+                items={UFs}
+            />
+
+            <Input
+                label={"descricao"}
                 multiline={true}
-                onChangeText={setDescription}
+                onChangeText={setDescricao}
             />
 
             <Spacer height={20} />
 
             <Button
+                keyText={"Recomendar produtos"}
+                isDark={true}
+                onPress={() => {
+                    navigation.navigate('RegisterProduct')
+                }}
+            />
+            <Button
                 keyText={"Finalizar"}
                 colors={colors}
-                onPress={() => { console.log(name) }} />
-        </ScrollView>
+                onPress={() => {
+                    props.onSubmit({
+                        nome,
+                        segmentoId,
+                        descricao,
+                        numero,
+                        cep,
+                        logradouro,
+                        cidade,
+                        bairro,
+                        uf: UFs.find(x => x.id == estado).sigla,
+                        imagemURL: 'https://c7.alamy.com/comp/2AXAP2A/error-template-icon-dead-site-page-not-found-404-trouble-with-system-eps-10-2AXAP2A.jpg',
+                        localProdutos: [
+                            {
+                                produto: {
+                                    nome: "produto 0",
+                                    descricao: "descricao do produto teste testando o teste"
+                                }
+                            }
+                        ]
+                    })
+                }} />
+
+            <Spacer height={30} />
+        </ScrollView >
     )
 }

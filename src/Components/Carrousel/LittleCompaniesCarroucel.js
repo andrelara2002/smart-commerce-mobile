@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from '@react-navigation/native';
 
 import {
     Image,
@@ -16,6 +17,7 @@ export default function LittleCompaniesCarrousel(props) {
 
     const [data, setData] = React.useState(props.data);
     const [colors, setColors] = React.useState(DefaultColors["dark"]);
+    const navigation = useNavigation()
 
     const styles = StyleSheet.create({
         container: {
@@ -50,8 +52,12 @@ export default function LittleCompaniesCarrousel(props) {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-                <TouchableOpacity style={styles.card}>
-                    <Image style={styles.image} source={{uri: item.imageURL}} />
+                <TouchableOpacity
+                    style={styles.card}
+                    onPress={() => {
+                        navigation.navigate('Company', { company: item })
+                    }}>
+                    <Image style={styles.image} source={{ uri: item.imageURL }} />
                     <Text style={styles.title}>{item.nome}</Text>
                     <Text style={styles.distance}>{`${item.distance / 1000} Km`}</Text>
                 </TouchableOpacity>
