@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react'
 
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 
 import LevelButton from '../../../components/Buttons/LevelButton'
 import Button from '../../../components/Buttons/Button'
 
 import Texts from '../../../texts'
 import diamond from '../../../assets/image/diamond.png'
+import defaultLogo from '../../../assets/image/FakeData/Logos/defaultLogo.png'
 
-/* const {
-    textColor,
-    border,
-    backgroundSecondary } = DefaultColors["dark"]
- */
-
-export default function HomeHeader({ name, language, colors, navigation }) {
+export default function HomeHeader({ name, language, colors, navigation, image }) {
 
     const styles = StyleSheet.create({
         container: {
@@ -23,6 +18,12 @@ export default function HomeHeader({ name, language, colors, navigation }) {
             borderBottomWidth: 1,
             borderBottomColor: colors.backgroundSecondary,
         },
+        greetings: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
+        },
+
         title: {
             fontSize: 40,
             fontWeight: 'bold',
@@ -48,6 +49,12 @@ export default function HomeHeader({ name, language, colors, navigation }) {
             marginRight: 20,
             height: 60,
             width: '60%',
+        },
+        image: {
+            width: 70,
+            height: 70,
+            borderRadius: 40,
+            marginRight: 20,
         }
     })
 
@@ -69,10 +76,38 @@ export default function HomeHeader({ name, language, colors, navigation }) {
         }
     })
 
+
+    function mountImage() {
+        if (image) {
+            return (
+                <Image
+                    style={styles.image}
+                    source={{ uri: image }}
+                />
+            )
+        } else {
+            return (
+                <Image
+                    style={styles.image}
+                    source={defaultLogo}
+                />
+            )
+        }
+    }
+
     return (
         <View style={styles.container}>
-            <Text style={styles.subtitle}>{saudacao}</Text>
-            <Text style={styles.title}>{name}</Text>
+            <View style={styles.greetings}>
+                <TouchableOpacity
+                    onPress={() => { navigation.navigate('User') }}
+                >
+                    {mountImage()}
+                </TouchableOpacity>
+                <View>
+                    <Text style={styles.subtitle}>{saudacao}</Text>
+                    <Text style={styles.title}>{name}</Text>
+                </View>
+            </View>
             <View style={styles.buttons}>
                 <TouchableOpacity
                     style={styles.darkButton}

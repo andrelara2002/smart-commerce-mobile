@@ -126,7 +126,6 @@ export default function LoginView(props) {
                 )}>
 
             </Button>
-            <Spacer height={50} />
             <Button
                 flex={null}
                 isDark={true}

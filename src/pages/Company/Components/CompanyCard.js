@@ -1,8 +1,8 @@
 import React from 'react'
-import LinearGradient from 'react-native-linear-gradient'
 import texts from '../../../texts'
 
 import defaultLogo from '../../../assets/image/FakeData/Logos/defaultLogo.png'
+import { useSelector } from 'react-redux'
 
 import CompanyRank, { renderRank } from '../../../components/Util/CompanyRank'
 
@@ -30,9 +30,10 @@ export default function CompanyCard(props) {
         image,
         rank,
         qtdVotacoes,
-        colors,
-        language
     } = props
+
+    const colors = useSelector(state => state.settings.app.colors)
+    const language = useSelector(state => state.settings.app.language)
 
     const styles = StyleSheet.create({
         container: {

@@ -10,6 +10,8 @@ import Map from '../Map/MapController';
 import Company from '../Company/CompanyController';
 import CompanyCardsController from '../../CompanyCards/CompanyCardsController';
 import SignUpController from '../SignUp/SiginUpController';
+
+import UserController from '../User/UserController'
 import RegisterCompanyController from '../RegisterCompany/RegisterCompanyController';
 import RegisterProductController from '../RegisterProduct/RegisterProductController';
 import RegisterProductSuccess from '../RegisterProduct/RegisterProductSuccess';
@@ -113,6 +115,13 @@ export default function NavigationTabScreen() {
           component={RegisterProductSuccess}
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="User"
+          component={UserController}
+          options={{
+            headerShown: false
           }}
         />
       </Stack.Navigator>
