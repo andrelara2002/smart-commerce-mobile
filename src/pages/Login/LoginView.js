@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //Api
 import api from '../../services/api'
 
-import { storeUser, storeUserToken } from '../../utils'
+import { storeUser, storeUserToken, storeCredentials } from '../../utils'
 
 //Page texts
 import Texts from '../../texts';
@@ -67,13 +67,14 @@ export default function LoginView(props) {
             const userResponse = await api.get('/usuario');
             await storeUser(userResponse.data.data);
           
+            await storeCredentials(credentials);
+
             setLoading(false)
             props.navigation.navigate('AuthLoading')
 
         } catch (err) {
 
-            console.log(err)
-
+            console.log(err);
             setLoading(false)
             setErrorMessage(texts.login_error_invalid_credentials);
         }

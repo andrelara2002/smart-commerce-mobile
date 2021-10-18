@@ -6,7 +6,7 @@ import {
     StyleSheet,
     ScrollView,
     FlatList,
-    Image
+    ActivityIndicator
 } from 'react-native'
 
 import Spacer from '../../components/Util/Spacer'
@@ -17,18 +17,28 @@ import CompanyStyles from './CompanyStyles'
 
 export default function CompanyView(props) {
     const {
+        id,
         description,
-        products, distance,
-        name, rank, logo, image,
-        qtdVotacoes, colors, type, language
+        products,
+        distance,
+        name,
+        rank,
+        logo,
+        image,
+        qtdVotacoes,
+        colors,
+        type,
+        language
     } = props
 
-
+    const [votou, setVotou] = React.useState(false);
     const styles = CompanyStyles(colors)
+    const [loading, setLoading] = React.useState(false);
 
     React.useEffect(() => {
         console.log("COMPANY VIEW LOADED")
-    })
+        setVotou(props.votou);
+    }, [])
 
     return (
         <ScrollView style={styles.container}>
@@ -62,7 +72,23 @@ export default function CompanyView(props) {
                     width={120}
                     height={50}
                     isDark={false}
-                    keyText={'Votar'}
+                    keyText={loading ? (
+                        <ActivityIndicator size="small" color="#FFF" />
+                    ) : (
+                        <Text>{votou ? 'remover voto' : 'votar'}</Text>
+                    )}
+                    onPress={async () => {
+                        setLoading(true)
+                        var novoVoto = !votou;
+                        setVotou(novoVoto);
+
+                        await props.onSubmitVotar({
+                            localId: id,
+                            voto: novoVoto
+                        })
+
+                        setLoading(false)
+                    }}
                 />
             </View>
             <Spacer height={40} />
@@ -81,13 +107,11 @@ export default function CompanyView(props) {
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.productsCard}>
-                            <Image
-                                source={item.image}
-                                style={styles.productsCardImage}
-                            />
                             <Text
                                 style={styles.productsCardTitle}
-                            >{item.name}</Text>
+                            >{item.nome}
+                            </Text>
+                            <Text style={styles.productsCardTitle}>{item.descricao}</Text>
                         </View>
                     )
                 }} />

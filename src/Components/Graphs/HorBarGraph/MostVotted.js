@@ -40,7 +40,7 @@ export default function MostVotted(props) {
                     image={item.imageURL}
                     title={item.nome}
                     qtdVotos={item.totalVotacao}
-                    qtdTotalVotos={10000}
+                    qtdTotalVotos={100}
                     index={index}
                 />
             )
