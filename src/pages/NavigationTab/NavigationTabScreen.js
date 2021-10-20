@@ -174,13 +174,36 @@ export default function NavigationTabScreen() {
             },
           }}
         />
-
+        <Stack.Screen
+          name="RegisterProduct"
+          component={RegisterProductController}
+          options={{
+            headerShown: true,
+            title: 'Adicionar Produto',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: '#22252e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
+          }}
+        />
+        <Stack.Screen
+          name="RegisterProductSuccess"
+          component={RegisterProductSuccess}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator >
     )
   }
 
-  const activeColor =  colors.accent 
-  const inactiveColor =  colors.border 
+  const activeColor = colors.accent
+  const inactiveColor = colors.border
 
   return (
     <NavigationContainer>

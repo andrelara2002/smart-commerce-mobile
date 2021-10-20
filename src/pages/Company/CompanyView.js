@@ -28,16 +28,19 @@ export default function CompanyView(props) {
         qtdVotacoes,
         colors,
         type,
-        language
+        language,
+        navigation
     } = props
 
     const [votou, setVotou] = React.useState(false);
     const styles = CompanyStyles(colors)
     const [loading, setLoading] = React.useState(false);
+    const [listProdutos, setListProdutos] = React.useState({});
 
     React.useEffect(() => {
         console.log("COMPANY VIEW LOADED")
         setVotou(props.votou);
+        setListProdutos(props.products);
     }, [])
 
     return (
@@ -66,6 +69,9 @@ export default function CompanyView(props) {
                     width={200}
                     height={50}
                     isDark={true}
+                    onPress={() => {
+                        props.onSubmitAdicionarProduto();                       
+                    }}
                     keyText={'Sugerir Produto'}
                 />
                 <Button
@@ -101,7 +107,7 @@ export default function CompanyView(props) {
                 }}>Produtos recomendados</Text>
             <FlatList
                 horizontal={true}
-                data={products}
+                data={listProdutos}
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item }) => {

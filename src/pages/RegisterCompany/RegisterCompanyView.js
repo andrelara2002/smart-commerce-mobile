@@ -14,12 +14,13 @@ import {
     View,
     Text,
     ScrollView,
-    Image
+    Image,
+    ActivityIndicator
 } from 'react-native'
 
 export default function RegisterCompanyView(props) {
 
-    const { navigation, colors, language, categorias } = props
+    const { colors, categorias } = props
 
     //Company Variables
     const [nome, setNome] = React.useState('')
@@ -31,10 +32,8 @@ export default function RegisterCompanyView(props) {
     const [cidade, setCidade] = React.useState('')
     const [bairro, setBairro] = React.useState('')
     const [estado, setEstado] = React.useState(0)
-
     const [descricao, setDescricao] = React.useState('')
-    const [sugestions, setSugestions] = React.useState('')
-
+    const [loading, setLoading] = React.useState(false);
     const styles = RegisterCompanyStyle(colors)
 
     React.useEffect(() => {
@@ -114,40 +113,33 @@ export default function RegisterCompanyView(props) {
                 onChangeText={setCidade}
                 value={cidade}
             />
-
             <Spacer height={50} />
-
             <Button
-                keyText={"Recomendar produtos"}
-                isDark={true}
-                onPress={() => {
-                    navigation.navigate('RegisterProduct')
-                }}
-            />
-            <Button
-                keyText={"Finalizar"}
+                keyText={loading ? (
+                    <ActivityIndicator size="small" color="#FFF" />
+                ) : (
+                    <Text>{'Adicionar'}</Text>
+                )}
                 colors={colors}
-                onPress={() => {
-                    props.onSubmit({
+                onPress={async () => {
+                    setLoading(true)
+
+                    await props.onSubmit({
                         nome,
                         segmentoId,
                         descricao,
-                        numero,
-                        cep: cep.replace('-', ''),
-                        logradouro,
-                        cidade,
-                        bairro,
-                        uf: UFs.find(x => x.id == estado).sigla,
-                        imagemURL: 'https://www.shareicon.net/data/128x128/2017/06/05/886722_store_512x512.png',
-                        localProdutos: [
-                            {
-                                produto: {
-                                    nome: "produto 0",
-                                    descricao: "descricao do produto teste testando o teste"
-                                }
-                            }
-                        ]
+                        ImageURL: 'https://www.shareicon.net/data/128x128/2017/06/05/886722_store_512x512.png',
+                        endereco: {
+                            numero,
+                            cep: cep.replace('-', ''),
+                            logradouro,
+                            cidade,
+                            bairro,
+                            uf: UFs.find(x => x.id == estado).sigla,
+                        }
                     })
+
+                    setLoading(false)
                 }} />
 
             <Spacer height={30} />
