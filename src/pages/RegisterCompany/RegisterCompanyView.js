@@ -23,7 +23,7 @@ export default function RegisterCompanyView(props) {
 
     //Company Variables
     const [nome, setNome] = React.useState('')
-    const [segmentoId, setSegmentoId] = React.useState(1)
+    const [segmentoId, setSegmentoId] = React.useState(0)
 
     const [logradouro, setLogradouro] = React.useState('')
     const [numero, setNumero] = React.useState('')
@@ -52,12 +52,10 @@ export default function RegisterCompanyView(props) {
                     setLogradouro(`${response.logradouro} ${response.complemento}`)
                     setCidade(response.localidade)
                     setBairro(response.bairro)
-                    setEstado(response.estado)
                     setCep(response.cep)
-                    setEstado(response.uf)
+                    setEstado(UFs.find(x => x.sigla == response.uf).id)
+                    console.log({ 'response.cep': response })
                 }
-
-                console.log(response)
             })
         }
 
@@ -75,6 +73,7 @@ export default function RegisterCompanyView(props) {
                 label='categoria'
                 onChangeIndex={setSegmentoId}
                 items={categorias}
+                currentIndex={segmentoId}
             />
             <Input
                 label={"descricao"}
@@ -85,14 +84,15 @@ export default function RegisterCompanyView(props) {
                 height={50}
                 text={'Endereço'}
             />
-            <Picker
-                label='UF'
-                onChangeIndex={setEstado}
-                items={UFs}
-            />
             <Input
                 label={"cep"}
                 onChangeText={handleCEP}
+            />
+            <Picker
+                label='UF'
+                onChangeIndex={setEstado}
+                currentIndex={estado}
+                items={UFs}
             />
             <Input
                 label={"numero"}
@@ -133,12 +133,12 @@ export default function RegisterCompanyView(props) {
                         segmentoId,
                         descricao,
                         numero,
-                        cep,
+                        cep: cep.replace('-', ''),
                         logradouro,
                         cidade,
                         bairro,
                         uf: UFs.find(x => x.id == estado).sigla,
-                        imagemURL: 'https://c7.alamy.com/comp/2AXAP2A/error-template-icon-dead-site-page-not-found-404-trouble-with-system-eps-10-2AXAP2A.jpg',
+                        imagemURL: 'https://www.shareicon.net/data/128x128/2017/06/05/886722_store_512x512.png',
                         localProdutos: [
                             {
                                 produto: {

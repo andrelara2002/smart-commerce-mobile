@@ -5,7 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 
 export default function CustomPicker(props) {
 
-    const [currentIndex, setCurrentIndex] = useState(0)
+    var { currentIndex } = props
     const { onChangeIndex } = props
     const { items } = props
 
@@ -56,7 +56,7 @@ export default function CustomPicker(props) {
                 selectedValue={currentIndex}
                 onValueChange={(itemValue, itemIndex) => {
                     onChangeIndex(itemValue)
-                    setCurrentIndex(itemIndex)
+                    currentIndex = itemIndex
                 }}
                 mode="dropdown"
             >
