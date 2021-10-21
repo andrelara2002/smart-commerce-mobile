@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 export default function Input(props) {
     const { text, setText } = useState('')
     const [type, setType] = useState(props.type || 'text')
-    const { onChangeText } = props
+    const { onChangeText, value } = props
 
     const {
         background,
@@ -35,7 +35,7 @@ export default function Input(props) {
             padding: 10,
             minHeight: props.multiline ? 120 : 60,
             height: props.multiline ? "auto" : props.numberOfLines ? props.numberOfLines * 20 : 60,
-            fontSize: 24,
+            fontSize: 15,
             color: textColor
         },
         text: {
@@ -52,6 +52,7 @@ export default function Input(props) {
                 multiline={props.multiline}
                 onChangeText={text => onChangeText(text)}
                 defaultValue={text}
+                value={value ? value : text}
                 secureTextEntry={type === 'password'}
             />
         </View>

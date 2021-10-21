@@ -1,13 +1,8 @@
 import React from 'react'
 import ReactNative from 'react-native'
-
 import RegisterCompanyView from './RegisterCompanyView'
-import RegisterCompanyStyle from './RegisterCompanyStyles'
 import { getCategoria, storeLocal, getLocal } from '../../utils'
 import { useSelector } from 'react-redux'
-import Loading from '../../components/Util/Loading';
-
-//Api
 import api from '../../services/api'
 
 export default function RegisterCompanyController(props) {
@@ -19,28 +14,21 @@ export default function RegisterCompanyController(props) {
     const [language, setLanguage] = React.useState({})
     const [categorias, setCategorias] = React.useState([]);
 
-    const [loading, setLoading] = React.useState(true);
 
     async function onSubmit(data) {
-        setLoading(true);
 
         console.log({ 'onSubmit.data': data })
-        const localResponse = await api.post('/local', data).catch(error => { console.log(error) })
+        const response = await api.post('/local', data).catch(error => { console.log(error) })
 
-        if (localResponse != undefined && !localResponse.request._hasError) {
-
+        if (response != undefined && !response.request._hasError) {
+            data.id = response.data.data
             var localDatas = await getLocal();
             localDatas = localDatas.concat(data);
             await storeLocal(localDatas);
-
-            ReactNative.Alert.alert(
-                '',
-                'Local cadastrado com sucesso!',
-                [{ text: 'OK' }],
-                { cancelable: false }
-            )
+            data.produtos = []
             //navigation.navigate('RegisterCompanySuccess')
-            navigation.goBack()
+            navigation.replace('Company', { company: data })
+            //navigation.goBack()
         } else {
             ReactNative.Alert.alert(
                 '',
@@ -49,24 +37,19 @@ export default function RegisterCompanyController(props) {
                 { cancelable: false }
             )
         }
-
-        setLoading(false);
     }
-    async function getCategoriaFromStorage() {
+
+    async function getData() {
+        setColors(settings.app.colors)
+        setLanguage(settings.app.language)
+
         const categoria = await getCategoria();
         setCategorias(categoria);
-        setLoading(false);
     }
 
     React.useEffect(() => {
-        setColors(settings.app.colors)
-        setLanguage(settings.app.language)
-        getCategoriaFromStorage();
+        getData();
     }, [])
-
-    if (loading) {
-        return <Loading />
-    }
 
     return (
         <RegisterCompanyView

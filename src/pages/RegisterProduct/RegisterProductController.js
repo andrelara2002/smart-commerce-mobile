@@ -1,44 +1,55 @@
 import React from 'react'
+import ReactNative from 'react-native'
+
 import { useSelector } from 'react-redux';
 
 import RegisterProductView from './RegisterProductView';
 import Loading from '../../components/Util/Loading';
+import api from '../../services/api'
 
 export default function RegisterProductController(props) {
 
     const { navigation } = props;
-    const [loading, setLoading] = React.useState(true);
+    
+    const settings = useSelector(state => state.settings)
+    const [colors, setColors] = React.useState({})
+    const [language, setLanguage] = React.useState({})
+    const [company, setCompany] = React.useState({})
 
-    const [colors, setColors] = React.useState({});
-    const [language, setLanguage] = React.useState({});
-    const [settings, setSettings] = React.useState(useSelector(state => state.settings))
-
-    const [registerProduct, setRegisterProduct] = React.useState({})
-
-    async function getData() {
-        await setColors(settings.app.colors);
-        await setLanguage(settings.app.language);
-
-        setLoading(false);
+    function getData() {
+        setColors(settings.app.colors)
+        setLanguage(settings.app.language)
+        setCompany(props.route.params.company)
     }
 
-    function onSubmit(data) {
-        console.log(data)
-        setRegisterProduct(data);
-        navigation.goBack()
-        //navigation.navigate('RegisterProductSuccess');
+    async function onSubmit(data) {
+        console.log({ 'onSubmit.data': data })
+
+        const response = await api.post('/produto', data).catch(error => { console.log(error) })
+        if (response != undefined && !response.request._hasError) {
+            data.id = response.data.data
+            company.produtos.push(data);
+            navigation.goBack();            
+            props.route.params.company = company;
+
+        } else {
+            ReactNative.Alert.alert(
+                '',
+                'Falha ao cadastrar o local, tente novamente!',
+                [{ text: 'OK' }],
+                { cancelable: false }
+            )
+        }
+
     }
 
     React.useEffect(() => {
         getData();
-    })
-
-    if (loading) {
-        return <Loading />
-    }
+    }, [])
 
     return (
         <RegisterProductView
+            localId={company.id}
             navigation={navigation}
             colors={colors}
             language={language}

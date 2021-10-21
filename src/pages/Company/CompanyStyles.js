@@ -20,11 +20,16 @@ export default function CompanyStyles(colors) {
             color: colors.accent,
             fontStyle: 'italic',
         },
-        products: {},
+        products: {
+            width: '100%',
+            backgroundColor: colors.backgroundSecondary,
+        },
         productsCard: {
+            marginTop: 20,
             padding: 10,
             borderRadius: 5,
-            backgroundColor: colors.background,
+            width: 200,
+            backgroundColor: colors.backgroundSecondary,
         },
         productsCardImage: {
             width: 100,
@@ -32,11 +37,22 @@ export default function CompanyStyles(colors) {
             borderRadius: 5,
         },
         productsCardTitle: {
-            fontSize: 16,
+            fontSize: 24,
             marginTop: 5,
             paddingLeft: 10,
             color: colors.textColor,
             fontWeight: "bold",
+            paddingBottom: 10,
+            borderBottomWidth: 1,
+            borderBottomColor: colors.accent,
+        },
+        productsDescription: {
+            fontSize: 14,
+            paddingLeft: 10,
+            color: colors.border,
+            marginTop: 10,
+            fontWeight: "100",
+
         },
         buttons: {
             flexDirection: 'row',

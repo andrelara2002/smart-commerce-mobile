@@ -3,7 +3,8 @@ import React from 'react'
 import {
     ScrollView,
     Image,
-    Text
+    Text,
+    ActivityIndicator
 } from 'react-native'
 
 import Input from '../../components/Inputs/Input'
@@ -13,11 +14,16 @@ import Button from '../../components/Buttons/Button'
 import { RegisterProductStyle } from './RegisterProductStyle'
 
 export default function RegisterProductView(props) {
-    
-    const [product, setProduct] = React.useState({})
-    const [productDescription, setProductDescription] = React.useState({})
 
-    const styles = RegisterProductStyle(props.colors)
+    const { colors, localId } = props
+    const [nome, setNome] = React.useState('')
+    const [descricao, setDescricao] = React.useState('')
+    const [loading, setLoading] = React.useState(false);
+    const styles = RegisterProductStyle(colors)
+
+    React.useEffect(() => {
+        console.log('REGISTER PRODUCT VIEW LOADED')
+    }, [])
 
     return (
         <ScrollView style={styles.container}>
@@ -27,22 +33,35 @@ export default function RegisterProductView(props) {
             />
             <Spacer height={20} />
             <Input
-                label={'Produto'}
+                label={'Nome do produto'}
                 colors={props.colors}
-                onChangeText={setProduct}
+                onChangeText={setNome}
             />
             <Input
                 label={'Descrição'}
-                onChangeText={setProductDescription}
+                onChangeText={setDescricao}
                 multiline={true}
                 colors={props.colors}
                 numberOfLines={4}
             />
             <Spacer height={20} />
             <Button
-                keyText={'Adicionar'}
-                onPress={()=> {props.onSubmit({product, productDescription})}}
-                />
+                keyText={loading ? (
+                    <ActivityIndicator size="small" color="#FFF" />
+                ) : (
+                    <Text>{'Adicionar'}</Text>
+                )}
+
+                onPress={async () => {
+                    setLoading(true)
+                    await props.onSubmit({
+                        nome,
+                        descricao,
+                        localId
+                    })
+                    setLoading(false)
+                }}
+            />
         </ScrollView>
     )
 }

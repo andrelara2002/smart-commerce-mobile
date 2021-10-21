@@ -22,8 +22,8 @@ export default function Button({ onPress, keyText, isDark, width, style, height 
             height: newHeight,
             justifyContent: "center",
             alignItems: "center",
-            marginTop: 10,
-            marginBottom: 10,
+            marginTop: 5,
+            marginBottom: 5,
             marginRight: 0,
             /* borderWidth: 1, */
         },
@@ -38,7 +38,7 @@ export default function Button({ onPress, keyText, isDark, width, style, height 
         },
         text: {
             color: textColor,
-            fontSize: 18,
+            fontSize: 15,
             fontWeight: "bold",
             textAlign: "center",
             textTransform: "uppercase",
