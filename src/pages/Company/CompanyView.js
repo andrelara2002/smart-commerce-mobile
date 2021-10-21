@@ -70,7 +70,7 @@ export default function CompanyView(props) {
                     height={50}
                     isDark={true}
                     onPress={() => {
-                        props.onSubmitAdicionarProduto();                       
+                        props.onSubmitAdicionarProduto();
                     }}
                     keyText={'Sugerir Produto'}
                 />
@@ -116,11 +116,11 @@ export default function CompanyView(props) {
                             <Text
                                 style={styles.productsCardTitle}
                             >{
-                                    item.nome[0].toUpperCase() + item.nome.slice(1)
+                                    item.nome.charAt(0).toUpperCase() + item.nome.slice(1)
                                 }
                             </Text>
                             <Text style={styles.productsDescription}>{
-                                item.descricao[0].toUpperCase() + item.descricao.slice(1)
+                                item.descricao.charAt(0).toUpperCase() + item.descricao.slice(1)
                             }</Text>
                         </View>
                     )
