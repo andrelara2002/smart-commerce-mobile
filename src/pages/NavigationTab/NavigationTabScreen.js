@@ -62,9 +62,9 @@ export default function NavigationTabScreen() {
             headerStyle: {
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: '#22252e',
+              backgroundColor: colors.background,
             },
-            headerTintColor: '#fff',
+            headerTintColor: colors.textColor,
             headerTitleStyle: {
               fontWeight: 'bold'
             },
@@ -80,9 +80,9 @@ export default function NavigationTabScreen() {
             headerStyle: {
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: '#22252e',
+              backgroundColor: colors.background,
             },
-            headerTintColor: '#fff',
+            headerTintColor: colors.textColor,
             headerTitleStyle: {
               fontWeight: 'bold'
             },
@@ -104,9 +104,9 @@ export default function NavigationTabScreen() {
             headerStyle: {
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: '#22252e',
+              backgroundColor: colors.background,
             },
-            headerTintColor: '#fff',
+            headerTintColor: colors.textColor,
             headerTitleStyle: {
               fontWeight: 'bold'
             },
@@ -123,7 +123,17 @@ export default function NavigationTabScreen() {
           name="User"
           component={UserController}
           options={{
-            headerShown: false
+            headerShown: true,
+            title: 'Ajustes',
+            headerStyle: {
+              elevation: 0, // remove shadow on Android
+              shadowOpacity: 0, // remove shadow on iOS
+              backgroundColor: colors.background,
+            },
+            headerTintColor: colors.textColor,
+            headerTitleStyle: {
+              fontWeight: 'bold'
+            },
           }}
         />
         <Stack.Screen
@@ -135,9 +145,9 @@ export default function NavigationTabScreen() {
             headerStyle: {
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: '#22252e',
+              backgroundColor: colors.background,
             },
-            headerTintColor: '#fff',
+            headerTintColor: colors.textColor,
             headerTitleStyle: {
               fontWeight: 'bold'
             },
@@ -166,9 +176,9 @@ export default function NavigationTabScreen() {
             headerStyle: {
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: '#22252e',
+              backgroundColor: colors.background,
             },
-            headerTintColor: '#fff',
+            headerTintColor: colors.textColor,
             headerTitleStyle: {
               fontWeight: 'bold'
             },
@@ -183,9 +193,9 @@ export default function NavigationTabScreen() {
             headerStyle: {
               elevation: 0, // remove shadow on Android
               shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: '#22252e',
+              backgroundColor: colors.background,
             },
-            headerTintColor: '#fff',
+            headerTintColor: colors.textColor,
             headerTitleStyle: {
               fontWeight: 'bold'
             },
@@ -206,12 +216,14 @@ export default function NavigationTabScreen() {
   const inactiveColor = colors.border
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{ colors: { background: colors.background } }}
+    >
       <Tab.Navigator
         initialRouteName="Home"
         activeColor={colors.accent}
         inactiveColor={colors.border}
-        barStyle={{ backgroundColor: colors.backgroundSecondary }}
+        barStyle={{ backgroundColor: colors.background }}
       >
         <Tab.Screen name="Home"
           component={HomeScreen}
