@@ -1,41 +1,31 @@
 import React from 'react'
-
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-// Arquivos de configurações ->
-
-/* import DefaultColors from '../../assets/colors/DefaultColors' */
 import Texts from '../../texts'
-
-// <- Arquivos de configurações
-
-// Componentes customizados ->
-
 import Title from '../../components/Util/Title';
 import Spacer from '../../components/Util/Spacer';
 import CategoriesCarrousel from '../../components/Carrousel/CategoriesCarrousel';
 import LittleCompaniesCarrousel from '../../components/Carrousel/LittleCompaniesCarroucel';
 import SearchStyles from './SearchStyles';
 
-// <- Componentes customizados
+export default function SearchView(
+    {
+        colors,
+        lang,
+        search,
+        locais,
+        navigation,
+        categorias
+    }) {
 
-export default function SearchView(props) {
-
-    const [Colors, setColors] = React.useState(props.colors)
-    const [search, setSearch] = React.useState("")
-    const [text, setText] = React.useState(Texts[props.lang])
-
-    const styles = SearchStyles(props.colors)
-
-    function updateSearch(search) {
-        setSearch(search)
-    }
+    const [searchText, setSearchText] = React.useState("")
+    const [text, setText] = React.useState(Texts[lang])
+    const styles = SearchStyles(colors)
 
     React.useEffect(() => {
-        console.log("SEARCH VIEW LOADED")        
+        console.log("SEARCH VIEW LOADED")
     }, [])
 
     return (
@@ -44,27 +34,32 @@ export default function SearchView(props) {
                 <SearchBar
                     placeholder={text.search_placeholder}
                     cancelButtonTitle="Cancel"
-                    value={search}
-                    onChangeText={(search) => { updateSearch(search) }}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={(searchText) => {
+                        setSearchText(searchText)
+                        search(searchText)
+                    }}
+                    value={searchText}
 
                     containerStyle={styles.containerStyle}
-                    inputContainerStyle={{ backgroundColor: Colors.backgroundSecondary }}
+                    inputContainerStyle={{ backgroundColor: colors.backgroundSecondary }}
                     inputStyle={{
-                        backgroundColor: Colors.backgroundSecondary,
-                        color: Colors.textColor
+                        backgroundColor: colors.backgroundSecondary,
+                        color: colors.textColor
                     }}
 
-                    placeholderTextColor={Colors.border}
-                    cancelButtonColor={Colors.text}
+                    placeholderTextColor={colors.border}
+                    cancelButtonColor={colors.text}
                     searchIcon={{
-                        color: Colors.border,
+                        color: colors.border,
                         borderRightWidth: 1,
-                        borderRightColor: Colors.background,
+                        borderRightColor: colors.background,
                         size: 20,
                         paddingRight: 10,
                         paddingLeft: 10,
                     }}
-                    clearIcon={{ color: Colors.text }}
+                    clearIcon={{ color: colors.text }}
                     icon={
                         <Icon
                             name="search"
@@ -76,10 +71,12 @@ export default function SearchView(props) {
             </View>
             <Spacer height={20} />
             <Title text={text.sessions_title.categories} />
-            <CategoriesCarrousel more={text.sessions_title.see_more} data={props.categorias}/>
+            <CategoriesCarrousel more={text.sessions_title.see_more} data={categorias} />
             <Spacer height={30} />
             <Title text={text.sessions_title.little_companies} />
-            <LittleCompaniesCarrousel data={props.locais}/>
+            <LittleCompaniesCarrousel
+                data={locais}
+                navigation={navigation} />
 
             <Spacer height={30} />
         </ScrollView>

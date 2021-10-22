@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigation } from '@react-navigation/native';
 
 import {
     Image,
@@ -13,11 +12,9 @@ import {
 import FakeData from "../../pages/Home/HomeCarrocel/FakeData";
 import DefaultColors from "../../assets/colors/DefaultColors";
 
-export default function LittleCompaniesCarrousel(props) {
-
-    const [data, setData] = React.useState(props.data);
+export default function LittleCompaniesCarrousel({data, navigation}) {
+    
     const [colors, setColors] = React.useState(DefaultColors["dark"]);
-    const navigation = useNavigation()
 
     const styles = StyleSheet.create({
         container: {

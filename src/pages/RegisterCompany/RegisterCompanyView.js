@@ -33,7 +33,7 @@ export default function RegisterCompanyView(props) {
     const [bairro, setBairro] = React.useState('')
     const [estado, setEstado] = React.useState(0)
     const [descricao, setDescricao] = React.useState('')
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = React.useState(false)
     const styles = RegisterCompanyStyle(colors)
 
     React.useEffect(() => {

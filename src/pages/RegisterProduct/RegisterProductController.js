@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactNative from 'react-native'
-
 import { useSelector } from 'react-redux';
 
 import RegisterProductView from './RegisterProductView';
-import Loading from '../../components/Util/Loading';
 import api from '../../services/api'
 
 export default function RegisterProductController(props) {
