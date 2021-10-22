@@ -35,13 +35,32 @@ export default function CompanyView(props) {
     const [votou, setVotou] = React.useState(false);
     const styles = CompanyStyles(colors)
     const [loading, setLoading] = React.useState(false);
-    const [listProdutos, setListProdutos] = React.useState({});
+    const [listProdutos, setListProdutos] = React.useState([]);
 
     React.useEffect(() => {
         console.log("COMPANY VIEW LOADED")
         setVotou(props.votou);
         setListProdutos(props.products);
-    }, [])
+    }, [products])
+
+    function renderProducts() {
+        return listProdutos.map((item, index) => {
+            return (
+                <View style={styles.productsCard} key={index}>
+                    <Text
+                        style={styles.productsCardTitle}
+                    >{
+                            item.nome.charAt(0).toUpperCase() + item.nome.slice(1)
+                        }
+                    </Text>
+                    <Text style={styles.productsDescription}>{
+                        item.descricao ? item.descricao.charAt(0).toUpperCase() + item.descricao.slice(1) : 'Sem descrição'
+                    }</Text>
+                </View>
+            )
+        })
+    }
+
 
     return (
         <ScrollView style={styles.container}>
@@ -58,15 +77,19 @@ export default function CompanyView(props) {
             />
             {/* Spacer.------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
             <Spacer height={30} />
-            <Text style={styles.description}>{description}</Text>
+            <Text style={styles.description}>{
+                description ? description.charAt(0).toUpperCase() + description.slice(1) : 'Sem descrição'
+            }</Text>
             {/* Spacer.-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
             <Spacer height={10} />
-            <Text style={styles.distance}>{`${distance / 10000} Km`}</Text>
+            <Text style={styles.distance}>{
+                distance ? `${distance / 10000} Km` : 'Sem distância'
+            }</Text>
             {/* Spacer.------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
             <Spacer height={40} />
             <View style={styles.buttons}>
                 <Button
-                    width={200}
+                    width={180}
                     height={50}
                     isDark={true}
                     onPress={() => {
@@ -75,7 +98,7 @@ export default function CompanyView(props) {
                     keyText={'Sugerir Produto'}
                 />
                 <Button
-                    width={120}
+                    width={180}
                     height={50}
                     isDark={false}
                     keyText={loading ? (
@@ -105,26 +128,9 @@ export default function CompanyView(props) {
                     fontSize: 20,
                     fontWeight: 'bold'
                 }}>Produtos recomendados</Text>
-            <FlatList
-                horizontal={true}
-                data={listProdutos}
-                showsHorizontalScrollIndicator={false}
-                keyExtractor={(item, index) => index}
-                renderItem={({ item }) => {
-                    return (
-                        <View style={styles.productsCard}>
-                            <Text
-                                style={styles.productsCardTitle}
-                            >{
-                                    item.nome.charAt(0).toUpperCase() + item.nome.slice(1)
-                                }
-                            </Text>
-                            <Text style={styles.productsDescription}>{
-                                item.descricao.charAt(0).toUpperCase() + item.descricao.slice(1)
-                            }</Text>
-                        </View>
-                    )
-                }} />
+
+
+            {listProdutos.length > 0 ? renderProducts() : <Text style={styles.productsDescription}>Nenhum produto encontrado</Text>}
             <Spacer height={20} />
 
         </ScrollView>

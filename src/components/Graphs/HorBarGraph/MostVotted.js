@@ -4,13 +4,13 @@ import { View, StyleSheet } from 'react-native'
 
 import HotBarGraph from './HotBarGraph'
 
-import DefaultColors from '../../../assets/colors/DefaultColors'
+import { useSelector } from 'react-redux'
 
 export default function MostVotted(props) {
 
     const [data, setData] = React.useState(props.data)
 
-    const { accent, textColor, backgroundSecondary } = DefaultColors["dark"]
+    const { accent, textColor, backgroundSecondary } = useSelector(state => state.settings.app.colors)
 
 
     const styles = StyleSheet.create({
