@@ -24,8 +24,7 @@ export default function RegisterCompanyController(props) {
             var localDatas = await getLocal();
             localDatas = localDatas.concat(data);
             await storeLocal(localDatas);
-            data.produtos = []
-            data.votou = true
+            
             navigation.replace('Company', { company: data })
         } else {
             ReactNative.Alert.alert(
