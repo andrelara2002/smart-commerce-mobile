@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { useSelector } from 'react-redux';
 
+import { StatusBar } from 'react-native';
 import { getSettings } from '../../utils';
 import Loading from '../../components/Util/Loading';
 import Home from '../Home/HomeController'
@@ -219,6 +220,10 @@ export default function NavigationTabScreen() {
     <NavigationContainer
       theme={{ colors: { background: colors.background } }}
     >
+      <StatusBar backgroundColor={colors.background} barStyle={
+        colors.background === '#ffffff' ? 'dark-content' : 'light-content'
+      } />
+
       <Tab.Navigator
         initialRouteName="Home"
         activeColor={colors.accent}

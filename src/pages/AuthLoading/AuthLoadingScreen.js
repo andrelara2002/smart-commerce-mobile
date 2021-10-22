@@ -3,12 +3,15 @@ import { View, Text, Image } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation'
 
 import { ProgressBar } from 'react-native-paper';
+import { StatusBar } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import api from '../../services/api'
 import { storeCategoria, storeLocal, storeUser, storeUserToken, getUserToken, getCredentials } from '../../utils'
 
 export default function AuthLoadingScreen(props) {
   const [porcentagem, setPorcentagem] = React.useState(0);
+  const colors = useSelector(state => state.settings.app.colors)
 
   function setProgress(porcentagemAtual, total) {
     const porcentagemUnitario = 100 / total
@@ -28,7 +31,7 @@ export default function AuthLoadingScreen(props) {
       var categoriaDatas = [];
 
       while (localResponse.data.pageNumber <= localResponse.data.totalPages && localResponse.data.succeeded == true) {
-        localDatas = localDatas.concat(localResponse.data.data);       
+        localDatas = localDatas.concat(localResponse.data.data);
         localResponse = await api.get('/local?PageNumber=' + (localResponse.data.pageNumber + 1) + '&PageSize=10');
         setProgress(++porcentagemAtual, totalPaginas)
       }
@@ -89,9 +92,12 @@ export default function AuthLoadingScreen(props) {
 
   return (
     <View style={{
-      backgroundColor: '#22252e',
+      backgroundColor: colors.background,
       flex: 1, justifyContent: 'center', alignItems: 'center'
     }}>
+      <StatusBar backgroundColor={colors.background} barStyle={
+        colors.background === '#ffffff' ? 'dark-content' : 'light-content'
+      } />
       <Image source={require('../../assets/image/splash_icon.png')}
         style={{
           resizeMode: 'center'
@@ -99,12 +105,12 @@ export default function AuthLoadingScreen(props) {
 
       <ProgressBar
         progress={porcentagem}
-        color='#3F8CFF'
+        color={colors.accent}
         style={{
           height: 10,
           width: 200,
           borderRadius: 10,
-          backgroundColor: '#22252e',
+          backgroundColor: colors.backgroundSecondary,
           marginBottom: 20,
         }}
       />
@@ -112,7 +118,7 @@ export default function AuthLoadingScreen(props) {
       <Text style={{
         fontSize: 18,
         fontWeight: 'bold',
-        color: 'white',
+        color: colors.textColor,
         marginBottom: 20,
       }}>ANDROID BETA</Text>
 

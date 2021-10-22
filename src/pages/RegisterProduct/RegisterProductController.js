@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactNative from 'react-native'
-
 import { useSelector } from 'react-redux';
 
 import RegisterProductView from './RegisterProductView';
-import Loading from '../../components/Util/Loading';
 import api from '../../services/api'
 
 export default function RegisterProductController(props) {
@@ -29,7 +27,7 @@ export default function RegisterProductController(props) {
         if (response != undefined && !response.request._hasError) {
             data.id = response.data.data
             company.produtos.push(data);
-            navigation.goBack();            
+            navigation.navigate('Company', { company: company });            
             props.route.params.company = company;
 
         } else {

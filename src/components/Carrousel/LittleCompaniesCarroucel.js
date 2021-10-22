@@ -1,6 +1,4 @@
 import React from "react";
-import { useNavigation } from '@react-navigation/native';
-
 import {
     Image,
     View,
@@ -10,14 +8,11 @@ import {
     TouchableOpacity,
 } from "react-native";
 
-import FakeData from "../../pages/Home/HomeCarrocel/FakeData";
-import DefaultColors from "../../assets/colors/DefaultColors";
+import { useSelector } from "react-redux";
 
-export default function LittleCompaniesCarrousel(props) {
+export default function LittleCompaniesCarrousel({ data, navigation }) {
 
-    const [data, setData] = React.useState(props.data);
-    const [colors, setColors] = React.useState(DefaultColors["dark"]);
-    const navigation = useNavigation()
+    const colors = useSelector(state => state.settings.app.colors);
 
     const styles = StyleSheet.create({
         container: {
@@ -58,8 +53,12 @@ export default function LittleCompaniesCarrousel(props) {
                         navigation.navigate('Company', { company: item })
                     }}>
                     <Image style={styles.image} source={{ uri: item.imageURL }} />
-                    <Text style={styles.title}>{item.nome}</Text>
-                    <Text style={styles.distance}>{`${item.distance / 1000} Km`}</Text>
+                    <Text style={styles.title}>{
+                        item.nome.length > 20 ? item.nome.substring(0, 20) + "..." : item.nome
+                    }</Text>
+                    <Text style={styles.distance}>{
+                        item.distancia ? `${item.distance / 1000} Km` : 'Sem distância'
+                    }</Text>
                 </TouchableOpacity>
             )}
         />

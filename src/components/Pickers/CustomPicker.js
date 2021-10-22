@@ -61,7 +61,14 @@ export default function CustomPicker(props) {
                 mode="dropdown"
             >
                 {items.map((item, index) => {
-                    return (<Picker.Item label={item.nome} value={item.id} key={item.id} />)
+                    return (
+                        <Picker.Item
+                            label={item.nome}
+                            value={item.id}
+                            key={item.id}
+                            color={textColor}
+                        />
+                    )
                 })}
             </Picker>
         </View>

@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Alert } from 'react-native'
 import api from '../../services/api'
 
+import Loading from '../../components/Util/Loading'
 
 import CompanyView from './CompanyView'
 import { useSelector } from 'react-redux'
@@ -9,7 +10,8 @@ import { useSelector } from 'react-redux'
 export default function CompanyController(props) {
 
     const { navigation } = props
-    const [company, setCompany] = React.useState(props.route.params.company)
+    const [company, setCompany] = React.useState({})
+    const [loading, setLoading] = React.useState(true)
     const settings = useSelector(state => state.settings)
     const [colors, setColors] = React.useState({})
     const [language, setLanguage] = React.useState({})
@@ -21,17 +23,19 @@ export default function CompanyController(props) {
 
     function onSubmitAdicionarProduto() {
         navigation.navigate('RegisterProduct', { company })
+        getData()
     }
 
     function getData() {
         setColors(settings.app.colors)
         setLanguage(settings.app.language)
         setCompany(props.route.params.company)
+        setLoading(false)
     }
 
     React.useEffect(() => {
         getData()
-    }, [])
+    })
 
 
     const styles = StyleSheet.create({
@@ -40,6 +44,12 @@ export default function CompanyController(props) {
             backgroundColor: '#22252e'
         }
     })
+
+    if (loading) {
+        return (
+            <Loading />
+        )
+    }
 
 
     return (

@@ -9,9 +9,12 @@ import {
 
 import DefaultColors from '../../../assets/colors/DefaultColors';
 
+import { useSelector } from 'react-redux';
+
 export default function NormalCard(props) {
 
     const [initialMargin, setInitialMargin] = React.useState(0);
+    const colors = useSelector(state => state.settings.app.colors)
 
     React.useEffect(() => {
         if (props.index === 0) {
@@ -23,11 +26,12 @@ export default function NormalCard(props) {
         item: {
             flexDirection: 'column',
             padding: 10,
-            backgroundColor: DefaultColors["dark".backgroundColor],
+            backgroundColor: colors.background === "#ffffff" ? colors.backgroundSecondary : colors.background,
             marginLeft: initialMargin,
             marginRight: 10,
             marginBottom: 0,
             marginTop: 0,
+            borderRadius: 10,
         },
         itemHeader: {
             flexDirection: 'row',
@@ -37,13 +41,13 @@ export default function NormalCard(props) {
         title: {
             fontSize: 18,
             fontWeight: 'bold',
-            color: DefaultColors["dark"].textColor,
+            color: colors.textColor,
             width: 200,
             flexShrink: 1,
         },
         segment: {
             fontSize: 14,
-            color: DefaultColors["dark"].accent,
+            color: colors.accent,
         },
         image: {
             width: 250,

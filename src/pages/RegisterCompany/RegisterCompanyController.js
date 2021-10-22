@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactNative from 'react-native'
+import { useSelector } from 'react-redux'
+
 import RegisterCompanyView from './RegisterCompanyView'
 import { getCategoria, storeLocal, getLocal } from '../../utils'
-import { useSelector } from 'react-redux'
 import api from '../../services/api'
 
 export default function RegisterCompanyController(props) {
@@ -16,8 +17,6 @@ export default function RegisterCompanyController(props) {
 
 
     async function onSubmit(data) {
-
-        console.log({ 'onSubmit.data': data })
         const response = await api.post('/local', data).catch(error => { console.log(error) })
 
         if (response != undefined && !response.request._hasError) {
@@ -25,10 +24,8 @@ export default function RegisterCompanyController(props) {
             var localDatas = await getLocal();
             localDatas = localDatas.concat(data);
             await storeLocal(localDatas);
-            data.produtos = []
-            //navigation.navigate('RegisterCompanySuccess')
+            
             navigation.replace('Company', { company: data })
-            //navigation.goBack()
         } else {
             ReactNative.Alert.alert(
                 '',

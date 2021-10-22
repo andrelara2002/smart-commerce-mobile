@@ -33,7 +33,7 @@ export default function RegisterCompanyView(props) {
     const [bairro, setBairro] = React.useState('')
     const [estado, setEstado] = React.useState(0)
     const [descricao, setDescricao] = React.useState('')
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = React.useState(false)
     const styles = RegisterCompanyStyle(colors)
 
     React.useEffect(() => {
@@ -129,6 +129,9 @@ export default function RegisterCompanyView(props) {
                         segmentoId,
                         descricao,
                         ImageURL: 'https://www.shareicon.net/data/128x128/2017/06/05/886722_store_512x512.png',
+                        produtos: [],
+                        votou: true,
+                        totalVotacao: 1,
                         endereco: {
                             numero,
                             cep: cep.replace('-', ''),
@@ -136,7 +139,7 @@ export default function RegisterCompanyView(props) {
                             cidade,
                             bairro,
                             uf: UFs.find(x => x.id == estado).sigla,
-                        }
+                        },
                     })
 
                     setLoading(false)

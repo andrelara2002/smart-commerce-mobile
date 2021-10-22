@@ -2,12 +2,12 @@ import React from "react";
 
 import { StyleSheet, Text } from "react-native";
 
-import DefaultColors from "../../assets/colors/DefaultColors";
+import { useSelector } from "react-redux";
 
 export default function Title(props) {
     const { text } = props;
 
-    const [colors, setColor] = React.useState(DefaultColors["dark"]);
+    const colors = useSelector(state => state.settings.app.colors)
 
     const styles = StyleSheet.create({
         title: {

@@ -28,7 +28,7 @@ export default function CompanyStyles(colors) {
             marginTop: 20,
             padding: 10,
             borderRadius: 5,
-            width: 200,
+            width: "100%",
             backgroundColor: colors.backgroundSecondary,
         },
         productsCardImage: {
