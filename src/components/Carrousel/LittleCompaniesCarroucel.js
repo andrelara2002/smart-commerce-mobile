@@ -1,6 +1,4 @@
 import React from "react";
-import { useNavigation } from '@react-navigation/native';
-
 import {
     Image,
     View,
@@ -10,15 +8,11 @@ import {
     TouchableOpacity,
 } from "react-native";
 
-import FakeData from "../../pages/Home/HomeCarrocel/FakeData";
-import DefaultColors from "../../assets/colors/DefaultColors";
 import { useSelector } from "react-redux";
 
-export default function LittleCompaniesCarrousel(props) {
+export default function LittleCompaniesCarrousel({ data, navigation }) {
 
-    const [data, setData] = React.useState(props.data);
     const colors = useSelector(state => state.settings.app.colors);
-    const navigation = useNavigation()
 
     const styles = StyleSheet.create({
         container: {

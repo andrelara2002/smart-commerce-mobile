@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import DefaultColors from '../assets/colors/DefaultColors';
 
 const initialState = {
     settings: {
