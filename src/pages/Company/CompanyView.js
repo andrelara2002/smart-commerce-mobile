@@ -41,7 +41,7 @@ export default function CompanyView(props) {
         console.log("COMPANY VIEW LOADED")
         setVotou(props.votou);
         setListProdutos(props.products);
-    }, [products])
+    })
 
     function renderProducts() {
         return listProdutos.map((item, index) => {
@@ -130,7 +130,7 @@ export default function CompanyView(props) {
                 }}>Produtos recomendados</Text>
 
 
-            {listProdutos.length > 0 ? renderProducts() : <Text style={styles.productsDescription}>Nenhum produto encontrado</Text>}
+            {listProdutos.length > 0 && listProdutos != undefined ? renderProducts() : <Text style={styles.productsDescription}>Nenhum produto encontrado</Text>}
             <Spacer height={20} />
 
         </ScrollView>

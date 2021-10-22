@@ -29,7 +29,7 @@ export default function RegisterProductController(props) {
         if (response != undefined && !response.request._hasError) {
             data.id = response.data.data
             company.produtos.push(data);
-            navigation.goBack();            
+            navigation.navigate('Company', { company: company });            
             props.route.params.company = company;
 
         } else {
