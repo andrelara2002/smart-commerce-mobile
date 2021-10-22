@@ -1,8 +1,9 @@
 import React from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, ScrollView } from 'react-native'
 import { SearchBar } from 'react-native-elements'
+import { useSelector } from 'react-redux';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Texts from '../../texts'
 import Title from '../../components/Util/Title';
 import Spacer from '../../components/Util/Spacer';
@@ -12,17 +13,16 @@ import SearchStyles from './SearchStyles';
 
 export default function SearchView(
     {
-        colors,
-        lang,
         search,
         locais,
         navigation,
         categorias
     }) {
 
+    const settings = useSelector(state => state.settings)
     const [searchText, setSearchText] = React.useState("")
-    const [text, setText] = React.useState(Texts[lang])
-    const styles = SearchStyles(colors)
+    const [text, setText] = React.useState(Texts[settings.app.language])
+    const styles = SearchStyles(settings.app.colors)
 
     React.useEffect(() => {
         console.log("SEARCH VIEW LOADED")
@@ -43,23 +43,23 @@ export default function SearchView(
                     value={searchText}
 
                     containerStyle={styles.containerStyle}
-                    inputContainerStyle={{ backgroundColor: colors.backgroundSecondary }}
+                    inputContainerStyle={{ backgroundColor: settings.app.colors.backgroundSecondary }}
                     inputStyle={{
-                        backgroundColor: colors.backgroundSecondary,
-                        color: colors.textColor
+                        backgroundColor: settings.app.colors.backgroundSecondary,
+                        color: settings.app.colors.textColor
                     }}
 
-                    placeholderTextColor={colors.border}
-                    cancelButtonColor={colors.text}
+                    placeholderTextColor={settings.app.colors.border}
+                    cancelButtonColor={settings.app.colors.text}
                     searchIcon={{
-                        color: colors.border,
+                        color: settings.app.colors.border,
                         borderRightWidth: 1,
-                        borderRightColor: colors.background,
+                        borderRightColor: settings.app.colors.background,
                         size: 20,
                         paddingRight: 10,
                         paddingLeft: 10,
                     }}
-                    clearIcon={{ color: colors.text }}
+                    clearIcon={{ color: settings.app.colors.text }}
                     icon={
                         <Icon
                             name="search"

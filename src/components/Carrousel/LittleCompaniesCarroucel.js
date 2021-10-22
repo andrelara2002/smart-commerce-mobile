@@ -7,13 +7,12 @@ import {
     FlatList,
     TouchableOpacity,
 } from "react-native";
+
 import { useSelector } from "react-redux";
 
-export default function LittleCompaniesCarrousel(props) {
+export default function LittleCompaniesCarrousel({ data, navigation }) {
 
-    const [data, setData] = React.useState(props.data);
     const colors = useSelector(state => state.settings.app.colors);
-    const navigation = useNavigation()
 
     const styles = StyleSheet.create({
         container: {

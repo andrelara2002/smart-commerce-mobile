@@ -7,7 +7,6 @@ import SearchView from './SearchView'
 
 export default function SearchController(props) {
 
-    const settings = useSelector(state => state.settings)
     const [categorias, setCategorias] = React.useState([])
     const [loading, setLoading] = React.useState(true)
     const [locaisfilteredData, setLocaisFilteredData] = React.useState([])
@@ -50,9 +49,6 @@ export default function SearchController(props) {
 
     return (
         <SearchView
-            lang={settings.app.language}
-            colors={settings.app.colors}
-            settings={settings}
             categorias={categorias}
             search={search}
             locais={locaisfilteredData}
