@@ -17,7 +17,7 @@ import {
 export default function CompanyCard(props) {
 
     const [height, setHeight] = React.useState(200)
- 
+
     const {
         logo,
         name,
@@ -39,17 +39,16 @@ export default function CompanyCard(props) {
             backgroundColor: colors.backgroundSecondary,
         },
         name: {
-            fontSize: 24,
+            fontSize: name.length > 20 ? 18 : 24,
             fontWeight: 'bold',
             color: colors.textColor,
             marginLeft: 20,
-            width: 100,
+            width: name.length > 20 ? 150 : 100,
             flexShrink: 1,
         },
         header: {
             flex: 3,
             flexDirection: 'row',
-            justifyContent: 'center',
             alignItems: 'center',
             justifyContent: 'center',
             paddingTop: 25

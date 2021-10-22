@@ -10,13 +10,13 @@ import {
 
 import { Icon } from "react-native-elements";
 
-import DefaultColors from "../../assets/colors/DefaultColors";
+import { useSelector } from "react-redux";
 
 export default function CategoriesCarrousel(props) {
 
-    const [colors, setColors] = React.useState(DefaultColors["dark"]);
+    const colors = useSelector(state => state.settings.app.colors)
     const [data, setData] = React.useState(props.data);
-    
+
     const styles = StyleSheet.create({
         container: {
             paddingLeft: 20,
@@ -68,7 +68,7 @@ export default function CategoriesCarrousel(props) {
                         name={category.iconeNome}
                         type='material-community'
                         size={25}
-                        color={colors.textColor}
+                        color={colors.accent}
                     />
                 </View>
                 <Text

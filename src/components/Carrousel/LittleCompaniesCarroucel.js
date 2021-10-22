@@ -12,11 +12,12 @@ import {
 
 import FakeData from "../../pages/Home/HomeCarrocel/FakeData";
 import DefaultColors from "../../assets/colors/DefaultColors";
+import { useSelector } from "react-redux";
 
 export default function LittleCompaniesCarrousel(props) {
 
     const [data, setData] = React.useState(props.data);
-    const [colors, setColors] = React.useState(DefaultColors["dark"]);
+    const colors = useSelector(state => state.settings.app.colors);
     const navigation = useNavigation()
 
     const styles = StyleSheet.create({
@@ -58,8 +59,12 @@ export default function LittleCompaniesCarrousel(props) {
                         navigation.navigate('Company', { company: item })
                     }}>
                     <Image style={styles.image} source={{ uri: item.imageURL }} />
-                    <Text style={styles.title}>{item.nome}</Text>
-                    <Text style={styles.distance}>{`${item.distance / 1000} Km`}</Text>
+                    <Text style={styles.title}>{
+                        item.nome.length > 20 ? item.nome.substring(0, 20) + "..." : item.nome
+                    }</Text>
+                    <Text style={styles.distance}>{
+                        item.distancia ? `${item.distance / 1000} Km` : 'Sem distância'
+                    }</Text>
                 </TouchableOpacity>
             )}
         />
