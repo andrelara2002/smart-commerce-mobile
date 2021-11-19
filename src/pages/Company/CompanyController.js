@@ -1,11 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, Alert } from 'react-native'
-import api from '../../services/api'
-
-import Loading from '../../components/Util/Loading'
-
-import CompanyView from './CompanyView'
 import { useSelector } from 'react-redux'
+
+import api from '../../services/api'
+import Loading from '../../components/Util/Loading'
+import CompanyView from './CompanyView'
 
 export default function CompanyController(props) {
 

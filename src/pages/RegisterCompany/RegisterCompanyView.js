@@ -128,7 +128,7 @@ export default function RegisterCompanyView(props) {
                         nome,
                         segmentoId,
                         descricao,
-                        ImageURL: 'https://www.shareicon.net/data/128x128/2017/06/05/886722_store_512x512.png',
+                        imageURL: 'https://www.shareicon.net/data/128x128/2017/06/05/886722_store_512x512.png',
                         produtos: [],
                         votou: true,
                         totalVotacao: 1,

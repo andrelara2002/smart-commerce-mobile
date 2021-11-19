@@ -41,7 +41,7 @@ export default function CompanyView(props) {
         console.log("COMPANY VIEW LOADED")
         setVotou(props.votou);
         setListProdutos(props.products);
-    })
+    },[])
 
     function renderProducts() {
         return listProdutos.map((item, index) => {

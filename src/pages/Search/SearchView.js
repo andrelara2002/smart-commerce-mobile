@@ -26,7 +26,7 @@ export default function SearchView(
 
     React.useEffect(() => {
         console.log("SEARCH VIEW LOADED")
-    }, [])
+    }, [locais])
 
     return (
         <ScrollView style={styles.container}>
