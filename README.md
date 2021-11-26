@@ -5,7 +5,7 @@
 
 # Links
 - [Back-end (api)](https://github.com/joseBarreto/smart_commerce_back)
-- [Download APK para instalação]()
+- [Download APK para instalação](https://install.appcenter.ms/users/jose.de.paula/apps/smartcommerce/distribution_groups/public_group)
 
 # Build
 - executar o comando `npm install`
