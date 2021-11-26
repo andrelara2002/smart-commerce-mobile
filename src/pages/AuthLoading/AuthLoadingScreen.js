@@ -64,25 +64,31 @@ export default function AuthLoadingScreen(props) {
   useEffect(() => {
     async function handleUserNextScreen() {
 
-      const userToken = await getUserToken();
-      if (userToken) {
-        await refreshToken();
-      }
+      const resetActionToApp = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'App' })],
+      })
 
-      if (userToken && (await loadDatasFromAPI())) {
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'App' })],
-        })
+      const resetActionToSignIn = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
+      })
 
-        props.navigation.dispatch(resetAction)
-      }
-      else {
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
-        })
-        props.navigation.dispatch(resetAction)
+      try {
+        const userToken = await getUserToken();
+        if (userToken) {
+          await refreshToken();
+        }
+
+        if (userToken && (await loadDatasFromAPI())) {
+          props.navigation.dispatch(resetActionToApp)
+        }
+        else {
+          props.navigation.dispatch(resetActionToSignIn)
+        }
+      } catch (error) {
+        console.log(error);
+        props.navigation.dispatch(resetActionToSignIn)
       }
 
     }

@@ -99,7 +99,7 @@ export default function HomeHeader({ name, language, colors, navigation, image }
         <View style={styles.container}>
             <View style={styles.greetings}>
                 <TouchableOpacity
-                    onPress={() => { navigation.navigate('User') }}
+                    onPress={() => { navigation.navigate('Settings') }}
                 >
                     {mountImage()}
                 </TouchableOpacity>
