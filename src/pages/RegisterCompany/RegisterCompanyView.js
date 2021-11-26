@@ -85,6 +85,8 @@ export default function RegisterCompanyView(props) {
             />
             <Input
                 label={"cep"}
+                keyboardType={"numeric"}
+                returnKeyType={"next"}
                 onChangeText={handleCEP}
             />
             <Picker
@@ -95,6 +97,8 @@ export default function RegisterCompanyView(props) {
             />
             <Input
                 label={"numero"}
+                keyboardType={"numeric"}
+                returnKeyType={"next"}
                 onChangeText={setNumero}
                 value={numero}
             />

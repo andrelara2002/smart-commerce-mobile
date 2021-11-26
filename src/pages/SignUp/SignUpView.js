@@ -100,23 +100,29 @@ export default function SignUpView(props) {
             <Input
                 label='Nome'
                 colors={colors}
+                returnKeyType={"next"}
                 onChangeText={setName}
             />
             <Input
                 label='Sobrenome'
                 colors={colors}
+                returnKeyType={"next"}
                 onChangeText={setLastName}
             />
             <Input
                 label='Email'
                 colors={colors}
+                keyboardType={"email-address"}
+                returnKeyType={"next"}
                 onChangeText={setEmail}
             />
             <Input
                 label='Senha'
                 colors={colors}
-                onChangeText={setPassword}
                 type='password'
+                keyboardType={"numeric"}
+                returnKeyType={"next"}
+                onChangeText={setPassword}
             />
             <Spacer height={40} />
             <Button
