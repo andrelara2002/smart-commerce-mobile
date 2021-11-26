@@ -8,19 +8,14 @@ import { getSettings } from '../../utils';
 import Loading from '../../components/Util/Loading';
 import Home from '../Home/HomeController'
 import Search from '../Search/SearchController';
-import Map from '../Map/MapController';
 import Company from '../Company/CompanyController';
 
 import UserController from '../User/UserController'
 import RegisterCompanyController from '../RegisterCompany/RegisterCompanyController';
 import RegisterProductController from '../RegisterProduct/RegisterProductController';
-import RegisterProductSuccess from '../RegisterProduct/RegisterProductSuccess';
-import RegisterCompanySuccess from '../RegisterCompany/RegisterCompanySuccess';
-import SettingsController from '../Settings/SettingsController';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Icon } from 'react-native-elements';
-import LoginStyles from '../Login/LoginStyles';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator()
@@ -71,7 +66,6 @@ export default function NavigationTabScreen() {
             },
           }}
         />
-
         <Stack.Screen
           name="RegisterCompany"
           component={RegisterCompanyController}
@@ -88,14 +82,7 @@ export default function NavigationTabScreen() {
               fontWeight: 'bold'
             },
           }}
-        />
-        <Stack.Screen
-          name="RegisterCompanySuccess"
-          component={RegisterCompanySuccess}
-          options={{
-            headerShown: false,
-          }}
-        />
+        />        
         <Stack.Screen
           name="RegisterProduct"
           component={RegisterProductController}
@@ -112,48 +99,7 @@ export default function NavigationTabScreen() {
               fontWeight: 'bold'
             },
           }}
-        />
-        <Stack.Screen
-          name="RegisterProductSuccess"
-          component={RegisterProductSuccess}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="User"
-          component={UserController}
-          options={{
-            headerShown: true,
-            title: 'Ajustes',
-            headerStyle: {
-              elevation: 0, // remove shadow on Android
-              shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: colors.background,
-            },
-            headerTintColor: colors.textColor,
-            headerTitleStyle: {
-              fontWeight: 'bold'
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={SettingsController}
-          options={{
-            headerShown: true,
-            title: 'Configurações',
-            headerStyle: {
-              elevation: 0, // remove shadow on Android
-              shadowOpacity: 0, // remove shadow on iOS
-              backgroundColor: colors.background,
-            },
-            headerTintColor: colors.textColor,
-            headerTitleStyle: {
-              fontWeight: 'bold'
-            },
-          }}
-        />
+        />        
       </Stack.Navigator>
     )
   }
@@ -202,13 +148,6 @@ export default function NavigationTabScreen() {
             },
           }}
         />
-        <Stack.Screen
-          name="RegisterProductSuccess"
-          component={RegisterProductSuccess}
-          options={{
-            headerShown: false,
-          }}
-        />
       </Stack.Navigator >
     )
   }
@@ -255,13 +194,13 @@ export default function NavigationTabScreen() {
               )
             }
           }} />
-        <Tab.Screen name="Map" component={Map}
+        <Tab.Screen name="Settings" component={UserController}
           initialParams={{ settings: settings }}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
                 <Icon
-                  name="map-outline"
+                  name="person-outline"
                   type="ionicon"
                   color={focused ? activeColor : inactiveColor} />
               )

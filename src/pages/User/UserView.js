@@ -12,22 +12,22 @@ export default function UserView(props) {
     {
       title: 'Alterar dados',
       icon: 'edit',
-      onPress: () => props.navigation.navigate('UserEdit')
+      onPress: () => console.log("props.navigation.navigate('UserEdit')")
     },
     {
       title: 'Histórico de votações',
       icon: 'history',
-      onPress: () => props.navigation.navigate('UserVotes')
+      onPress: () => console.log("props.navigation.navigate('UserVotes')")
     },
     {
       title: 'Ajustes',
       icon: 'settings',
-      onPress: () => props.navigation.navigate('Settings')
+      onPress: () => console.log("props.navigation.navigate('Settings')")
     },
     {
       title: 'Sair',
       icon: 'exit-to-app',
-      onPress: () => props.navigation.navigate('Login')
+      onPress: () => console.log("props.navigation.navigate('Login')")
     }
   ]
 
