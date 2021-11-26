@@ -103,12 +103,16 @@ export default function LoginView(props) {
             <LoginInput
                 label={"username"}
                 lang={lang}
+                keyboardType={"email-address"}
+                returnKeyType={"next"}
                 onChange={username => setUsername(username)}
             />
 
             <LoginInput
                 label={"password"}
                 lang={lang}
+                keyboardType={"numeric"}
+                returnKeyType={"next"}
                 onChange={password => setPassword(password)}
             />
             <Button
@@ -127,12 +131,6 @@ export default function LoginView(props) {
                 onPress={SignUp}
                 keyText={"Cadastrar-se"}>
             </Button>
-
-            <Divisor height={50} position={'center'} text={'Entre com redes sociais'}/>
-            <View style={styles.socialButtons}>
-                <GoogleLoginButton lang={lang} />
-                <FacebookLoginButton lang={lang} />
-            </View>
         </View>
     )
 }

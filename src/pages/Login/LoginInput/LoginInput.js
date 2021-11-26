@@ -56,13 +56,22 @@ export default function LoginInput(props) {
         setTexts(text);
     }
 
+    function getKeyboardType() {
+        return props.keyboardType || 'default'
+    }
+
+    function getReturnKeyType() {
+        return props.returnKeyType || 'done'
+    }
+
     return (
         <View style={style.container}>
             <TextInput
                 style={style.input}
                 secureTextEntry={hidePassword}
                 onChangeText={a => props.onChange(a.toLowerCase())}
-                
+                keyboardType={getKeyboardType()}
+                returnKeyType={getReturnKeyType()}
             />
             <Text style={style.label}>
                 {texts}

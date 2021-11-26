@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 export default function Input(props) {
     const { text, setText } = useState('')
     const [type, setType] = useState(props.type || 'text')
-    const { onChangeText, value } = props
+    const { onChangeText, value, keyboardType, returnKeyType } = props
 
     const {
         background,
@@ -45,6 +45,15 @@ export default function Input(props) {
             marginBottom: 10
         }
     });
+
+    function getKeyboardType() {
+        return keyboardType || 'default'
+    }
+
+    function getReturnKeyType() {
+        return returnKeyType || 'done'
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{props.label}</Text>
@@ -54,6 +63,8 @@ export default function Input(props) {
                 defaultValue={text}
                 value={value ? value : text}
                 secureTextEntry={type === 'password'}
+                keyboardType={getKeyboardType()}
+                returnKeyType={getReturnKeyType()}
             />
         </View>
     )
